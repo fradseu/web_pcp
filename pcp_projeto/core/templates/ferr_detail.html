@@ -1,0 +1,75 @@
+{% extends "model-page.html" %}
+
+{% block content %}
+{% load crispy_forms_tags %}
+
+  <div class="container">
+
+    <h1 class="tittle">{{ os_list.id }}</h1>
+    <small> Criado em : {{ os_list.date_create}}</small>
+    <p><strong>{{ os_list.sector}}</strong></p>
+    <p>{{ os_list.issue_desctiption }}</p>
+   
+    <div class="col-md-12 offset-md-0 mt-2">
+      <div class="jumbotron">
+        <hr class="my-2">
+          <form action="" method="post" autocomplete="off"> {% csrf_token %}
+              <div class="row">
+                  <div class="col-md-12">
+                      {{form1.name|as_crispy_field}}
+                  </div>
+              </div>    
+              <div class="row">
+                  <div class="col-md-4">
+                      {{form1.data_1|as_crispy_field}}
+                  </div>
+                  <div class="col-md-4">
+                      {{form1.hora_1|as_crispy_field}}
+                  </div>
+                  <div class="col-md-4">
+                    {{form1.hora_2|as_crispy_field}}
+                  </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  {{form1.body|as_crispy_field}} 
+                </div>                                
+              </div>
+            </br>
+              <button type="submit" class="btn btn-success"><i class="far fa-save"></i> Salvar</button>
+          </form>
+          <br>
+          <hr class="my-2">
+          <h2 class="lead font-italic"><b>Anotações operacionais.</b></h2>
+          <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Nome</th>
+                    <th scope="col">Data</th>
+                    <th scope="col">Hora inicial</th>
+                    <th scope="col">Hora final</th>
+                    <th scope="col">O que foi feito</th>
+                </tr>
+            </thead>
+            <body>
+                {% for os_number in os_list.comments.all %}
+                    <tr>
+                        <td> {{ os_number.name }}</td>
+                        <td> {{ os_number.data_1 }}</td>
+                        <td> {{ os_number.hora_1 }}</td>
+                        <td> {{ os_number.hora_2 }}</td>
+                        <td> {{ os_number.body }}</td>
+                    </tr>
+                {% endfor %}
+            </body>
+        </table>
+      </div>
+  </div>
+
+      <div class="field">
+
+      </div>
+    </form>
+    <br>
+  </div>
+{% endblock %}
