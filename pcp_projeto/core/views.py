@@ -9,19 +9,35 @@ from .forms import Ferramentaria_form,Ferramentaria_form_report
 # Create your views here.
 
 def home(request):
-    return render(request, 'home.html')
+    os_list = Solicitacao.objects.all()
+    context = {
+        'os_list': os_list
+    }
+    return render(request, 'home.html',context)
+
+    #return render(request, 'home.html')
+    
+
+
+def teste(request):
+    os_list = Solicitacao.objects.all()
+    context = {
+        'os_list': os_list
+    }
+    return render(request, 'teste.html',context)
+
+
 
 def ferr_form(request,slug=0):
-    print(slug)
-    print('erro acima')
+
     if request.method == "GET":
         if slug==0:
             form = Ferramentaria_form()
-            return render(request, 'ferr_form.html',{'form':form})    
+            return render(request, 'manut_form.html',{'form':form})    
         else:
             editar = Solicitacao.objects.get(slug=slug)
             form = Ferramentaria_form(instance=editar)
-            return render(request, 'ferr_form.html',{'form':form})
+            return render(request, 'manut_form.html',{'form':form})
     else:
         if slug==0:
             form = Ferramentaria_form(request.POST)
@@ -58,3 +74,5 @@ def ferr_detail(request, slug):
         form1 = Ferramentaria_form_report()
 
     return render(request, 'ferr_detail.html', {'os_list':os_list, 'form1':form1})
+
+
