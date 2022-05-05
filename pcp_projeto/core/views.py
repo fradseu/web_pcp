@@ -1,4 +1,4 @@
-import pkgutil
+
 from queue import Empty
 from django.shortcuts import redirect, render
 from .models import Solicitacao
@@ -13,18 +13,28 @@ def home(request):
     context = {
         'os_list': os_list
     }
-    return render(request, 'home.html',context)
+    return render(request, 'index.html',context)
 
     #return render(request, 'home.html')
     
 
 
-def teste(request):
+def manut_list(request):
     os_list = Solicitacao.objects.all()
     context = {
         'os_list': os_list
     }
-    return render(request, 'teste.html',context)
+    return render(request, 'manut_list.html',context)
+
+
+def dashboard(request):
+    os_list = Solicitacao.objects.all()
+    context = {
+        'os_list': os_list
+    }
+    return render(request, 'dashboard.html',context)
+
+    #return render(request, 'home.html')
 
 
 
@@ -46,17 +56,17 @@ def ferr_form(request,slug=0):
             form = Ferramentaria_form(request.POST,instance=editar)
         if form.is_valid():
             form.save()
-        return redirect('/ferr_list/')
+        return redirect('/manut_list/')
 
-def ferr_list(request):
+def manut_list(request):
     os_list = Solicitacao.objects.all()
     context = {
         'os_list': os_list
     }
-    return render(request, 'ferr_list.html',context)
+    return render(request, 'manut_list.html',context)
 
 
-def ferr_detail(request, slug):
+def manut_detail(request, slug):
     os_list = Solicitacao.objects.get(slug=slug)
     print(os_list.slug)
     
@@ -69,10 +79,10 @@ def ferr_detail(request, slug):
             comments.os_number = os_list
             comments.save()
 
-            return redirect('ferr_detail', slug= os_list.slug)
+            return redirect('manut_detail', slug= os_list.slug)
     else:
         form1 = Ferramentaria_form_report()
 
-    return render(request, 'ferr_detail.html', {'os_list':os_list, 'form1':form1})
+    return render(request, 'manut_detail.html', {'os_list':os_list, 'form1':form1})
 
 

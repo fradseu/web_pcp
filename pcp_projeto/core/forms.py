@@ -7,18 +7,20 @@ from .widget import DatePickerInput, TimePickerInput, DateTimePickerInput
 class Ferramentaria_form(forms.ModelForm):
     class Meta:
         model = Solicitacao
-        fields = ('fullname','factory','status_os','machine_code','sector','priority_type','issue_desctiption')
+        fields = ('fullname','type_service','factory','status_os','machine_code','sector','priority_type','issue_desctiption')
         labels ={
             'fullname':'Quem solicitou',
+            'type_service':'Tipo de Manutenção',
             'factory':'Fábrica',
             'status_os':'Status da OS:',
             'machine_code':'Cód. Máqina',
             'sector':'Setor',
             'priority_type':'Prioridade',
-            'issue_desctiption':'Descrição do problema'
+            'issue_desctiption':'Descrição do problema ou serviço'
         }
     def __init__(self, *args, **kwargs):
         super(Ferramentaria_form,self).__init__(*args, **kwargs)
+        self.fields['type_service'].empty_label = "Selecione"
         self.fields['factory'].empty_label = "Selecione"
         self.fields['status_os'].empty_label = "Selecione"
         self.fields['sector'].empty_label = "Selecione"

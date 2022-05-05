@@ -21,14 +21,15 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 
 urlpatterns = [
-    path('teste/', views.teste , name='teste'),
+    #path('manut_list/', views.manut_list, name='manut_list'),
+    path('dashboard/', views.dashboard, name='dashboard'),
     path('admin/', admin.site.urls),
     path('', RedirectView.as_view(url='/home/')),
     path('home/', views.home),
     path('ferr_form/', views.ferr_form, name="ferr_form"),
-    path('ferr_list/', views.ferr_list, name="ferr_list"),
+    path('manut_list/', views.manut_list, name="manut_list"),
     path('form/<slug:slug>/', views.ferr_form, name='ferr_form_update'),
-    path('<slug:slug>/', views.ferr_detail, name='ferr_detail'),
+    path('<slug:slug>/', views.manut_detail, name='manut_detail'),
     
 
 ]
