@@ -45,6 +45,7 @@
             <thead>
                 <tr>
                     <th scope="col">Nome</th>
+                    <th scope="col">Procedimento</th>
                     <th scope="col">Data</th>
                     <th scope="col">Hora inicial</th>
                     <th scope="col">Hora final</th>
@@ -55,6 +56,7 @@
                 {% for os_number in os_list.comments.all %}
                     <tr>
                         <td> {{ os_number.name }}</td>
+                        <td> {{ os_number.procedimento}}</td>
                         <td> {{ os_number.data_1 }}</td>
                         <td> {{ os_number.hora_1 }}</td>
                         <td> {{ os_number.hora_2 }}</td>

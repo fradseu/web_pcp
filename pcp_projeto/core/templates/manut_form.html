@@ -53,7 +53,7 @@
   <body>
     
     <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
-      <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="#">Web - PCP</a>
+      <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="#">PCP - WEB</a>
       <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -162,7 +162,7 @@
                     <div class="col-md-12 offset-md-0 mt-2">
                         <div class="jumbotron">
                             <h1 class="display-4">Formulário - Ferramentaria e Manutenção</h1>
-                            <h2 class="lead font-italic">Use esse formulário para abrir Ordem de serviço para a ferrametnaria ou manutenção.</h2>
+                            <h2 class="lead font-italic">Utilize esse formulário para solicitar serviço de manutenção ou de ferramentaria.</h2>
                             <hr class="my-4">
                             <form action="" method="post" autocomplete="off"> {% csrf_token %}
                                 <div class="row">
@@ -183,14 +183,21 @@
                                     <div class="col-md-4">
                                         {{form.machine_code|as_crispy_field}}
                                     </div>
-                                    <div class="col-md-4">
+                                    <div class="col-md-2">
                                         {{form.sector|as_crispy_field}}
                                     </div>
-                                    <div class="col-md-4">
+                                    <div class="col-md-2">
                                         {{form.priority_type|as_crispy_field}}
                                     </div>
-                                </div>                                
-                                {{form.issue_desctiption|as_crispy_field}}
+                                    <div class="col-md-4">
+                                      {{form.propose_service|as_crispy_field}}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                  <div class="col-md-12">
+                                    {{form.issue_desctiption|as_crispy_field}}
+                                  </div>                                  
+                                </div>                             
                                 <button type="submit" class="btn btn-success"><i class="far fa-save"></i> Salvar</button>
                             </form>
                         </div>

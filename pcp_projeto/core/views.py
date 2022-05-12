@@ -91,8 +91,7 @@ def manut_list(request):
 
 def manut_detail(request, slug):
     os_list = Solicitacao.objects.get(slug=slug)
-    print(os_list.slug)
-    
+        
     if request.method == "POST":
         form1 = Ferramentaria_form_report(request.POST)
         
@@ -107,3 +106,7 @@ def manut_detail(request, slug):
         form1 = Ferramentaria_form_report()
 
     return render(request, 'manut_detail.html', {'os_list':os_list, 'form1':form1})
+
+
+def form_delete(request):
+    pass

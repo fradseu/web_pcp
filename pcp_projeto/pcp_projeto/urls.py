@@ -30,6 +30,7 @@ urlpatterns = [
     path('manut_list/', views.manut_list, name="manut_list"),
     path('form/<slug:slug>/', views.ferr_form, name='ferr_form_update'),
     path('<slug:slug>/', views.manut_detail, name='manut_detail'),
+    path('delete/<int:id>', views.form_delete, name='form_delete'),
     
 
 ]

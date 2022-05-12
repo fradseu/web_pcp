@@ -35,6 +35,16 @@ class Type_service(models.Model):
     title = models.CharField(max_length=20)
     def __str__(self):
         return self.title
+
+class Procedimento(models.Model):
+    title = models.CharField(max_length=40)
+    def __str__(self):
+        return self.title
+
+class Propose_service(models.Model):
+    title = models.CharField(max_length=40)
+    def __str__(self):
+        return self.title
 		
 class Solicitacao(models.Model):
     id = models.AutoField(primary_key=True)
@@ -49,6 +59,8 @@ class Solicitacao(models.Model):
     issue_desctiption = models.CharField(max_length=150)
     status_os = models.ForeignKey(Statusos, on_delete= models.CASCADE)
     type_service = models.ForeignKey(Type_service,max_length=50, on_delete= models.CASCADE)
+    propose_service = models.ForeignKey(Propose_service, on_delete= models.CASCADE)
+ 
  
     
     class Meta:
@@ -79,6 +91,7 @@ class Ferr_report(models.Model):
     hora_1 = models.TimeField()
     hora_2 = models.TimeField()
     body = models.TextField(max_length=255)
+    procedimento = models.ForeignKey(Procedimento,max_length=50, on_delete= models.CASCADE)
 
     
 

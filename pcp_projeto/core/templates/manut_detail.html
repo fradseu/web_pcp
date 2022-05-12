@@ -51,7 +51,7 @@
   <body>
     
 <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
-  <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="#">Web - PCP</a>
+  <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="#">PCP - WEB</a>
   <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -140,20 +140,60 @@
 
     <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
 
-      <div class="container">
+      <div class="container bg-light">
         <div class="row">
             <h1>Atitividades executadas na OS.</h1>
         </div>
+      </div>
         <br>
         {% load crispy_forms_tags %}
 
     <div class="container">
+      <div class="col-md-12 offset-md-0 mt-0">
 
-      <h1 class="tittle">Os nº: {{ os_list.id }}</h1>
-      <small> Criado em : {{ os_list.date_create}}</small>
-      <p><strong>Setor: {{ os_list.sector}}</strong></p>
-      <p><strong>Descrição do problema: </strong>{{ os_list.issue_desctiption }}</p>
-    
+        <div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
+          <div class="feature col">
+            <div class="feature-icon bg-primary bg-gradient">
+              <svg class="bi" width="1em" height="1em"><use xlink:href="#toggles2"></use></svg>
+            </div>
+            <h2><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-file-earmark" viewBox="0 0 16 16">
+              <path d="M14 4.5V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h5.5L14 4.5zm-3 0A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V4.5h-2z"/>
+            </svg>  Número da OS: </h2>
+            <h3>{{ os_list.id }}</h3>
+            </div>
+          <div class="feature col">
+            <div class="feature-icon bg-primary bg-gradient">
+              <svg class="bi" width="1em" height="1em"><use xlink:href="#toggles2"></use></svg>
+            </div>
+            <h2><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-calendar-day" viewBox="0 0 16 16">
+              <path d="M4.684 11.523v-2.3h2.261v-.61H4.684V6.801h2.464v-.61H4v5.332h.684zm3.296 0h.676V8.98c0-.554.227-1.007.953-1.007.125 0 .258.004.329.015v-.613a1.806 1.806 0 0 0-.254-.02c-.582 0-.891.32-1.012.567h-.02v-.504H7.98v4.105zm2.805-5.093c0 .238.192.425.43.425a.428.428 0 1 0 0-.855.426.426 0 0 0-.43.43zm.094 5.093h.672V7.418h-.672v4.105z"/>
+              <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z"/>
+            </svg>  Data de crição:</h2>
+            <h3>{{ os_list.date_create}}</h3>
+          </div>
+          <div class="feature col">
+            <div class="feature-icon bg-primary bg-gradient">
+              <svg class="bi" width="1em" height="1em"><use xlink:href="#toggles2"></use></svg>
+            </div>
+            <h2><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-people-fill" viewBox="0 0 16 16">
+              <path d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+              <path fill-rule="evenodd" d="M5.216 14A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216z"/>
+              <path d="M4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z"/>
+            </svg>  Setor solicitante</h2>
+            <h3>{{ os_list.sector}}</h3>
+          </div>
+        </div>
+       
+         
+       <!-- 
+        <h1 class="tittle">Os nº: {{ os_list.id }}</h1>
+        <small> Criado em : {{ os_list.date_create}}</small>
+        <p><strong>Setor: {{ os_list.sector}}</strong></p>
+      -->
+        <p><strong>Descrição do problema: </strong>{{ os_list.issue_desctiption }}</p>
+        
+      </div>
+    </div>
       <div class="col-md-12 offset-md-0 mt-2">
         <div class="jumbotron">
           <hr class="my-2">
@@ -164,14 +204,17 @@
                     </div>
                 </div>    
                 <div class="row">
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         {{form1.data_1|as_crispy_field}}
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-2">
                         {{form1.hora_1|as_crispy_field}}
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-2">
                       {{form1.hora_2|as_crispy_field}}
+                    </div>
+                    <div class="col-md-5">
+                      {{form1.procedimento|as_crispy_field}}
                     </div>
                 </div>
                 <div class="row">
@@ -187,28 +230,40 @@
             <h2 class="lead font-italic"><b>Anotações operacionais.</b></h2>
             <table class="table">
               <thead>
-                  <tr>
+                  <tr class="table-light">
+                      <th scope="col">Procedimento</th>
                       <th scope="col">Nome</th>
                       <th scope="col">Data</th>
                       <th scope="col">Hora inicial</th>
                       <th scope="col">Hora final</th>
                       <th scope="col">O que foi feito</th>
+                      <th scope="col">Excluir</th>
                   </tr>
               </thead>
               <body>
                   {% for os_number in os_list.comments.all %}
-                      <tr>
-                          <td> {{ os_number.name }}</td>
-                          <td> {{ os_number.data_1 }}</td>
-                          <td> {{ os_number.hora_1 }}</td>
-                          <td> {{ os_number.hora_2 }}</td>
-                          <td> {{ os_number.body }}</td>
+                      <tr class="table-secondary">                          
+                          <td > {{ os_number.procedimento }}</td>
+                          <td > {{ os_number.name }}</td>
+                          <td > {{ os_number.data_1 }}</td>
+                          <td > {{ os_number.hora_1 }}</td>
+                          <td > {{ os_number.hora_2 }}</td>
+                          <td > {{ os_number.body }}</td>
+                          <td class="table-secondary">
+                            <a button type="button" class="btn btn-danger" href="#">
+                              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-earmark-x" viewBox="0 0 16 16">
+                                <path d="M6.854 7.146a.5.5 0 1 0-.708.708L7.293 9l-1.147 1.146a.5.5 0 0 0 .708.708L8 9.707l1.146 1.147a.5.5 0 0 0 .708-.708L8.707 9l1.147-1.146a.5.5 0 0 0-.708-.708L8 8.293 6.854 7.146z"/>
+                                <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 3A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5v2z"/>
+                              </svg> Excluir</button>
+                            </a>
+                          </td> 
                       </tr>
                   {% endfor %}
               </body>
           </table>
         </div>
-    </div>
+      </div>
+    
     </main>
 <footer class="container py-5">
   <div class="row">

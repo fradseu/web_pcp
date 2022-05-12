@@ -1,5 +1,5 @@
 from django import forms
-from .models import Solicitacao,Ferr_report
+from .models import Procedimento, Solicitacao,Ferr_report
 from .widget import DatePickerInput, TimePickerInput, DateTimePickerInput
 
 ### Ferramentaria
@@ -7,7 +7,7 @@ from .widget import DatePickerInput, TimePickerInput, DateTimePickerInput
 class Ferramentaria_form(forms.ModelForm):
     class Meta:
         model = Solicitacao
-        fields = ('fullname','type_service','factory','status_os','machine_code','sector','priority_type','issue_desctiption')
+        fields = ('fullname','type_service','factory','status_os','machine_code','sector','priority_type','issue_desctiption','propose_service')
         labels ={
             'fullname':'Quem solicitou',
             'type_service':'Tipo de Manutenção',
@@ -16,11 +16,13 @@ class Ferramentaria_form(forms.ModelForm):
             'machine_code':'Cód. Máqina',
             'sector':'Setor',
             'priority_type':'Prioridade',
+            'propose_service':'Propósito',
             'issue_desctiption':'Descrição do problema ou serviço'
         }
     def __init__(self, *args, **kwargs):
         super(Ferramentaria_form,self).__init__(*args, **kwargs)
         self.fields['type_service'].empty_label = "Selecione"
+        self.fields['propose_service'].empty_label = "Selecione"
         self.fields['factory'].empty_label = "Selecione"
         self.fields['status_os'].empty_label = "Selecione"
         self.fields['sector'].empty_label = "Selecione"
@@ -34,7 +36,7 @@ class Ferramentaria_form_report(forms.ModelForm):
 
     class Meta:
         model = Ferr_report
-        fields = ('name','data_1','hora_1','hora_2','body')
+        fields = ('name','data_1','hora_1','hora_2','body','procedimento')
         widgets = {
             'data_1' : DatePickerInput(),
             'hora_1' : TimePickerInput(),
@@ -48,11 +50,12 @@ class Ferramentaria_form_report(forms.ModelForm):
         #data_1 = forms.DateField(widget=forms.DateInput(attrs={'type': 'date'}))                                                 
         
         labels ={
-            'name':'Quem executou:',
-            'data_1':'Data:',
-            'hora_1':'Hora início:',
-            'hora_2':'Hora término:',
-            'body':'Descrição da tarefa:',
+            'name':'Quem executou: ',
+            'data_1':'Data: ',
+            'hora_1':'Hora início: ',
+            'hora_2':'Hora término: ',
+            'body':'Descrição da tarefa: ',
+            'procedimento':'Descrição da tarefa: ',
         }
 
         
