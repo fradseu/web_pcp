@@ -31,6 +31,7 @@ urlpatterns = [
     path('form/<slug:slug>/', views.ferr_form, name='ferr_form_update'),
     path('<slug:slug>/', views.manut_detail, name='manut_detail'),
     path('delete/<int:id>', views.form_delete, name='form_delete'),
+    path('apagar/<int:id>', views.apagar_delete, name='apagar_delete'),
     
 
 ]

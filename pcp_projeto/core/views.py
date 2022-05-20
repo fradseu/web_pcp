@@ -1,7 +1,7 @@
 
 
 from django.shortcuts import redirect, render
-from .models import Solicitacao
+from .models import Solicitacao,Ferr_report
 from .forms import Ferramentaria_form,Ferramentaria_form_report
 import io
 from django.http import FileResponse
@@ -108,5 +108,14 @@ def manut_detail(request, slug):
     return render(request, 'manut_detail.html', {'os_list':os_list, 'form1':form1})
 
 
-def form_delete(request):
-    pass
+def form_delete(request, id):
+    os_list = Solicitacao.objects.get(pk=id)
+    os_list.delete()
+
+    return redirect('/manut_list/')
+
+
+def apagar_delete(request, id):
+    os_number = Ferr_report.objects.get(pk=id)
+    os_number.delete
+    return redirect('/manut_list/')
