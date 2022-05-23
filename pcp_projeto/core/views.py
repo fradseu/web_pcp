@@ -60,25 +60,49 @@ def some_view():
             buffer.seek(0)
             return FileResponse(buffer, as_attachment=True, filename='hello.pdf')
 
+class ferram_class:
+    def ferr_form(request,slug=0):
+        if request.method == "GET":
+            if slug==0:
+                form = Ferramentaria_form()
+                return render(request, 'manut_form.html',{'form':form})    
+            else:
+                editar = Solicitacao.objects.get(slug=slug)
+                form = Ferramentaria_form(instance=editar)
+                return render(request, 'manut_form.html',{'form':form})
+        else:
+            if slug==0:
+                form = Ferramentaria_form(request.POST)
+            else:
+                editar = Solicitacao.objects.get(slug=slug)
+                form = Ferramentaria_form(request.POST,instance=editar)
+            if form.is_valid():
+                manut_print = form.save()
+                
+                print('------------------------------')
+                print('Número da id: ',manut_print.id)
+                
+                impress_id = manut_print.id
 
-def ferr_form(request,slug=0):
-    if request.method == "GET":
-        if slug==0:
-            form = Ferramentaria_form()
-            return render(request, 'manut_form.html',{'form':form})    
-        else:
-            editar = Solicitacao.objects.get(slug=slug)
-            form = Ferramentaria_form(instance=editar)
-            return render(request, 'manut_form.html',{'form':form})
-    else:
-        if slug==0:
-            form = Ferramentaria_form(request.POST)
-        else:
-            editar = Solicitacao.objects.get(slug=slug)
-            form = Ferramentaria_form(request.POST,instance=editar)
-        if form.is_valid():
-            form.save()
-            return redirect('/manut_list/')
+                contexto = {'id':manut_print.id,
+                            'fullname':manut_print.fullname,
+                            'type_service':manut_print.type_service,
+                            'factory':manut_print.factory,
+                            'status_os':manut_print.status_os,
+                            'machine_code':manut_print.machine_code,
+                            'sector':manut_print.sector,
+                            'priority_type':manut_print.priority_type,
+                            'propose_service':manut_print.propose_service,
+                            'issue_desctiption':manut_print.issue_desctiption,
+                            }
+                return render(request, 'manut_print.html',contexto)
+
+
+def manut_impressao(request):
+    
+    return render(request, 'manut_print.html')
+
+                
 
 
 def manut_list(request):
@@ -119,3 +143,11 @@ def apagar_delete(request, id):
     os_number = Ferr_report.objects.get(pk=id)
     os_number.delete
     return redirect('/manut_list/')
+
+
+
+class msg_do_dia:
+    def msg_dia():
+        pass
+
+
