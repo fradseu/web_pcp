@@ -152,7 +152,7 @@
       <div class="col-md-12 offset-md-0 mt-0">
 
         <div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
-          <div class="feature col">
+          <div class="feature col bg-light">
             <div class="feature-icon bg-primary bg-gradient">
               <svg class="bi" width="1em" height="1em"><use xlink:href="#toggles2"></use></svg>
             </div>
@@ -161,7 +161,7 @@
             </svg>  Número da OS: </h2>
             <h3>{{ os_list.id }}</h3>
             </div>
-          <div class="feature col">
+          <div class="feature col bg-light">
             <div class="feature-icon bg-primary bg-gradient">
               <svg class="bi" width="1em" height="1em"><use xlink:href="#toggles2"></use></svg>
             </div>
@@ -171,7 +171,7 @@
             </svg>  Data de crição:</h2>
             <h3>{{ os_list.date_create}}</h3>
           </div>
-          <div class="feature col">
+          <div class="feature col bg-light">
             <div class="feature-icon bg-primary bg-gradient">
               <svg class="bi" width="1em" height="1em"><use xlink:href="#toggles2"></use></svg>
             </div>
@@ -183,14 +183,10 @@
             <h3>{{ os_list.sector}}</h3>
           </div>
         </div>
-       
-         
-       <!-- 
-        <h1 class="tittle">Os nº: {{ os_list.id }}</h1>
-        <small> Criado em : {{ os_list.date_create}}</small>
-        <p><strong>Setor: {{ os_list.sector}}</strong></p>
-      -->
-        <p><strong>Descrição do problema: </strong>{{ os_list.issue_desctiption }}</p>
+        <div class="row bg-light" >
+          <p><strong>Descrição do problema: </strong>{{ os_list.issue_desctiption }}</p>
+        </div>
+        
         
       </div>
     </div>
