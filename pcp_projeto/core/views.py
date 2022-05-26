@@ -94,7 +94,12 @@ class ferram_class:
                             'priority_type':manut_print.priority_type,
                             'propose_service':manut_print.propose_service,
                             'issue_desctiption':manut_print.issue_desctiption,
+                            'date_create':manut_print.date_create,
+                            'hour_arrive':manut_print.hour_arrive,
+                            'slug':manut_print.slug,
                             }
+
+                              
                 return render(request, 'manut_print.html',contexto)
 
 
