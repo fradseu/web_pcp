@@ -64,226 +64,237 @@
                 
             <hr>
               <div class="container">
-                <div class="row">
-                  <h4>São Paulo, {{ date_create }}. {{ hour_arrive }}</h4><br>
+                <div class="col-sm-12 ">
+                  <h5>Data de criação: {{ date_create }}, às {{ hour_arrive }}</h5>
                 </div>              
               <hr>
                 <div class="row bg-light">
-                  <div class="col-sm-3 border bg-light">
+                  <div class="col-sm-3 border border-right-0 border-dark">
                     <h5>Descrição do problema: </h5>
                   </div>
-                  <div class="col-sm-9 border bg-light">
+                  <div class="col-sm-9 border border-dark">
                     {{ issue_desctiption }}
                   </div>
                 </div>
               </div>
-            <hr><br>
+            <hr>
             <div class="container">
                 <div class="row g-3">
                   <div class="col-4">
                     <label for="firstName" class="form-label"><h5>Quem solicitou: </h5></label>
-                    <div class="p-3 border bg-light"><h6>{{ fullname }}</h6></div>
+                    <div class="p-3 border border-dark"><h6>{{ fullname }}</h6></div>
                   </div>
                   <div class="col-4">
                     <label for="firstName" class="form-label"><h5>Tipo de Manutenção:</h5></label>
-                    <div class="p-3 border bg-light"><h6>{{ type_service }}</h6></div>
+                    <div class="p-3 border border-dark"><h6>{{ type_service }}</h6></div>
                   </div>
                   <div class="col-4">
                     <label for="firstName" class="form-label"><h5>Fábrica: </h5></label>
-                    <div class="p-3 border bg-light"><h6>{{ factory }}</h6></div>
+                    <div class="p-3 border border-dark"><h6>{{ factory }}</h6></div>
                   </div>
                   <div class="col-4">
                     <label for="firstName" class="form-label"><h5>Cód. Máqina: </h5></label>
-                    <div class="p-3 border bg-light"><h6>{{ machine_code }}</h6></div>
+                    <div class="p-3 border border-dark"><h6>{{ machine_code }}</h6></div>
                   </div>
                   <div class="col-4">
                     <label for="firstName" class="form-label"><h5>Setor: </h5></label>
-                    <div class="p-3 border bg-light"><h6>{{ sector }}</h6></div>
+                    <div class="p-3 border border-dark"><h6>{{ sector }}</h6></div>
                   </div>
                   <div class="col-4">
                     <label for="firstName" class="form-label"><h5>Prioridade: </h5></label>
-                    <div class="p-3 border bg-light"><h6>{{ priority_type }}</h6></div>
+                    <div class="p-3 border border-dark"><h6>{{ priority_type }}</h6></div>
                   </div>
                 </div>
               </div>
-              <hr><br>
+            <hr>
               <h5>Anotações Operacionais</h5>
               <br>
             <!--
             {{ slug }}<br>
             -->
             <div class="container">
-              <div class="row row-cols-5 border bg-light">
-                <div class="col border bg-light">Procedimento</div>
-                <div class="col border bg-light">Nome</div>
-                <div class="col border bg-light">Data</div>
-                <div class="col border bg-light">Hora inicial</div>
-                <div class="col border bg-light">Hora final</div>
+              <div class="row row-cols-5 border border-dark">
+                <div class="col border border-dark">Procedimento</div>
+                <div class="col border border-dark">Nome</div>
+                <div class="col border border-dark">Data</div>
+                <div class="col border border-dark">Hora inicial</div>
+                <div class="col border border-dark">Hora final</div>
               </div>
-              <div class="row row-cols-5 border bg-light">
-                <div class="col border bg-light"></div>
-                <div class="col border bg-light"></div>
-                <div class="col border bg-light">______/______/_________</div>
-                <div class="col border bg-light">__________:___________</div>
-                <div class="col border bg-light">__________:___________</div>
+              <div class="row row-cols-5 border border-dark">
+                <div class="col border-right border-top-0 border-dark  "></div>
+                <div class="col border-right border-top-0 border-dark "></div>
+                <div class="col border-right border-top-0 border-dark ">______/______/_________</div>
+                <div class="col border-right border-top-0 border-dark ">__________:___________</div>
+                <div class="col border ">__________:___________</div>
               </div>
               <div class="row bg-light">
-                <div class="col-sm-2 border bg-light">
+                <div class="col-sm-2 border border-top-0 border-right-0 border-dark">
                   O que foi feito?
                 </div>
-                <div class="col-sm-10 border bg-light">                  
+                <div class="col-sm-10 border border-top-0 border-dark">                  
                 </div>
               </div>
               <br>
-              <div class="row row-cols-5 border bg-light">
-                <div class="col border bg-light">Procedimento</div>
-                <div class="col border bg-light">Nome</div>
-                <div class="col border bg-light">Data</div>
-                <div class="col border bg-light">Hora inicial</div>
-                <div class="col border bg-light">Hora final</div>
+              <div class="row row-cols-5 border border-dark">
+                <div class="col border border-dark">Procedimento</div>
+                <div class="col border border-dark">Nome</div>
+                <div class="col border border-dark">Data</div>
+                <div class="col border border-dark">Hora inicial</div>
+                <div class="col border border-dark">Hora final</div>
               </div>
-              <div class="row row-cols-5 border bg-light">
-                <div class="col border bg-light"></div>
-                <div class="col border bg-light"></div>
-                <div class="col border bg-light">______/______/_________</div>
-                <div class="col border bg-light">__________:___________</div>
-                <div class="col border bg-light">__________:___________</div>
+              <div class="row row-cols-5 border border-dark">
+                <div class="col border-right border-top-0 border-dark  "></div>
+                <div class="col border-right border-top-0 border-dark "></div>
+                <div class="col border-right border-top-0 border-dark ">______/______/_________</div>
+                <div class="col border-right border-top-0 border-dark ">__________:___________</div>
+                <div class="col border ">__________:___________</div>
               </div>
               <div class="row bg-light">
-                <div class="col-sm-2 border bg-light">
+                <div class="col-sm-2 border border-top-0 border-right-0 border-dark">
                   O que foi feito?
                 </div>
-                <div class="col-sm-10 border bg-light">                  
+                <div class="col-sm-10 border border-top-0 border-dark">                  
                 </div>
               </div>
               <br>
-              <div class="row row-cols-5 border bg-light">
-                <div class="col border bg-light">Procedimento</div>
-                <div class="col border bg-light">Nome</div>
-                <div class="col border bg-light">Data</div>
-                <div class="col border bg-light">Hora inicial</div>
-                <div class="col border bg-light">Hora final</div>
+              <div class="row row-cols-5 border border-dark">
+                <div class="col border border-dark">Procedimento</div>
+                <div class="col border border-dark">Nome</div>
+                <div class="col border border-dark">Data</div>
+                <div class="col border border-dark">Hora inicial</div>
+                <div class="col border border-dark">Hora final</div>
               </div>
-              <div class="row row-cols-5 border bg-light">
-                <div class="col border bg-light"></div>
-                <div class="col border bg-light"></div>
-                <div class="col border bg-light">______/______/_________</div>
-                <div class="col border bg-light">__________:___________</div>
-                <div class="col border bg-light">__________:___________</div>
+              <div class="row row-cols-5 border border-dark">
+                <div class="col border-right border-top-0 border-dark  "></div>
+                <div class="col border-right border-top-0 border-dark "></div>
+                <div class="col border-right border-top-0 border-dark ">______/______/_________</div>
+                <div class="col border-right border-top-0 border-dark ">__________:___________</div>
+                <div class="col border ">__________:___________</div>
               </div>
               <div class="row bg-light">
-                <div class="col-sm-2 border bg-light">
+                <div class="col-sm-2 border border-top-0 border-right-0 border-dark">
                   O que foi feito?
                 </div>
-                <div class="col-sm-10 border bg-light">                  
+                <div class="col-sm-10 border border-top-0 border-dark">                  
                 </div>
               </div>
               <br>
-              <div class="row row-cols-5 border bg-light">
-                <div class="col border bg-light">Procedimento</div>
-                <div class="col border bg-light">Nome</div>
-                <div class="col border bg-light">Data</div>
-                <div class="col border bg-light">Hora inicial</div>
-                <div class="col border bg-light">Hora final</div>
+              <div class="row row-cols-5 border border-dark">
+                <div class="col border border-dark">Procedimento</div>
+                <div class="col border border-dark">Nome</div>
+                <div class="col border border-dark">Data</div>
+                <div class="col border border-dark">Hora inicial</div>
+                <div class="col border border-dark">Hora final</div>
               </div>
-              <div class="row row-cols-5 border bg-light">
-                <div class="col border bg-light"></div>
-                <div class="col border bg-light"></div>
-                <div class="col border bg-light">______/______/_________</div>
-                <div class="col border bg-light">__________:___________</div>
-                <div class="col border bg-light">__________:___________</div>
+              <div class="row row-cols-5 border border-dark">
+                <div class="col border-right border-top-0 border-dark  "></div>
+                <div class="col border-right border-top-0 border-dark "></div>
+                <div class="col border-right border-top-0 border-dark ">______/______/_________</div>
+                <div class="col border-right border-top-0 border-dark ">__________:___________</div>
+                <div class="col border ">__________:___________</div>
               </div>
               <div class="row bg-light">
-                <div class="col-sm-2 border bg-light">
+                <div class="col-sm-2 border border-top-0 border-right-0 border-dark">
                   O que foi feito?
                 </div>
-                <div class="col-sm-10 border bg-light">                  
+                <div class="col-sm-10 border border-top-0 border-dark">                  
                 </div>
               </div>
               <br>
-              <div class="row row-cols-5 border bg-light">
-                <div class="col border bg-light">Procedimento</div>
-                <div class="col border bg-light">Nome</div>
-                <div class="col border bg-light">Data</div>
-                <div class="col border bg-light">Hora inicial</div>
-                <div class="col border bg-light">Hora final</div>
+              <div class="row row-cols-5 border border-dark">
+                <div class="col border border-dark">Procedimento</div>
+                <div class="col border border-dark">Nome</div>
+                <div class="col border border-dark">Data</div>
+                <div class="col border border-dark">Hora inicial</div>
+                <div class="col border border-dark">Hora final</div>
               </div>
-              <div class="row row-cols-5 border bg-light">
-                <div class="col border bg-light"></div>
-                <div class="col border bg-light"></div>
-                <div class="col border bg-light">______/______/_________</div>
-                <div class="col border bg-light">__________:___________</div>
-                <div class="col border bg-light">__________:___________</div>
+              <div class="row row-cols-5 border border-dark">
+                <div class="col border-right border-top-0 border-dark  "></div>
+                <div class="col border-right border-top-0 border-dark "></div>
+                <div class="col border-right border-top-0 border-dark ">______/______/_________</div>
+                <div class="col border-right border-top-0 border-dark ">__________:___________</div>
+                <div class="col border ">__________:___________</div>
               </div>
               <div class="row bg-light">
-                <div class="col-sm-2 border bg-light">
+                <div class="col-sm-2 border border-top-0 border-right-0 border-dark">
                   O que foi feito?
                 </div>
-                <div class="col-sm-10 border bg-light">                  
+                <div class="col-sm-10 border border-top-0 border-dark">                  
                 </div>
               </div>
               <br>
-              <div class="row row-cols-5 border bg-light">
-                <div class="col border bg-light">Procedimento</div>
-                <div class="col border bg-light">Nome</div>
-                <div class="col border bg-light">Data</div>
-                <div class="col border bg-light">Hora inicial</div>
-                <div class="col border bg-light">Hora final</div>
+              <div class="row row-cols-5 border border-dark">
+                <div class="col border border-dark">Procedimento</div>
+                <div class="col border border-dark">Nome</div>
+                <div class="col border border-dark">Data</div>
+                <div class="col border border-dark">Hora inicial</div>
+                <div class="col border border-dark">Hora final</div>
               </div>
-              <div class="row row-cols-5 border bg-light">
-                <div class="col border bg-light"></div>
-                <div class="col border bg-light"></div>
-                <div class="col border bg-light">______/______/_________</div>
-                <div class="col border bg-light">__________:___________</div>
-                <div class="col border bg-light">__________:___________</div>
+              <div class="row row-cols-5 border border-dark">
+                <div class="col border-right border-top-0 border-dark  "></div>
+                <div class="col border-right border-top-0 border-dark "></div>
+                <div class="col border-right border-top-0 border-dark ">______/______/_________</div>
+                <div class="col border-right border-top-0 border-dark ">__________:___________</div>
+                <div class="col border ">__________:___________</div>
               </div>
               <div class="row bg-light">
-                <div class="col-sm-2 border bg-light">
+                <div class="col-sm-2 border border-top-0 border-right-0 border-dark">
                   O que foi feito?
                 </div>
-                <div class="col-sm-10 border bg-light">                  
+                <div class="col-sm-10 border border-top-0 border-dark">                  
                 </div>
               </div>
               <br>
-              <div class="row row-cols-5 border bg-light">
-                <div class="col border bg-light">Procedimento</div>
-                <div class="col border bg-light">Nome</div>
-                <div class="col border bg-light">Data</div>
-                <div class="col border bg-light">Hora inicial</div>
-                <div class="col border bg-light">Hora final</div>
+              <div class="row row-cols-5 border border-dark">
+                <div class="col border border-dark">Procedimento</div>
+                <div class="col border border-dark">Nome</div>
+                <div class="col border border-dark">Data</div>
+                <div class="col border border-dark">Hora inicial</div>
+                <div class="col border border-dark">Hora final</div>
               </div>
-              <div class="row row-cols-5 border bg-light">
-                <div class="col border bg-light"></div>
-                <div class="col border bg-light"></div>
-                <div class="col border bg-light">______/______/_________</div>
-                <div class="col border bg-light">__________:___________</div>
-                <div class="col border bg-light">__________:___________</div>
+              <div class="row row-cols-5 border border-dark">
+                <div class="col border-right border-top-0 border-dark  "></div>
+                <div class="col border-right border-top-0 border-dark "></div>
+                <div class="col border-right border-top-0 border-dark ">______/______/_________</div>
+                <div class="col border-right border-top-0 border-dark ">__________:___________</div>
+                <div class="col border ">__________:___________</div>
               </div>
               <div class="row bg-light">
-                <div class="col-sm-2 border bg-light">
+                <div class="col-sm-2 border border-top-0 border-right-0 border-dark">
                   O que foi feito?
                 </div>
-                <div class="col-sm-10 border bg-light">                  
+                <div class="col-sm-10 border border-top-0 border-dark">                  
                 </div>
               </div>
               <br>
              
-              <div class="row row-cols-5 border bg-light">
-                <div class="col border bg-light"></div>
-                <div class="col border bg-light"></div>
-                <div class="col border bg-light">______/______/_________</div>
-                <div class="col border bg-light">__________:___________</div>
-                <div class="col border bg-light">__________:___________</div>
-              </div>  
+              <div class="row row-cols-5 border border-dark">
+                <div class="col border border-dark">Procedimento</div>
+                <div class="col border border-dark">Nome</div>
+                <div class="col border border-dark">Data</div>
+                <div class="col border border-dark">Hora inicial</div>
+                <div class="col border border-dark">Hora final</div>
+              </div>
+              <div class="row row-cols-5 border border-dark">
+                <div class="col border-right border-top-0 border-dark  "></div>
+                <div class="col border-right border-top-0 border-dark "></div>
+                <div class="col border-right border-top-0 border-dark ">______/______/_________</div>
+                <div class="col border-right border-top-0 border-dark ">__________:___________</div>
+                <div class="col border ">__________:___________</div>
+              </div>
+              <div class="row bg-light">
+                <div class="col-sm-2 border border-top-0 border-right-0 border-dark">
+                  O que foi feito?
+                </div>
+                <div class="col-sm-10 border border-top-0 border-dark">                  
+                </div>
+              </div>
               
-
-            </div>
-
-
+              <!--
+              <img src="https://marflex.ind.br/images/slide%20platinados.jpg">
+              -->
             
-
-            <hr><br>
-
+            <hr>            
             <a button type="button" class="btn btn-secondary" href="/manut_list/">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
                     <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>

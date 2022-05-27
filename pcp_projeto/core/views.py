@@ -67,9 +67,12 @@ class ferram_class:
                 form = Ferramentaria_form()
                 return render(request, 'manut_form.html',{'form':form})    
             else:
-                editar = Solicitacao.objects.get(slug=slug)
-                form = Ferramentaria_form(instance=editar)
-                return render(request, 'manut_form.html',{'form':form})
+                try:
+                    editar = Solicitacao.objects.get(slug=slug)
+                    form = Ferramentaria_form(instance=editar)
+                    return render(request, 'manut_form.html',{'form':form})
+                except:
+                    return redirect('/manut_list/')
         else:
             if slug==0:
                 form = Ferramentaria_form(request.POST)
@@ -82,7 +85,7 @@ class ferram_class:
                 print('------------------------------')
                 print('Número da id: ',manut_print.id)
                 
-                impress_id = manut_print.id
+                #impress_id = manut_print.id
 
                 contexto = {'id':manut_print.id,
                             'fullname':manut_print.fullname,
@@ -98,12 +101,12 @@ class ferram_class:
                             'hour_arrive':manut_print.hour_arrive,
                             'slug':manut_print.slug,
                             }
-
-                              
+                                          
                 return render(request, 'manut_print.html',contexto)
 
 
 def manut_impressao(request):
+    
     
     return render(request, 'manut_print.html')
 
