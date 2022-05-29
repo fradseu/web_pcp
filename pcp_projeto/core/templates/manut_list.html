@@ -193,7 +193,7 @@
                 </tr>
             </thead>
             
-                {% for os in os_list %}
+                {% for os in ordens %}
                     <tr>
                         <td class="table-secondary"> {{ os.id }}</td>
                         <td class="table-secondary"> {{ os.sector }}</td>
@@ -228,7 +228,51 @@
                     </tr>
                 {% endfor %}
         </table>
+        <br/><br/>
+        <!-- Elementos da paginação  -->
 
+        <!--
+        {{ ordens }}<br/>
+
+        Has Previous: {{ ordens.has_previous }}<br/>
+        Has Next: {{ ordens.has_next }}<br/>
+        Current Page: {{ ordens.number }}<br/>
+        Number of Pages: {{ ordens.paginator.num_pages }}<br/>
+        <hr><br/><br/>
+        -->
+
+        <nav aria-label="Page navigation example">
+          <ul class="pagination">
+
+        {% if ordens.has_previous %}
+          <li class="page-item"><a class="page-link" href="?page=1">&laquo First</a></li>
+          <li class="page-item"><a class="page-link"  href="?page={{ ordens.previous_page_number }}">Previous</a></li>
+        {% endif %}
+        
+        <!-- Contador de paginação padrão
+        <li class="page-item"><a href="#" class="page-link" disabled>
+        Page {{ ordens.number }} of {{ ordens.paginator.num_pages }}</a>
+        </li>
+        -->
+        <!-- Contador de paginação por números fracionados-->
+        {% for i in nums %}
+          <li class="page-item">
+            <a class="page-link" href="?page={{ forloop.counter }}">
+              {{ forloop.counter }}
+            </a>
+          </li>
+          
+        {% endfor %}
+
+
+        {% if ordens.has_next %}
+          <li class="page-item"><a class="page-link"  href="?page={{ ordens.next_page_number }}">Next</a></li>
+          <li class="page-item"><a class="page-link"  href="?page={{ ordens.paginator.num_pages }}">Last &raquo</a></li>
+
+        {% endif %}
+
+          </ul>
+        </nav>
     
         
       </main>

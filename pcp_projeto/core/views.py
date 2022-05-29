@@ -7,6 +7,8 @@ import io
 from django.http import FileResponse
 import reportlab
 from reportlab.pdfgen import canvas
+from django.core.paginator import Paginator, InvalidPage, EmptyPage
+
 
 
 
@@ -24,10 +26,20 @@ def home(request):
 
 
 def manut_list(request):
+    #os_list = Solicitacao.objects.all()
     os_list = Solicitacao.objects.all()
+    
+    # configuração paginação
+    p = Paginator(Solicitacao.objects.all(), 3)
+    page = request.GET.get('page')
+    ordens = p.get_page(page)
+    nums = "a" * ordens.paginator.num_pages
+
     context = {
-        'os_list': os_list
-    }
+        'os_list': os_list,
+        'ordens': ordens,
+        'nums': nums
+        }
     return render(request, 'manut_list.html',context)
 
 
@@ -112,13 +124,13 @@ def manut_impressao(request):
 
                 
 
-
-def manut_list(request):
-    os_list = Solicitacao.objects.all()
-    context = {
-        'os_list': os_list
-    }
-    return render(request, 'manut_list.html',context)
+#função duplicada
+#def manut_list(request):
+#    os_list = Solicitacao.objects.all()
+#    context = {
+#        'os_list': os_list
+#    }
+#    return render(request, 'manut_list.html',context)
 
 
 def manut_detail(request, slug):
