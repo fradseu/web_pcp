@@ -7,15 +7,20 @@
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.84.0">
     <title>PCP-WEB</title>
-
-    <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/dashboard/">
-
+    <!--
+      <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/dashboard/">
+    -->
     
 
     <!-- Bootstrap core CSS -->
-<link href="/docs/5.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+<link href="/static/bootstrap/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
     <!-- Favicons -->
+  
+<script src="/static/bootstrap/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<!--
+<script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js" integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE" crossorigin="anonymous"></script><script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js" integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha" crossorigin="anonymous"></script><script src="dashboard.js"></script>
+    -->
 <link rel="apple-touch-icon" href="/docs/5.0/assets/img/favicons/apple-touch-icon.png" sizes="180x180">
 <link rel="icon" href="/docs/5.0/assets/img/favicons/favicon-32x32.png" sizes="32x32" type="image/png">
 <link rel="icon" href="/docs/5.0/assets/img/favicons/favicon-16x16.png" sizes="16x16" type="image/png">
@@ -45,8 +50,9 @@
     </style>
 
     
-    <!-- Custom styles for this template -->
+    <!-- Custom styles for this template 
     <link href="dashboard.css" rel="stylesheet">
+    -->
   </head>
   <body>
     
@@ -163,32 +169,146 @@
         </ul>
       </div>
     </nav>
+    
 
-    <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+    <main class="col-md-5 ms-sm-auto col-lg-10 px-md-4">
 
       <div class="container">
-        <div class="row">
-            <h1>PCP: o que é o planejamento e controle da produção?</h1>
+        <div class="bg-dark text-secondary px-1 py-2 text-center">
+          <div class="py-2">
+            <h1 class="display-5 fw-bold text-white">NOVA EMISSÃO DE ORDEM DE MANUTENÇÃO E FERRAMENTARIA </h1>
+            <div class="col-lg-6 mx-auto">
+              <p class="fs-5 mb-4">NOVO MODO DE EMISSÃO DE ORDEM DE MANUTENÇÃO E FERRAMENTARIA.</p>
+              <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+                <!--
+                <button type="button" class="btn btn-outline-info btn-lg px-4 me-sm-3 fw-bold">Custom button</button>
+                <button type="button" class="btn btn-outline-light btn-lg px-4">Secondary</button>
+                -->
+              </div>
+            </div>
+          </div>
         </div>
+
         <br>
       </div>
+      <div class="b-example-divider bg-light" ></div>
+      
+      <div class="px-1 py-2 my-2 text-center">
+        <!--
+        <img class="d-block mx-auto mb-4" src="/docs/5.2/assets/brand/bootstrap-logo.svg" alt="" width="72" height="57">
+        -->
+        <h1 class="display-5 fw-bold">Descrição e histórico do projeto</h1>
+        <div class="col-lg-6 mx-auto">
+          <p class="lead mb-4">O projeto da Folha de manutenção foi criado em meados de março de 2022, quando surgiu a necessidade na fábrica Marflex de documentar todas as ações corretivas realizadas nas ferramentas, para estar em conformidade com as normas ISO.</p>
+          <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+            <!--
+            <button type="button" class="btn btn-primary btn-lg px-4 gap-3">Primary button</button>
+            <button type="button" class="btn btn-outline-secondary btn-lg px-4">Secondary</button>
+            -->
+          </div>
+        </div>
+      </div>
 
-      <main>
-        
-          <h1>PCP</h1>
-          <p class="fs-5 col-md-8">Atualizando: PCP (Planejamento e Controle de Produção) é um processo para auxiliar o gerenciamento da produção de uma indústria.</p>
-          <p class="fs-5 col-md-8">Com ele a empresa consegue: planejar quando produzir, quanto produzir, onde produzir, em que ordem produzir e verificar se tudo está funcionando de acordo com o plano.</p>
+      <div class="px-1 py-2 my-2 text-center">
+        <!--
+        <img class="d-block mx-auto mb-4" src="/docs/5.2/assets/brand/bootstrap-logo.svg" alt="" width="72" height="57">
+        -->
+        <h1 class="display-5 fw-bold">Escopo do projeto</h1>
+        <div class="col-lg-6 mx-auto">
+          <p class="lead mb-4">O projeto WEB PCP tem como objetivo suprir a necessidade de informatizar a documentação. Atualmente a documentação é feita através de documentos Excel, os quais utilizam técnicas de programação VBA. 
+            A criação de um sistema web onde podemos centralizar as informações, proporcionando ganho de tempo, pois não será mais necessário procurar pastas dentro da rede ou até mesmo criar itens que já existem por motivos de não serem encontrados. 
+            O WEB PCP em seu início deverá conter as funções de CRIAR ORDEM DE MANUTENÇÃO e FERRAMENTARIA, as quais devem ser impressas ou não, guardando as informações em banco de dados PostgreSQL, assim possibilitando as possíveis auditorias em conformidade com a norma ISO.</p>
+          <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+            <!--
+            <button type="button" class="btn btn-primary btn-lg px-4 gap-3">Primary button</button>
+            <button type="button" class="btn btn-outline-secondary btn-lg px-4">Secondary</button>
+            -->
+          </div>
+        </div>
+      </div>
 
-          <p class="fs-5 col-md-8">Em uma fábrica o PCP é fundamental para garantir que a empresa está de fato produzindo os melhores produtos, da melhor forma e de acordo com um planejamento feito previamente.</p>
-            
-          <p class="fs-5 col-md-8">Afinal, se a indústria não planejar, programar e controlar a produção, terá dificuldade para se manter competitiva e com a qualidade desejada.</p>
-            
-          <p class="fs-5 col-md-8">Neste artigo você vai entender o que é o PCP, quais são os benefícios do PCP, quais são as etapas do PCP e como um sistema de PCP funciona.</p>
+      <div class="px-1 py-2 my-2 text-center">
+        <!--
+        <img class="d-block mx-auto mb-4" src="/docs/5.2/assets/brand/bootstrap-logo.svg" alt="" width="72" height="57">
+        -->
+        <h1 class="display-5 fw-bold">Requisitos de alto nível</h1>
+        <div class="col-lg-6 mx-auto">
+          <p class="lead mb-4"> O novo sistema deve incluir o seguinte:
+            <ul>
+              <li>Capacidade de permitir que os usuários internos acessem o aplicativo sem baixar nenhum software.</li>
+              <li>Conter uma página home, onde possamos criar links para pastas da rede ou documentos.</li>
+              <li>Capacidade de criar Ordem de Manutenção e ou Ferramentaria.</li>
+              <li>Capacidade de IMPRIMIR a Ordem de Manutenção e ou Ferramentaria.</li>
+              <li>Capacidade de ALTERAR a Ordem de Manutenção e ou Ferramentaria.</li>
+              <li>Capacidade de VISUALIZAR a Ordem de Manutenção e ou Ferramentaria.</li>
+              <li>Capacidade de DELETAR a Ordem de Manutenção e ou Ferramentaria.</li>
+              <li>Capacidade de salvar a Ordem de Manutenção e ou Ferramentaria em banco de dados.</li>
+              <li>Capacidade de exportar dados para geração de indicadores.</li>
+              <li>Permitir a utilização simultânea do sistema pelos usuários.</li>
+            </ul>
+          </p>
+          <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+            <!--
+            <button type="button" class="btn btn-primary btn-lg px-4 gap-3">Primary button</button>
+            <button type="button" class="btn btn-outline-secondary btn-lg px-4">Secondary</button>
+            -->
+          </div>
+        </div>
+      </div>
+
+      <div class="px-1 py-2 my-2 text-center">
+        <!--
+        <img class="d-block mx-auto mb-4" src="/docs/5.2/assets/brand/bootstrap-logo.svg" alt="" width="72" height="57">
+        -->
+        <h1 class="display-5 fw-bold">Resultados finais</h1>
+        <div class="col-lg-6 mx-auto">
+          <p class="lead mb-4">As partes interessadas são a Produção, o Planejamento e controle de Produção, a Qualidade, a Ferramentaria e a Manutenção.</p>
+          <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+            <!--
+            <button type="button" class="btn btn-primary btn-lg px-4 gap-3">Primary button</button>
+            <button type="button" class="btn btn-outline-secondary btn-lg px-4">Secondary</button>
+            -->
+          </div>
+        </div>
+      </div>
+
+      <div class="px-1 py-2 my-2 text-center">
+        <!--
+        <img class="d-block mx-auto mb-4" src="/docs/5.2/assets/brand/bootstrap-logo.svg" alt="" width="72" height="57">
+        -->
+        <h1 class="display-5 fw-bold">Exclusões exclusivas do escopo</h1>
+        <div class="col-lg-6 mx-auto">
+          <p class="lead mb-4">O projeto PCP WEB, será implementado conforme os módulos forem entregues.</p>
+          <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+            <!--
+            <button type="button" class="btn btn-primary btn-lg px-4 gap-3">Primary button</button>
+            <button type="button" class="btn btn-outline-secondary btn-lg px-4">Secondary</button>
+            -->
+          </div>
+        </div>
+      </div>
+
+      <div class="px-1 py-2 my-2 text-center">
+        <!--
+        <img class="d-block mx-auto mb-4" src="/docs/5.2/assets/brand/bootstrap-logo.svg" alt="" width="72" height="57">
+        -->
+        <h1 class="display-5 fw-bold">Plano de implementação</h1>
+        <div class="col-lg-6 mx-auto">
+          <p class="lead mb-4">A nossa proposta é implementar o sistema PCP - WEB, gradativamente. Após a entrega da aplicação iremos realizar um período de testes onde o objetivo é identificar os bugs ou erros de programação. As atualizações serão implementadas conforme necessidade de adequação. 
+            A primeira etapa é fornecer a aplicação de Ordem de Serviço Manutenção/Ferramentaria (OSMF), contendo a capacidade de criar, ler, atualizar, deletar e imprimir.
+            A segunda etapa será a atualização da página de listagem de OSMF, onde o objetivo é aplicar técnicas de paginação e filtros para melhor localização dos itens.
+            A terceira etapa, consiste em criar o sistema de usuários cadastrados, onde o usuário deve se logar para utilizar o sistema PCP – WEB.</p>
+          <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+            <!--
+            <button type="button" class="btn btn-primary btn-lg px-4 gap-3">Primary button</button>
+            <button type="button" class="btn btn-outline-secondary btn-lg px-4">Secondary</button>
+            -->
+          </div>
+        </div>
+      </div>
+
       
-      
-          <hr class="col-3 col-md-10 mb-5">
-      
-        
+  
       </main>
     </div>
     <footer class="container py-5">
@@ -227,7 +347,7 @@
         </div>
       </div>
     </footer>
-    <script src="/docs/5.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js" integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE" crossorigin="anonymous"></script><script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js" integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha" crossorigin="anonymous"></script><script src="dashboard.js"></script>
+    
+    
   </body>
 </html>

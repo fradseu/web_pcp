@@ -45,21 +45,27 @@ class Propose_service(models.Model):
     title = models.CharField(max_length=40)
     def __str__(self):
         return self.title
+
+#class Material(models.Model):
+#    title = models.CharField(max_length=12)
+#    def __str__(self):
+#        return self.title
 		
 class Solicitacao(models.Model):
     id = models.AutoField(primary_key=True)
     fullname = models.CharField(max_length=30)
     slug = models.SlugField('Slug', editable=False)
-    factory = models.ForeignKey(Factory, on_delete= models.CASCADE)
+    factory = models.ForeignKey(Factory, on_delete= models.CASCADE)#COFEL, MARFLEX, SPEEDBRAKE
     machine_code = models.CharField(max_length=50)
     sector = models.ForeignKey(Sector, on_delete= models.CASCADE)
-    priority_type = models.ForeignKey(Priority, on_delete= models.CASCADE)
+    priority_type = models.ForeignKey(Priority, on_delete= models.CASCADE)#01-ALTA; 02-MÉDIA; 03-BAIXA
     date_create = models.DateField(auto_now_add=True)
     hour_arrive = models.TimeField(auto_now_add=True)
     issue_desctiption = models.CharField(max_length=150)
-    status_os = models.ForeignKey(Statusos, on_delete= models.CASCADE)
-    type_service = models.ForeignKey(Type_service,max_length=50, on_delete= models.CASCADE)
-    propose_service = models.ForeignKey(Propose_service, on_delete= models.CASCADE)
+    status_os = models.ForeignKey(Statusos, on_delete= models.CASCADE)#ABERTA, FECHADA
+    type_service = models.ForeignKey(Type_service,max_length=50, on_delete= models.CASCADE)#FERRAMENTARIA, MANUTENÇÃO
+    
+    propose_service = models.ForeignKey(Propose_service, on_delete= models.CASCADE)#CORRETIVO, PREDIAL, PREVENTIVO, PROJETO
  
  
     
@@ -91,8 +97,9 @@ class Ferr_report(models.Model):
     hora_1 = models.TimeField()
     hora_2 = models.TimeField()
     body = models.TextField(max_length=255)
-    procedimento = models.ForeignKey(Procedimento,max_length=50, on_delete= models.CASCADE)
-
+    procedimento = models.ForeignKey(Procedimento,max_length=50, on_delete= models.CASCADE)#P1, P2, P3, P4, P5, P6, P7, P8, P9, P10
+    material = models.CharField(max_length=12)
+    qtd_mat = models.FloatField()
     
 
     class Meta:

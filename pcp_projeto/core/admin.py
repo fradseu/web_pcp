@@ -8,7 +8,6 @@ from .models import Sector,Priority,Statusos,Factory,Type_service,Procedimento,S
 
 
 
-
 admin.site.register(Sector)
 admin.site.register(Priority)
 admin.site.register(Statusos)
@@ -18,3 +17,5 @@ admin.site.register(Procedimento)
 admin.site.register(Solicitacao)
 admin.site.register(Ferr_report)
 admin.site.register(Propose_service)
+#admin.site.register(Material)
+

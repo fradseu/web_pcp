@@ -30,7 +30,7 @@ def manut_list(request):
     os_list = Solicitacao.objects.all()
     
     # configuração paginação
-    p = Paginator(Solicitacao.objects.all(), 3)
+    p = Paginator(Solicitacao.objects.all(), 50)
     page = request.GET.get('page')
     ordens = p.get_page(page)
     nums = "a" * ordens.paginator.num_pages

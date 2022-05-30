@@ -36,7 +36,7 @@ class Ferramentaria_form_report(forms.ModelForm):
 
     class Meta:
         model = Ferr_report
-        fields = ('name','data_1','hora_1','hora_2','body','procedimento')
+        fields = ('name','data_1','hora_1','hora_2','body','procedimento','material','qtd_mat')
         widgets = {
             'data_1' : DatePickerInput(),
             'hora_1' : TimePickerInput(),
@@ -56,6 +56,7 @@ class Ferramentaria_form_report(forms.ModelForm):
             'hora_2':'Hora término: ',
             'body':'Descrição da tarefa: ',
             'procedimento':'Descrição da tarefa: ',
+            'material': 'Material utilizado: ',
+            'qtd_mat': 'Quantidade de material utilizado',
         }
-
-        
+              

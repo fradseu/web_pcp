@@ -7,13 +7,14 @@
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.84.0">
     <title>PCP-WEB</title>
-
+    <!--
     <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/dashboard/">
+    -->
 
     
 
     <!-- Bootstrap core CSS -->
-<link href="/docs/5.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+<link href="/static/bootstrap/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
     <!-- Favicons -->
 <link rel="apple-touch-icon" href="/docs/5.0/assets/img/favicons/apple-touch-icon.png" sizes="180x180">
@@ -46,7 +47,9 @@
 
     
     <!-- Custom styles for this template -->
+    <!--
     <link href="dashboard.css" rel="stylesheet">
+    -->
   </head>
   <body>
     
@@ -168,61 +171,72 @@
 
       <div class="container bg-light">
         <div class="row">
-            <h1>Atitividades executadas na OS.</h1>
+            <h1>Atitividades executadas na Ordem de Serviço.</h1>
         </div>
       </div>
-        <br>
+      <br>
         {% load crispy_forms_tags %}
 
+    <!-- Começo do CABEÇALHO-->
     <div class="container">
       <div class="col-md-12 offset-md-0 mt-0">
-
         <div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
           <div class="feature col bg-light">
             <div class="feature-icon bg-primary bg-gradient">
-              <svg class="bi" width="1em" height="1em"><use xlink:href="#toggles2"></use></svg>
+              <svg class="bi" width="1em" height="1em">
+                <use xlink:href="#toggles2"></use>
+              </svg>
             </div>
-            <h2><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-file-earmark" viewBox="0 0 16 16">
-              <path d="M14 4.5V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h5.5L14 4.5zm-3 0A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V4.5h-2z"/>
-            </svg>  Número da OS: </h2>
+            <h2>
+              <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-file-earmark" viewBox="0 0 16 16">
+                <path d="M14 4.5V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h5.5L14 4.5zm-3 0A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V4.5h-2z"/>
+              </svg>  Número da OS: 
+            </h2>
             <h3>{{ os_list.id }}</h3>
-            </div>
+          </div>
           <div class="feature col bg-light">
             <div class="feature-icon bg-primary bg-gradient">
-              <svg class="bi" width="1em" height="1em"><use xlink:href="#toggles2"></use></svg>
+              <svg class="bi" width="1em" height="1em"><use xlink:href="#toggles2"></use>
+              </svg>
             </div>
-            <h2><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-calendar-day" viewBox="0 0 16 16">
-              <path d="M4.684 11.523v-2.3h2.261v-.61H4.684V6.801h2.464v-.61H4v5.332h.684zm3.296 0h.676V8.98c0-.554.227-1.007.953-1.007.125 0 .258.004.329.015v-.613a1.806 1.806 0 0 0-.254-.02c-.582 0-.891.32-1.012.567h-.02v-.504H7.98v4.105zm2.805-5.093c0 .238.192.425.43.425a.428.428 0 1 0 0-.855.426.426 0 0 0-.43.43zm.094 5.093h.672V7.418h-.672v4.105z"/>
-              <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z"/>
-            </svg>  Data de crição:</h2>
+            <h2>
+              <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-calendar-day" viewBox="0 0 16 16"><path d="M4.684 11.523v-2.3h2.261v-.61H4.684V6.801h2.464v-.61H4v5.332h.684zm3.296 0h.676V8.98c0-.554.227-1.007.953-1.007.125 0 .258.004.329.015v-.613a1.806 1.806 0 0 0-.254-.02c-.582 0-.891.32-1.012.567h-.02v-.504H7.98v4.105zm2.805-5.093c0 .238.192.425.43.425a.428.428 0 1 0 0-.855.426.426 0 0 0-.43.43zm.094 5.093h.672V7.418h-.672v4.105z"/><path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z"/>
+              </svg>  Data de crição:
+            </h2>
             <h3>{{ os_list.date_create}}</h3>
           </div>
           <div class="feature col bg-light">
             <div class="feature-icon bg-primary bg-gradient">
-              <svg class="bi" width="1em" height="1em"><use xlink:href="#toggles2"></use></svg>
+              <svg class="bi" width="1em" height="1em"><use xlink:href="#toggles2"></use>
+              </svg>
             </div>
-            <h2><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-people-fill" viewBox="0 0 16 16">
-              <path d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
-              <path fill-rule="evenodd" d="M5.216 14A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216z"/>
-              <path d="M4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z"/>
-            </svg>  Setor solicitante</h2>
+            <h2>
+              <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-people-fill" viewBox="0 0 16 16"><path d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/><path fill-rule="evenodd" d="M5.216 14A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216z"/><path d="M4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z"/>
+              </svg>  Setor solicitante: 
+            </h2>
             <h3>{{ os_list.sector}}</h3>
           </div>
         </div>
         <div class="row bg-light" >
           <p><strong>Descrição do problema: </strong>{{ os_list.issue_desctiption }}</p>
         </div>
-        
-        
       </div>
+      <!-- Final do CABEÇALHO-->
+
     </div>
       <div class="col-md-12 offset-md-0 mt-2">
         <div class="jumbotron">
           <hr class="my-2">
             <form action="" method="post" autocomplete="off"> {% csrf_token %}
                 <div class="row">
-                    <div class="col-md-12">
+                    <div class="col-md-6">
                         {{form1.name|as_crispy_field}}
+                    </div>
+                    <div class="col-md-4">
+                      {{form1.material|as_crispy_field}}
+                    </div>
+                    <div class="col-md-2">
+                      {{form1.qtd_mat|as_crispy_field}}
                     </div>
                 </div>    
                 <div class="row">
@@ -259,6 +273,8 @@
                       <th scope="col">Hora inicial</th>
                       <th scope="col">Hora final</th>
                       <th scope="col">O que foi feito</th>
+                      <th scope="col">O que foi usado</th>
+                      <th scope="col">Quanto foi usado</th>
                       <th scope="col">Excluir</th>
                   </tr>
               </thead>
@@ -326,7 +342,7 @@
     </footer>
 
 
-    <script src="/docs/5.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+      <script src="/static/bootstrap/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
       <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js" integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE" crossorigin="anonymous"></script><script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js" integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha" crossorigin="anonymous"></script><script src="dashboard.js"></script>
     </div>
