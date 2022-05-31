@@ -59,4 +59,14 @@ class Ferramentaria_form_report(forms.ModelForm):
             'material': 'Material utilizado: ',
             'qtd_mat': 'Quantidade de material utilizado',
         }
-              
+
+class Status_form(forms.ModelForm):
+    class Meta:
+        model = Solicitacao
+        fields = ('status_os',)
+        labels ={
+            'status_os':'Status da OS:',
+        }
+    def __init__(self, *args, **kwargs):
+        super(Ferramentaria_form,self).__init__(*args, **kwargs)
+        self.fields['status_os'].empty_label = "Selecione"

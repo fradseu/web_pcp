@@ -62,9 +62,8 @@ class Solicitacao(models.Model):
     date_create = models.DateField(auto_now_add=True)
     hour_arrive = models.TimeField(auto_now_add=True)
     issue_desctiption = models.CharField(max_length=150)
-    status_os = models.ForeignKey(Statusos, on_delete= models.CASCADE)#ABERTA, FECHADA
-    type_service = models.ForeignKey(Type_service,max_length=50, on_delete= models.CASCADE)#FERRAMENTARIA, MANUTENÇÃO
-    
+    status_os = models.ForeignKey(Statusos,default='ABERTA', on_delete= models.CASCADE)#ABERTA, FECHADA
+    type_service = models.ForeignKey(Type_service,max_length=50, on_delete= models.CASCADE)#FERRAMENTARIA, MANUTENÇÃO    
     propose_service = models.ForeignKey(Propose_service, on_delete= models.CASCADE)#CORRETIVO, PREDIAL, PREVENTIVO, PROJETO
  
  
@@ -108,5 +107,19 @@ class Ferr_report(models.Model):
 
 ##### fim do novo modelo ####
 
-### tudo que está abaixo era aprendizado
+class Current_day(models.Model):
+    title = models.DateField(max_length=40)
+    def __str__(self):
+        return self.title
+
+class Mensagem(models.Model):
+    title = models.CharField(max_length=150)
+    def __str__(self):
+        return self.title
+
+#mensagem do dia
+class Msg_day(models.Model):
+    id = models.AutoField(primary_key=True)
+    current_day = models.DateField(auto_now_add=False)
+    mensagem = models.CharField(max_length=150)
 

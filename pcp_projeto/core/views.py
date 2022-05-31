@@ -1,5 +1,6 @@
+from datetime import date
 from django.shortcuts import redirect, render
-from .models import Solicitacao,Ferr_report
+from .models import Solicitacao,Ferr_report,Msg_day
 from .forms import Ferramentaria_form,Ferramentaria_form_report
 import io
 from django.http import FileResponse
@@ -8,16 +9,37 @@ from reportlab.pdfgen import canvas
 from django.core.paginator import Paginator, InvalidPage, EmptyPage
 from django.http import HttpResponseRedirect
 from django.contrib import messages
+import os
+from datetime import datetime
 
 
 ###############################################
 
 #página Inicial.
 def home(request):
+    #mensagem do dia, um pequeno motivacional para descontrair.
+    msg_date = datetime.today().strftime('%Y-%m-%d')
+
+    try:
+        editar = Msg_day.objects.get(current_day=msg_date)
+    except:    
+        editar = datetime.today().strftime('%Y-%m-%d')
+        print('---------------')
+        print(editar)
+
+
     os_list = Solicitacao.objects.all()
-    context = {
-        'os_list': os_list
-    }
+    try:
+        context = {
+            'os_list': os_list,
+            'mensagem':editar.mensagem,
+        }
+    except:
+        context = {
+        'os_list': os_list,
+            'mensagem':'Semear ideias ecológicas e plantar sustentabilidade é ter a garantia de colhermos um futuro fértil e consciente. 🌎'
+        }
+        
     return render(request, 'index.html',context)
 
     
@@ -49,29 +71,13 @@ def dashboard(request):
 
 
 
-#função para gerar pdf, não ativa.
-def some_view():
-            # Create a file-like buffer to receive PDF data.
-            buffer = io.BytesIO()
-            # Create the PDF object, using the buffer as its "file."
-            p = canvas.Canvas(buffer)
-            # Draw things on the PDF. Here's where the PDF generation happens.
-            # See the ReportLab documentation for the full list of functionality.
-            p.drawString(100, 100, "Hello world.")
-            # Close the PDF object cleanly, and we're done.
-            p.showPage()
-            p.save()
-            # FileResponse sets the Content-Disposition header so that browsers
-            # present the option to save the file.
-            buffer.seek(0)
-            return FileResponse(buffer, as_attachment=True, filename='hello.pdf')
-
 
 
 class ferram_class:
     def ferr_form(request,slug=0):
         if request.method == "GET":
             if slug==0:
+                #criar os
                 form = Ferramentaria_form()
                 return render(request, 'manut_form.html',{'form':form})    
             else:
@@ -85,8 +91,11 @@ class ferram_class:
             if slug==0:
                 form = Ferramentaria_form(request.POST)
             else:
+                #editar os
                 editar = Solicitacao.objects.get(slug=slug)
                 form = Ferramentaria_form(request.POST,instance=editar)
+                print('tentativa')
+                print(form.status_os)
             if form.is_valid():
                 manut_print = form.save()                
                 print('------------------------------')
@@ -110,25 +119,20 @@ class ferram_class:
                                           
                 return render(request, 'manut_print.html',contexto)
 
+
 #Em um futuro distante, tentarei renderizar a página através de Query
-def manut_impressao(request):
-    
+def manut_impressao(request):    
     
     return render(request, 'manut_print.html')
 
-                
 
-#função duplicada
-#def manut_list(request):
-#    os_list = Solicitacao.objects.all()
-#    context = {
-#        'os_list': os_list
-#    }
-#    return render(request, 'manut_list.html',context)
 
 #Página de detalhe da Os
 def manut_detail(request, slug):
-    os_list = Solicitacao.objects.get(slug=slug)        
+    os_list = Solicitacao.objects.get(slug=slug)
+    #print('----------------------')
+    #print('Qual é essa os?')
+    #print(os_list.id)
     if request.method == "POST":
         form1 = Ferramentaria_form_report(request.POST)
         if form1.is_valid():
@@ -138,6 +142,7 @@ def manut_detail(request, slug):
             print('------------------------------')
             print(request.META.get('HTTP_REFERER'))
             print('Atividade de OS Criada')
+            
             print('OS: ',comments.id)
             return redirect('manut_detail', slug= os_list.slug)
     else:

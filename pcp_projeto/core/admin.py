@@ -4,8 +4,7 @@ from django.contrib import admin
 # Register your models here.
 
 
-from .models import Sector,Priority,Statusos,Factory,Type_service,Procedimento,Solicitacao,Ferr_report,Propose_service
-
+from .models import Sector,Priority,Statusos,Factory,Type_service,Procedimento,Solicitacao,Ferr_report,Propose_service,Msg_day
 
 
 admin.site.register(Sector)
@@ -17,5 +16,8 @@ admin.site.register(Procedimento)
 admin.site.register(Solicitacao)
 admin.site.register(Ferr_report)
 admin.site.register(Propose_service)
+admin.site.register(Msg_day)
+
+
 #admin.site.register(Material)
 
