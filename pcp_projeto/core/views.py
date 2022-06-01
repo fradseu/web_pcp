@@ -1,7 +1,7 @@
 from datetime import date
 from django.shortcuts import redirect, render
-from .models import Solicitacao,Ferr_report,Msg_day
-from .forms import Ferramentaria_form,Ferramentaria_form_report
+from .models import Solicitacao,Ferr_report,Msg_day,Statusos
+from .forms import Ferramentaria_form,Ferramentaria_form_report,Status_form
 import io
 from django.http import FileResponse
 import reportlab
@@ -89,13 +89,14 @@ class ferram_class:
                     return redirect('/manut_list/')
         else:
             if slug==0:
+                
                 form = Ferramentaria_form(request.POST)
+                
             else:
                 #editar os
                 editar = Solicitacao.objects.get(slug=slug)
                 form = Ferramentaria_form(request.POST,instance=editar)
-                print('tentativa')
-                print(form.status_os)
+                print('atualizado')
             if form.is_valid():
                 manut_print = form.save()                
                 print('------------------------------')
@@ -128,26 +129,40 @@ def manut_impressao(request):
 
 
 #Página de detalhe da Os
-def manut_detail(request, slug):
-    os_list = Solicitacao.objects.get(slug=slug)
-    #print('----------------------')
-    #print('Qual é essa os?')
-    #print(os_list.id)
-    if request.method == "POST":
-        form1 = Ferramentaria_form_report(request.POST)
-        if form1.is_valid():
-            comments = form1.save(commit=False)
-            comments.os_number = os_list
-            comments.save()
-            print('------------------------------')
-            print(request.META.get('HTTP_REFERER'))
-            print('Atividade de OS Criada')
-            
-            print('OS: ',comments.id)
-            return redirect('manut_detail', slug= os_list.slug)
-    else:
-        form1 = Ferramentaria_form_report()
-    return render(request, 'manut_detail.html', {'os_list':os_list, 'form1':form1})
+class manut_detail_class:
+    def manut_detail(request, slug):
+        os_list = Solicitacao.objects.get(slug=slug)
+        #print('----------------------')
+        #print('Qual é essa os?')
+        #print(os_list.id)
+        if request.method == "POST":
+            form1 = Ferramentaria_form_report(request.POST)
+            if form1.is_valid():
+                comments = form1.save(commit=False)
+                comments.os_number = os_list
+                comments.save()
+                print('------------------------------')
+                print(request.META.get('HTTP_REFERER'))
+                print('Atividade de OS Criada')
+                
+                print('OS: ',comments.id)
+                return redirect('manut_detail', slug= os_list.slug)
+        else:
+            form1 = Ferramentaria_form_report()
+        return render(request, 'manut_detail.html', {'os_list':os_list, 'form1':form1})
+
+    def atualizador(request, id):
+        print('Teste atualizador')
+        print(id)        
+        q = Solicitacao.objects.get(pk=id)
+        form2 = Status_form(request.POST)
+        q.status_os = 'FECHADA'
+        q.save()
+        return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+
+
+
 
 
 #Apagar a Ordem de Serviço
@@ -175,8 +190,23 @@ def apagar_delete(request, id):
 
 
 
-class msg_do_dia:
-    def msg_dia():
-        pass
 
+
+#atualizar o status das os.
+class atualizador_class:
+    def updt_close(request, id):
+        q = Solicitacao.objects.get(pk=id)
+        q.status_os = Statusos.objects.get(pk=2)
+        print('alterado status da os:',q.id, 'para >>', q.status_os)
+        q.save()
+        r_redirect = 'http://192.168.0.153:3306/' + q.slug
+        return redirect(r_redirect)
+
+    def updt_open(request, id):
+        q = Solicitacao.objects.get(pk=id)
+        q.status_os = Statusos.objects.get(pk=1)
+        print('alterado status da os:',q.id, 'para >>', q.status_os)
+        q.save()
+        r_redirect = 'http://192.168.0.153:3306/' + q.slug
+        return redirect(r_redirect)
 

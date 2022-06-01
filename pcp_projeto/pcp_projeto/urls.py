@@ -16,7 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from core import views
-from core.views import ferram_class
+from core.views import ferram_class, atualizador_class,manut_detail_class
 from django.views.generic import RedirectView
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
@@ -30,10 +30,12 @@ urlpatterns = [
     path('ferr_form/', ferram_class.ferr_form, name="ferr_form"),
     path('manut_list/', views.manut_list, name="manut_list"),
     path('form/<slug:slug>/', ferram_class.ferr_form, name='ferr_form_update'),
-    path('<slug:slug>/', views.manut_detail, name='manut_detail'),
+    path('<slug:slug>/', manut_detail_class.manut_detail, name='manut_detail'),
     path('delete/<int:id>', views.form_delete, name='form_delete'),
     path('apagar/<int:id>', views.apagar_delete, name='apagar_delete'),
     path('impressao/', views.manut_impressao, name='manut_impressao'),
+    path('updt_c/<int:id>', atualizador_class.updt_close, name='updt_close'),
+    path('updt_o/<int:id>', atualizador_class.updt_open, name='updt_open'),
     
 
 ]

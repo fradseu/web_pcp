@@ -97,8 +97,8 @@ class Ferr_report(models.Model):
     hora_2 = models.TimeField()
     body = models.TextField(max_length=255)
     procedimento = models.ForeignKey(Procedimento,max_length=50, on_delete= models.CASCADE)#P1, P2, P3, P4, P5, P6, P7, P8, P9, P10
-    material = models.CharField(max_length=12)
-    qtd_mat = models.FloatField()
+    material = models.CharField(max_length=12,default="--")
+    qtd_mat = models.FloatField(default=0)
     
 
     class Meta:
