@@ -24,8 +24,9 @@ def home(request):
         editar = Msg_day.objects.get(current_day=msg_date)
     except:    
         editar = datetime.today().strftime('%Y-%m-%d')
-        print('---------------')
-        print(editar)
+        print('------------------------------')
+        print('Novo acesso homePage')
+        print('------------------------------')
 
 
     os_list = Solicitacao.objects.all()
@@ -117,6 +118,7 @@ class ferram_class:
                             'hour_arrive':manut_print.hour_arrive,
                             'slug':manut_print.slug,
                             }
+                print('------------------------------')
                                           
                 return render(request, 'manut_print.html',contexto)
 
@@ -143,24 +145,13 @@ class manut_detail_class:
                 comments.save()
                 print('------------------------------')
                 print(request.META.get('HTTP_REFERER'))
-                print('Atividade de OS Criada')
-                
+                print('Atividade de OS Criada')                
                 print('OS: ',comments.id)
+                print('------------------------------')
                 return redirect('manut_detail', slug= os_list.slug)
         else:
             form1 = Ferramentaria_form_report()
         return render(request, 'manut_detail.html', {'os_list':os_list, 'form1':form1})
-
-    def atualizador(request, id):
-        print('Teste atualizador')
-        print(id)        
-        q = Solicitacao.objects.get(pk=id)
-        form2 = Status_form(request.POST)
-        q.status_os = 'FECHADA'
-        q.save()
-        return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
-
-
 
 
 
@@ -170,7 +161,21 @@ def form_delete(request, id):
     os_list = Solicitacao.objects.get(pk=id)
     print('------------------------------')
     print('Atividade de OS deletada')
-    print('OS: ',os_list)
+    print('OS: ',os_list.id)
+    print(os_list.fullname,
+            os_list.type_service,
+            os_list.factory,
+            os_list.status_os,
+            os_list.machine_code,
+            os_list.sector,
+            os_list.priority_type,
+            os_list.propose_service,
+            os_list.issue_desctiption,
+            os_list.date_create,
+            os_list.hour_arrive,
+            os_list.slug,
+            )
+    print('------------------------------')
     os_list.delete()
     return redirect('/manut_list/')
 
@@ -183,6 +188,7 @@ def apagar_delete(request, id):
     print('OS:',os_number.id)
     print('Atividade de os deletada')
     os_number.delete()
+    print('------------------------------')
 
     messages.add_message(request, messages.INFO, 'Atividade de os deletada.')
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))   
