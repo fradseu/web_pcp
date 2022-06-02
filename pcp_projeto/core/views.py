@@ -158,26 +158,29 @@ class manut_detail_class:
 
 #Apagar a Ordem de Serviço
 def form_delete(request, id):
-    os_list = Solicitacao.objects.get(pk=id)
-    print('------------------------------')
-    print('Atividade de OS deletada')
-    print('OS: ',os_list.id)
-    print(os_list.fullname,
-            os_list.type_service,
-            os_list.factory,
-            os_list.status_os,
-            os_list.machine_code,
-            os_list.sector,
-            os_list.priority_type,
-            os_list.propose_service,
-            os_list.issue_desctiption,
-            os_list.date_create,
-            os_list.hour_arrive,
-            os_list.slug,
-            )
-    print('------------------------------')
-    os_list.delete()
-    return redirect('/manut_list/')
+    try:
+        os_list = Solicitacao.objects.get(pk=id)
+        print('------------------------------')
+        print('Atividade de OS deletada')
+        print('OS: ',os_list.id)
+        print(os_list.fullname,
+                os_list.type_service,
+                os_list.factory,
+                os_list.status_os,
+                os_list.machine_code,
+                os_list.sector,
+                os_list.priority_type,
+                os_list.propose_service,
+                os_list.issue_desctiption,
+                os_list.date_create,
+                os_list.hour_arrive,
+                os_list.slug,
+                )
+        print('------------------------------')
+        os_list.delete()
+        return redirect('/manut_list/')
+    except:
+        return redirect('/manut_list/')
 
 
 #Apagar atividades das OS (registros)

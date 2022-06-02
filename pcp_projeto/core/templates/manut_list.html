@@ -203,7 +203,8 @@
         <table class="table table-striped">
           
             <thead>
-                <tr class="table-light">
+                <tr class="table-light">                  
+                    <th scope="col">Tipo de Manutenção</th>
                     <th scope="col">Nº da OS</th>
                     <th scope="col">Setor</th>
                     <th scope="col">Máquina</th>
@@ -217,6 +218,7 @@
             
                 {% for os in ordens %}
                     <tr>
+                        <td class="table-secondary"> {{ os.type_service }}</td>
                         <td class="table-secondary"> {{ os.id }}</td>
                         <td class="table-secondary"> {{ os.sector }}</td>
                         <td class="table-secondary"> {{ os.machine_code }}</td>
