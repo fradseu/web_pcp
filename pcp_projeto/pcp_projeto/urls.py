@@ -24,6 +24,8 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 urlpatterns = [
     #path('manut_list/', views.manut_list, name='manut_list'),
     path('dashboard/', views.dashboard, name='dashboard'),
+    path('login/', views.login_user, name='login'),
+    path('teste/', views.teste,name='teste'),
     path('admin/', admin.site.urls),
     path('', RedirectView.as_view(url='/home/')),
     path('home/', views.home),
@@ -36,6 +38,8 @@ urlpatterns = [
     path('impressao/', views.manut_impressao, name='manut_impressao'),
     path('updt_c/<int:id>', atualizador_class.updt_close, name='updt_close'),
     path('updt_o/<int:id>', atualizador_class.updt_open, name='updt_open'),
+    
+    
     
 
 ]

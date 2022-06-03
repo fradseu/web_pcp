@@ -2,18 +2,52 @@ from datetime import date
 from django.shortcuts import redirect, render
 from .models import Solicitacao,Ferr_report,Msg_day,Statusos
 from .forms import Ferramentaria_form,Ferramentaria_form_report,Status_form
+#Imports para gerar pdf.
+## Não implementado.
 import io
 from django.http import FileResponse
 import reportlab
 from reportlab.pdfgen import canvas
+
+#imports para criar paginação
+## Em implementação, necessita criar o filtro.
 from django.core.paginator import Paginator, InvalidPage, EmptyPage
+
+#
+##
 from django.http import HttpResponseRedirect
 from django.contrib import messages
 import os
+
+#
+##Imports para criar MSG dia
+##Implementado na index.html
 from datetime import datetime
+
+#
+##Imports para criar Login/Logout
+##Em implementação
+from django.contrib.auth.decorators import login_required
+
+
 
 
 ###############################################
+
+def teste(request):        
+    os_list = Solicitacao.objects.all()    
+    # configuração paginação
+    p = Paginator(Solicitacao.objects.all(), 50)
+    page = request.GET.get('page')
+    ordens = p.get_page(page)
+    nums = "a" * ordens.paginator.num_pages
+    context = {
+        'os_list': os_list,
+        'ordens': ordens,
+        'nums': nums
+        }
+    return render(request, 'iframe.html',context)
+
 
 #página Inicial.
 def home(request):
@@ -22,6 +56,7 @@ def home(request):
 
     try:
         editar = Msg_day.objects.get(current_day=msg_date)
+        print(editar)
     except:    
         editar = datetime.today().strftime('%Y-%m-%d')
         print('------------------------------')
@@ -62,7 +97,14 @@ def manut_list(request):
     return render(request, 'manut_list.html',context)
 
 
+
+
+def login_user(request):
+    return render(request, 'login.html')
+
+
 #Página do dashboard.
+@login_required(login_url='/login/')
 def dashboard(request):
     os_list = Solicitacao.objects.all()
     context = {
@@ -218,4 +260,5 @@ class atualizador_class:
         q.save()
         r_redirect = 'http://192.168.0.153:3306/' + q.slug
         return redirect(r_redirect)
+
 
