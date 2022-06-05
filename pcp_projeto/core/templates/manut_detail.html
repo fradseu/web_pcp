@@ -1,479 +1,506 @@
-<!doctype html>
-<html lang="pt-br">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
-    <meta name="generator" content="Hugo 0.84.0">
-    <title>PCP-WEB</title>
-    <!--
-    <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/dashboard/">
-    -->
+<!DOCTYPE html>
+<html lang="pr-br">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PCP - WEB</title>
 
-    
+  <!-- Google Font: Source Sans Pro -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="/static/plugins/fontawesome-free/css/all.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="/static/dist/css/adminlte.min.css">
+  <!-- overlayScrollbars -->
+  <link rel="stylesheet" href="/static/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+  <!-- Icones -->
+  <link rel="icon" href="/static/img/favicons/favicon-32x32.png" sizes="32x32" type="image/png">
+  <link rel="icon" href="/static/img/favicon-16x16.png" sizes="16x16" type="image/png">
+  <link rel="icon" href="/static/img/favicon.ico">
+</head>
+<body class="hold-transition sidebar-mini layout-fixed" data-panel-auto-height-mode="height">
+<div class="wrapper">
+  {% load crispy_forms_tags %}
 
-    <!-- Bootstrap core CSS -->
-<link href="/static/bootstrap/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <!-- Navbar -->
+  <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+    <!-- Left navbar links -->
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+      </li>
+    </ul>
 
-    <!-- Favicons -->
-<link rel="apple-touch-icon" href="/docs/5.0/assets/img/favicons/apple-touch-icon.png" sizes="180x180">
-<link rel="icon" href="/static/img/favicons/favicon-32x32.png" sizes="32x32" type="image/png">
-<link rel="icon" href="/static/img/favicon-16x16.png" sizes="16x16" type="image/png">
-<link rel="manifest" href="/docs/5.0/assets/img/favicons/manifest.json">
-<link rel="mask-icon" href="/docs/5.0/assets/img/favicons/safari-pinned-tab.svg" color="#7952b3">
-<link rel="icon" href="/static/img/favicon.ico">
-<meta name="theme-color" content="#7952b3">
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
-
-    <style>
-      .bd-placeholder-img {
-        font-size: 1.125rem;
-        text-anchor: middle;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        user-select: none;
-      }
-
-      @media (min-width: 768px) {
-        .bd-placeholder-img-lg {
-          font-size: 3.5rem;
-        }
-      }
-    </style>
-
-    
-    <!-- Custom styles for this template -->
-    <!--
-    <link href="dashboard.css" rel="stylesheet">
-    -->
-  </head>
-  <body>
-    
-<header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
-  <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="#">PCP - WEB</a>
-  <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <!--
-  <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
-  -->
-  <div class="navbar-nav">
-    <div class="nav-item text-nowrap">
-      <a class="nav-link px-3" href="#">Sign out</a>
-    </div>
-  </div>
-</header>
-
-<div class="container-fluid">
-  <div class="row">
-    <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
-      <div class="position-sticky pt-3">
-        <ul class="nav flex-column">
-          <li class="nav-item">
-            <a class="nav-link" href="/home/">
-              <span data-feather="shopping-cart"></span>
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-house" viewBox="0 0 16 16">
-                <path fill-rule="evenodd" d="M2 13.5V7h1v6.5a.5.5 0 0 0 .5.5h9a.5.5 0 0 0 .5-.5V7h1v6.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5zm11-11V6l-2-2V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5z"/>
-                <path fill-rule="evenodd" d="M7.293 1.5a1 1 0 0 1 1.414 0l6.647 6.646a.5.5 0 0 1-.708.708L8 2.207 1.354 8.854a.5.5 0 1 1-.708-.708L7.293 1.5z"/>
-              </svg>
-              Home
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/admin/">
-              <span data-feather="shopping-cart"></span>
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-server" viewBox="0 0 16 16">
-                <path d="M1.333 2.667C1.333 1.194 4.318 0 8 0s6.667 1.194 6.667 2.667V4c0 1.473-2.985 2.667-6.667 2.667S1.333 5.473 1.333 4V2.667z"/>
-                <path d="M1.333 6.334v3C1.333 10.805 4.318 12 8 12s6.667-1.194 6.667-2.667V6.334a6.51 6.51 0 0 1-1.458.79C11.81 7.684 9.967 8 8 8c-1.966 0-3.809-.317-5.208-.876a6.508 6.508 0 0 1-1.458-.79z"/>
-                <path d="M14.667 11.668a6.51 6.51 0 0 1-1.458.789c-1.4.56-3.242.876-5.21.876-1.966 0-3.809-.316-5.208-.876a6.51 6.51 0 0 1-1.458-.79v1.666C1.333 14.806 4.318 16 8 16s6.667-1.194 6.667-2.667v-1.665z"/>
-              </svg>
-              ADMIN
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="/dashboard/">
-              <span data-feather="home"></span>
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clipboard-data" viewBox="0 0 16 16">
-                <path d="M4 11a1 1 0 1 1 2 0v1a1 1 0 1 1-2 0v-1zm6-4a1 1 0 1 1 2 0v5a1 1 0 1 1-2 0V7zM7 9a1 1 0 0 1 2 0v3a1 1 0 1 1-2 0V9z"/>
-                <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z"/>
-                <path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z"/>
-              </svg>
-              Dashboard
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/ferr_form/">
-              <span data-feather="file"></span>
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clipboard-plus" viewBox="0 0 16 16">
-                <path fill-rule="evenodd" d="M8 7a.5.5 0 0 1 .5.5V9H10a.5.5 0 0 1 0 1H8.5v1.5a.5.5 0 0 1-1 0V10H6a.5.5 0 0 1 0-1h1.5V7.5A.5.5 0 0 1 8 7z"/>
-                <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z"/>
-                <path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z"/>
-              </svg>
-              Abrir Chamado
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/manut_list/">
-              <span data-feather="shopping-cart"></span>
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-list-check" viewBox="0 0 16 16">
-                <path fill-rule="evenodd" d="M5 11.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zM3.854 2.146a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 1 1 .708-.708L2 3.293l1.146-1.147a.5.5 0 0 1 .708 0zm0 4a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 1 1 .708-.708L2 7.293l1.146-1.147a.5.5 0 0 1 .708 0zm0 4a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 0 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0z"/>
-              </svg>
-              Lista de Os
-            </a>
-          </li>
-        </ul>
-
-        <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-          <span>Documentação</span>
-          <a class="link-secondary" href="#" aria-label="Add a new report">
-            <span data-feather="plus-circle"></span>
-          </a>
-        </h6>
-        <ul class="nav flex-column mb-2">
-          <li class="nav-item">
-            <a class="nav-link" href="#">
-              <span data-feather="file-text"></span>
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-lightbulb" viewBox="0 0 16 16">
-                <path d="M2 6a6 6 0 1 1 10.174 4.31c-.203.196-.359.4-.453.619l-.762 1.769A.5.5 0 0 1 10.5 13a.5.5 0 0 1 0 1 .5.5 0 0 1 0 1l-.224.447a1 1 0 0 1-.894.553H6.618a1 1 0 0 1-.894-.553L5.5 15a.5.5 0 0 1 0-1 .5.5 0 0 1 0-1 .5.5 0 0 1-.46-.302l-.761-1.77a1.964 1.964 0 0 0-.453-.618A5.984 5.984 0 0 1 2 6zm6-5a5 5 0 0 0-3.479 8.592c.263.254.514.564.676.941L5.83 12h4.342l.632-1.467c.162-.377.413-.687.676-.941A5 5 0 0 0 8 1z"/>
-              </svg>
-              SGQ em Foco
-            </a>
-          </li>
-          <!--
-          <li class="nav-item">
-            <a class="nav-link" href="#">
-              <span data-feather="file-text"></span>
-              Last quarter
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">
-              <span data-feather="file-text"></span>
-              Social engagement
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">
-              <span data-feather="file-text"></span>
-              Year-end sale
-            </a>
-          </li>
-          -->
-        </ul>
-
-      </ul>
-      <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-        <span>Expedição</span>
-        <a class="link-secondary" href="#" aria-label="Add a new report">
-          <span data-feather="plus-circle"></span>
+    <!-- Right navbar links -->
+    <ul class="navbar-nav ml-auto">
+      <!-- Navbar Search -->
+      <li class="nav-item">
+        <a  data-widget="fullscreen" href="#" role="button">
+          <i class="fas fa-expand-arrows-alt"></i> Expandir tela
         </a>
-      </h6>
-      <ul class="nav flex-column mb-2">
-        <li class="nav-item">
-          <a class="nav-link" href="http://192.168.0.244/autenticacao" target="_blank">
-            <span data-feather="file-text"></span>
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-truck" viewBox="0 0 16 16">
-              <path d="M0 3.5A1.5 1.5 0 0 1 1.5 2h9A1.5 1.5 0 0 1 12 3.5V5h1.02a1.5 1.5 0 0 1 1.17.563l1.481 1.85a1.5 1.5 0 0 1 .329.938V10.5a1.5 1.5 0 0 1-1.5 1.5H14a2 2 0 1 1-4 0H5a2 2 0 1 1-3.998-.085A1.5 1.5 0 0 1 0 10.5v-7zm1.294 7.456A1.999 1.999 0 0 1 4.732 11h5.536a2.01 2.01 0 0 1 .732-.732V3.5a.5.5 0 0 0-.5-.5h-9a.5.5 0 0 0-.5.5v7a.5.5 0 0 0 .294.456zM12 10a2 2 0 0 1 1.732 1h.768a.5.5 0 0 0 .5-.5V8.35a.5.5 0 0 0-.11-.312l-1.48-1.85A.5.5 0 0 0 13.02 6H12v4zm-9 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm9 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"/>
-            </svg>
-            Sistema Expedição
-          </a>
-        </li>
-      </ul>
-      </div>
-    </nav>
+      </li>     
+    </ul>
+    <ul class="navbar-nav ml-auto">
+      <!-- Navbar Search -->   
+           
+      <li class="nav-item">
+        <a href="/login/">
+          <i class="fas fa-sign-out-alt"></i> Sair 
+        </a>        
+      </li> 
+    </ul>
+  </nav>
+  <!-- /.navbar -->
 
-    <main class="col-md-1 ms-sm-auto col-lg-10 px-md-2">
+  <!-- Main Sidebar Container -->
+  <aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <!-- Brand Logo -->
+    <a href="/home/" class="brand-link">
+      <img src="/static/img/MARFLEX_LOGO.jpg" alt="Marflex Logo" class="brand-image elevation-3" style="opacity: .8">
+      <span class="brand-text font-weight-light">PCP - WEB</span>
+    </a>
 
-      <div class="container bg-light">
-        <div class="row">
-            <h1>Atitividades executadas na Ordem de Serviço.</h1>
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <!-- Sidebar user panel (optional) -->
+      <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+        <!--
+        <div class="image">
+          <img src="/static/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+        </div>
+        -->
+        <div class="info">
+          <a href="#" class="d-block"> "Usuário / Setor"</a>
         </div>
       </div>
-      <br>
+      <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+        
+        <div class="info">
+          <a href="/home/" class="d-block"><i class="fas fa-home"></i> Home</a>
+        </div>
+      </div>
+      
       
 
-        {% load crispy_forms_tags %}
-    <!-- Começo do CABEÇALHO-->
-    <div class="container-fluid">
-      <div class="col-md-12 offset-md-0 mt-0">
-        <div class="row g-4 py-1 row-cols-1 row-cols-lg-5">
-          <div class="feature col bg-light">
-            <div class="feature-icon bg-primary bg-gradient">
-              <svg class="bi" width="1em" height="1em">
-                <use xlink:href="#toggles2"></use>
-              </svg>
-            </div>
-            <h2>
-              <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-file-earmark" viewBox="0 0 16 16">
-                <path d="M14 4.5V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h5.5L14 4.5zm-3 0A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V4.5h-2z"/>
-              </svg>  Número da OS: 
-            </h2>
-            <h3>{{ os_list.id }}</h3>
-          </div>
-          <div class="feature col bg-light">
-            <div class="feature-icon bg-primary bg-gradient">
-              <svg class="bi" width="1em" height="1em"><use xlink:href="#toggles2"></use>
-              </svg>
-            </div>
-            <h2>
-              <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-calendar-day" viewBox="0 0 16 16"><path d="M4.684 11.523v-2.3h2.261v-.61H4.684V6.801h2.464v-.61H4v5.332h.684zm3.296 0h.676V8.98c0-.554.227-1.007.953-1.007.125 0 .258.004.329.015v-.613a1.806 1.806 0 0 0-.254-.02c-.582 0-.891.32-1.012.567h-.02v-.504H7.98v4.105zm2.805-5.093c0 .238.192.425.43.425a.428.428 0 1 0 0-.855.426.426 0 0 0-.43.43zm.094 5.093h.672V7.418h-.672v4.105z"/><path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z"/>
-              </svg>  Data de crição:
-            </h2>
-            <h3>{{ os_list.date_create}}</h3>
-          </div>
-          <div class="feature col bg-light">
-            <div class="feature-icon bg-primary bg-gradient">
-              <svg class="bi" width="1em" height="1em"><use xlink:href="#toggles2"></use>
-              </svg>
-            </div>
-            <h2>
-              <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-people-fill" viewBox="0 0 16 16"><path d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/><path fill-rule="evenodd" d="M5.216 14A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216z"/><path d="M4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z"/>
-              </svg>  Setor solicitante: 
-            </h2>
-            <h3>{{ os_list.sector}}</h3>
-          </div>
-          <div class="feature col bg-light">
-            <div class="feature-icon bg-primary bg-gradient">
-              <svg class="bi" width="1em" height="1em"><use xlink:href="#toggles2"></use>
-              </svg>
-            </div>
-            <h2>
-              <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-question-circle" viewBox="0 0 16 16">
-                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"></path>
-                <path d="M5.255 5.786a.237.237 0 0 0 .241.247h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286zm1.557 5.763c0 .533.425.927 1.01.927.609 0 1.028-.394 1.028-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94z"></path>
-              </svg>  Status da Os.: 
-            </h2>
-            <h3>{{ os_list.status_os}}
-            </h3>
-          </div>
-          <div class="feature col bg-light">
-            <div class="feature-icon bg-primary bg-gradient">
-              <svg class="bi" width="1em" height="1em"><use xlink:href="#toggles2"></use>
-              </svg>
-            </div>
-            <h2>
-              <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-file-earmark-person" viewBox="0 0 16 16">
-                <path d="M11 8a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
-                <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 3A1.5 1.5 0 0 0 11 4.5h2v9.255S12 12 8 12s-5 1.755-5 1.755V2a1 1 0 0 1 1-1h5.5v2z"/>
-              </svg>  Quem solicitou: 
-            </h2>
-            <h3>{{ os_list.fullname}}
-            </h3>
-          </div>
-        </div>
-        
-        <div class="row bg-light" >
-          <p><strong>Descrição do problema: </strong>{{ os_list.issue_desctiption }}</p>
-        </div>
-      </div>
-      <!-- Final do CABEÇALHO-->
+      <!-- SidebarSearch Form -->
+      
 
+      <!-- Sidebar Menu -->
+      <nav class="mt-2">
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+          <!-- Add icons to the links using the .nav-icon class
+               with font-awesome or any other icon font library -->
+          <!--
+          <li class="nav-header"><h6>PCP</h6></li>
+          -->
+          
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="fas fa-tachometer-alt"></i>
+              <p>
+                 Indicadores
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="/dashboard/" ><i class="fas fa-chart-line"></i>  Dashboard
+                </a>
+              </li>              
+            </ul>
+            <li class="nav-item">
+              <a href="/dashboard/" ><i class="fas fa-chart-line"></i>  Dashboard
+              </a>
+            </li>  
+          </li> 
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="fas fa-tools"></i>
+              <p>
+                Ordem de Serviço
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="/ferr_form/" ><i class="far fa-plus-square"></i> Abrir Chamado
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/manut_list/" ><i class="fas fa-list-ul"></i> Lista de Chamados
+                </a>
+              </li>              
+            </ul>
+            <li class="nav-item">
+              <a href="/ferr_form/" ><i class="far fa-plus-square"></i> Abrir Chamado
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="/manut_list/" ><i class="fas fa-list-ul"></i> Lista de Chamados
+              </a>
+            </li>
+          </li>          
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="fas fa-spell-check"></i>
+              <p>
+                SGQ
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="#" ><i class="far fa-circle nav-icon"></i> Desvio de Qualidade
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="#" ><i class="far fa-circle nav-icon"></i> Recebimento
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="#" ><i class="far fa-circle nav-icon"></i> Inspeção de Linha
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="#" ><i class="far fa-circle nav-icon"></i> Instrução de Trabalho
+                </a>
+              </li>             
+            </ul>
+            <li class="nav-item">
+              <a href="#" ><i class="far fa-circle nav-icon"></i> Desvio de Qualidade
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="#" ><i class="far fa-circle nav-icon"></i> Recebimento
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="#" ><i class="far fa-circle nav-icon"></i> Inspeção de Linha
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="#" ><i class="far fa-circle nav-icon"></i> Instrução de Trabalho
+              </a>
+            </li>
+          </li>              
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="fas fa-truck"></i>
+              <p>
+                Sistema de Expedição
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="http://192.168.0.244/autenticacao" target="_blank" ><i class="far fa-circle nav-icon"></i> Sistema Senai
+                </a>
+              </li>      
+            </ul>
+            <li class="nav-item">
+              <a href="http://192.168.0.244/autenticacao" target="_blank" ><i class="far fa-circle nav-icon"></i> Sistema Senai
+              </a>
+            </li>
+          </li>
+        </ul>
+      </nav>
+      <!-- /.sidebar-menu -->
     </div>
-      <div class="col-md-12 offset-md-0 mt-2">
-        <div class="jumbotron">
-          <hr class="my-2">
-            <form action="" method="post" autocomplete="off"> {% csrf_token %}
-                <div class="row">
-                    <div class="col-md-5">
-                        {{form1.name|as_crispy_field}}
-                    </div>
-                    <div class="col-md-4">
-                      {{form1.material|as_crispy_field}}
-                    </div>
-                    <div class="col-md-3">
-                      {{form1.qtd_mat|as_crispy_field}}
-                    </div>
-                </div>    
-                <div class="row">
-                    <div class="col-md-3">
-                        {{form1.data_1|as_crispy_field}}
-                    </div>
-                    <div class="col-md-2">
-                        {{form1.hora_1|as_crispy_field}}
-                    </div>
-                    <div class="col-md-2">
-                      {{form1.hora_2|as_crispy_field}}
-                    </div>
-                    <div class="col-md-5 ">
-                      {{form1.procedimento|as_crispy_field}}
-                    </div>
-                </div>
+    <!-- /.sidebar -->
+  </aside>
 
-
-                <div class="row">
-                  <div class="col-md-9">
-                    {{form1.body|as_crispy_field}} 
-                  </div>
-                  <div class="feature col bg-light">
-                    <div class="row">
-                      <div class="row">
-                        <div class="feature-icon bg-light bg-light">
-                          <svg class="bi" width="1em" height="1em"><use xlink:href="#toggles2"></use>
-                          </svg>
-                        </div>                        
-                        <div class="feature-icon bg-primary bg-gradient">
-                          <svg class="bi" width="1em" height="1em"><use xlink:href="#toggles2"></use>
-                          </svg>
-                        </div>
-                        <h5>
-                          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-arrow-left-right" viewBox="0 0 16 16">
-                            <path fill-rule="evenodd" d="M1 11.5a.5.5 0 0 0 .5.5h11.793l-3.147 3.146a.5.5 0 0 0 .708.708l4-4a.5.5 0 0 0 0-.708l-4-4a.5.5 0 0 0-.708.708L13.293 11H1.5a.5.5 0 0 0-.5.5zm14-7a.5.5 0 0 1-.5.5H2.707l3.147 3.146a.5.5 0 1 1-.708.708l-4-4a.5.5 0 0 1 0-.708l4-4a.5.5 0 1 1 .708.708L2.707 4H14.5a.5.5 0 0 1 .5.5z"/>
-                          </svg>  Mudar Status: 
-                        </h5>
-                        <h3><div class="container py-1 px-md-1">
-                          <div class="row justify-content-md-center">
-                            <div class="col py-1 px-md-1 justify-content-md-center">
-                              <a button type="button" class="btn btn-success" href="{% url 'updt_close' os_list.id %}"> {% csrf_token %}
-                                <svg xmlns="http://www.w3.org/2000/svg" width="18"  fill="currentColor" class="bi bi-folder-check" viewBox="0 0 16 16">
-                                  <path d="m.5 3 .04.87a1.99 1.99 0 0 0-.342 1.311l.637 7A2 2 0 0 0 2.826 14H9v-1H2.826a1 1 0 0 1-.995-.91l-.637-7A1 1 0 0 1 2.19 4h11.62a1 1 0 0 1 .996 1.09L14.54 8h1.005l.256-2.819A2 2 0 0 0 13.81 3H9.828a2 2 0 0 1-1.414-.586l-.828-.828A2 2 0 0 0 6.172 1H2.5a2 2 0 0 0-2 2zm5.672-1a1 1 0 0 1 .707.293L7.586 3H2.19c-.24 0-.47.042-.683.12L1.5 2.98a1 1 0 0 1 1-.98h3.672z"/>
-                                  <path d="M15.854 10.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.707 0l-1.5-1.5a.5.5 0 0 1 .707-.708l1.146 1.147 2.646-2.647a.5.5 0 0 1 .708 0z"/>
-                                </svg> Fechar</button>                              
-                              </a>
-                            </div>
-                            <div class="col py-1 px-md-1 justify-content-md-center">
-                              <a button type="button" class="btn btn-warning" href="{% url 'updt_open' os_list.id %}"> {% csrf_token %}
-                                <svg xmlns="http://www.w3.org/2000/svg" width="18"  fill="currentColor" class="bi bi-folder-x" viewBox="0 0 16 16">
-                                  <path d="M.54 3.87.5 3a2 2 0 0 1 2-2h3.672a2 2 0 0 1 1.414.586l.828.828A2 2 0 0 0 9.828 3h3.982a2 2 0 0 1 1.992 2.181L15.546 8H14.54l.265-2.91A1 1 0 0 0 13.81 4H2.19a1 1 0 0 0-.996 1.09l.637 7a1 1 0 0 0 .995.91H9v1H2.826a2 2 0 0 1-1.991-1.819l-.637-7a1.99 1.99 0 0 1 .342-1.31zm6.339-1.577A1 1 0 0 0 6.172 2H2.5a1 1 0 0 0-1 .981l.006.139C1.72 3.042 1.95 3 2.19 3h5.396l-.707-.707z"/>
-                                  <path d="M11.854 10.146a.5.5 0 0 0-.707.708L12.293 12l-1.146 1.146a.5.5 0 0 0 .707.708L13 12.707l1.146 1.147a.5.5 0 0 0 .708-.708L13.707 12l1.147-1.146a.5.5 0 0 0-.707-.708L13 11.293l-1.146-1.147z"/>
-                                </svg> Abrir</button>                              
-                              </a>
-                            </div>
-                          </div>
-                        </div>
-                        </h3>
-                      </div>
-                      
-                      <div class="row">                        
-                        <div class="feature-icon bg-primary bg-gradient">
-                          <svg class="bi" width="1em" height="1em"><use xlink:href="#toggles2"></use>
-                          </svg>
-                        </div>
-                        <h5>
-                          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-journal-text" viewBox="0 0 16 16">
-                            <path d="M5 10.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5zm0-2a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm0-2a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm0-2a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5z"/>
-                            <path d="M3 0h10a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-1h1v1a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v1H1V2a2 2 0 0 1 2-2z"/>
-                            <path d="M1 5v-.5a.5.5 0 0 1 1 0V5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0V8h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0v.5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1z"/>
-                          </svg>  Salvar descrições da tarefa: 
-                        </h5>
-                        <h3><div class="container py-1 px-md-1">
-                          <div class="row justify-content-md-center">
-                            <div class="col py-1 px-md-1 justify-content-md-center">
-                              <button type="submit" class="btn btn-success">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22"  fill="currentColor" class="bi bi-folder-x" viewBox="0 0 16 16">
-                                  <path d="M.54 3.87.5 3a2 2 0 0 1 2-2h3.672a2 2 0 0 1 1.414.586l.828.828A2 2 0 0 0 9.828 3h3.982a2 2 0 0 1 1.992 2.181L15.546 8H14.54l.265-2.91A1 1 0 0 0 13.81 4H2.19a1 1 0 0 0-.996 1.09l.637 7a1 1 0 0 0 .995.91H9v1H2.826a2 2 0 0 1-1.991-1.819l-.637-7a1.99 1.99 0 0 1 .342-1.31zm6.339-1.577A1 1 0 0 0 6.172 2H2.5a1 1 0 0 0-1 .981l.006.139C1.72 3.042 1.95 3 2.19 3h5.396l-.707-.707z"/>
-                                  <path d="M11.854 10.146a.5.5 0 0 0-.707.708L12.293 12l-1.146 1.146a.5.5 0 0 0 .707.708L13 12.707l1.146 1.147a.5.5 0 0 0 .708-.708L13.707 12l1.147-1.146a.5.5 0 0 0-.707-.708L13 11.293l-1.146-1.147z"/>
-                                </svg> Salvar </button>                             
-                              </a>
-                            </div>
-                          </div>
-                        </div>
-                        </h3>
-                      </div>
-                    </div>
-
-                  </div>               
-                   
-                  </div>
-                </div>
-                <!--       
-              </br>
-                <button type="submit" class="btn btn-success"><i class="far fa-save"></i> Salvar</button>
-                -->         
-            </form>
-            <br>
-            <hr class="my-2">
-            <h3><b>Anotações operacionais.</b></h3>
-            <table class="table">
-              <thead>
-                  <tr class="table-light">
-                      <th scope="col">Procedimento</th>
-                      <th scope="col">Nome</th>
-                      <th scope="col">Data</th>
-                      <th scope="col">Hora inicial</th>
-                      <th scope="col">Hora final</th>
-                      <th scope="col">O que foi feito</th>
-                      <th scope="col">O que foi usado</th>
-                      <th scope="col">Quanto foi usado</th>
-                      <th scope="col">Excluir</th>
-                  </tr>
-              </thead>
-              <body>
-                  {% for os_number in os_list.comments.all %}
-                      <tr class="table-secondary">                          
-                          <td > {{ os_number.procedimento }}</td>
-                          <td > {{ os_number.name }}</td>
-                          <td > {{ os_number.data_1 }}</td>
-                          <td > {{ os_number.hora_1 }}</td>
-                          <td > {{ os_number.hora_2 }}</td>
-                          <td > {{ os_number.body }}</td>
-                          <td > {{ os_number.material }}</td>
-                          <td > {{ os_number.qtd_mat }}</td>
-                          <td class="table-secondary">
-                            <a button type="button" class="btn btn-danger" href="{% url 'apagar_delete' os_number.id %}"> {% csrf_token %}
-                              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-earmark-x" viewBox="0 0 16 16">
-                                <path d="M6.854 7.146a.5.5 0 1 0-.708.708L7.293 9l-1.147 1.146a.5.5 0 0 0 .708.708L8 9.707l1.146 1.147a.5.5 0 0 0 .708-.708L8.707 9l1.147-1.146a.5.5 0 0 0-.708-.708L8 8.293 6.854 7.146z"/>
-                                <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 3A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5v2z"/>
-                              </svg> Excluir</button>                              
-                            </a>
-                          </td> 
-                      </tr>
-                  {% endfor %}
-              </body>
-          </table>
-        </div>
-      </div>
-    </div>
-    </main>
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper iframe-mode" data-widget="iframe" data-loading-screen="750">
     
-    <footer class="container py-5">
-      <div class="row">
-        <div class="col-12 col-md">
-          <img src="/static/img/favicons/mascote-marflex.png" width="26%">
-          <small class="d-block mb-3 text-muted">©Felipe Reis - 2022</small>
-        </div>
-        <div class="col-6 col-md">
-          <h5>Marflex</h5>
-          <ul class="list-unstyled text-small">
-            <li><a class="link-secondary" href="#">-</a></li>
-            <li><a class="link-secondary" href="#">-</a></li>
-          </ul>
-        </div>
-        <div class="col-6 col-md">
-          <h5>SpeedBrake</h5>
-          <ul class="list-unstyled text-small">
-            <li><a class="link-secondary" href="#">-</a></li>
-            <li><a class="link-secondary" href="#">-</a></li>
-          </ul>
-        </div>
-        <div class="col-6 col-md">
-          <h5>Sobre</h5>
-          <ul class="list-unstyled text-small">
-            <li><a class="link-secondary" href="#">-</a></li>
-            <li><a class="link-secondary" href="#">-</a></li>
-          </ul>
-        </div>
-        <!--
-        <div class="col-6 col-md">
-          <h5>Sobre</h5>
-          <ul class="list-unstyled text-small">
-            <li><a class="link-secondary" href="#">-</a></li>
-            <li><a class="link-secondary" href="#">-</a></li>
-          </ul>
-        </div>
-        -->
-      </div>
-    </footer>
-
-
-      <script src="/static/bootstrap/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-      <!--
-      <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js" integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE" crossorigin="anonymous"></script><script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js" integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha" crossorigin="anonymous"></script><script src="dashboard.js"></script>
-        -->
+    <div class="nav navbar navbar-expand navbar-white navbar-light border-bottom p-0">
+      <a class="nav-link bg-light" href="#" data-widget="iframe-fullscreen"><i class="fas fa-expand"></i></a>
     </div>
-    </div>   
-  </body>
+  
+    <div class="tab-content">
+      <div class="card">
+        <div class="card card-success">
+          <div class="card-header">
+            <h3 class="card-title">Informações da ordem de servço</h3>
+          </div>
+        </div>
+        <!-- Começo Principal -->
+        <section class="content">
+          <div class="container-fluid">
+            <!-- Small boxes (Stat box) -->
+            <div class="row">
+              <div class="col-lg-3 col-6">
+                <!-- small box -->
+                <div class="small-box bg-warning">
+                  <div class="inner">                    
+                    <h3><sup style="font-size: 18px">Número da OS</sup></h3> 
+                    <h3><sup style="font-size: 18px">{{ os_list.id }}</sup></h3>
+                  </div>
+                  <div class="icon">
+                    <i class="ion ion-pie-graph"></i>
+                  </div>
+                  <a href="#" class="small-box-footer"> </a>
+                </div>
+              </div>
+              <div class="col-lg-3 col-6">
+                <!-- small box -->
+                <div class="small-box bg-warning">
+                  <div class="inner">
+                    <h3><sup style="font-size: 18px">Data de crição</sup></h3>
+                    <h3><sup style="font-size: 18px">{{ os_list.date_create}}</sup></h3>
+                  </div>
+                  <div class="icon">
+                    <i class="ion ion-stats-bars"></i>
+                  </div>
+                  <a href="#" class="small-box-footer"> </a>
+                </div>
+              </div>
+              
+              <!-- ./col -->
+              <div class="col-lg-3 col-6">
+                <!-- small box -->
+                <div class="small-box bg-warning">
+                  <div class="inner">
+                    <h3><sup style="font-size: 18px">Setor solicitante</sup></h3> 
+                    <h3><sup style="font-size: 18px">{{ os_list.sector}}</sup></h3>
+                  </div>
+                  <div class="icon">
+                    <i class="ion ion-person-add"></i>
+                  </div>
+                  <a href="#" class="small-box-footer"> </a>
+                </div>
+              </div>
+              <!-- ./col -->
+              <div class="col-lg-3 col-6">
+                <!-- small box -->
+                <div class="small-box bg-warning">
+                  <div class="inner">
+                    <h3><sup style="font-size: 18px">Quem solicitou</sup></h3> 
+                    <h3><sup style="font-size: 18px">{{os_list.fullname}}</sup></h3>
+                  </div>
+                  <div class="icon">
+                    <i class="ion ion-pie-graph"></i>
+                  </div>
+                  <a href="#" class="small-box-footer"> </a>
+                </div>
+              </div>
+              <!-- ./col -->
+              
+            </div>
+            <div class="row">
+              <div class="col-lg-12 col-12">
+                <div class="card card-primary card-outline">
+                  <div class="card-header">
+                    <h3><sup style="font-size: 18px">Descrição do problema</sup></h3> 
+                  </div>
+                  <div class="card-body">                  
+                    <h3><sup style="font-size: 18px">{{ os_list.issue_desctiption }}</sup></h3>
+                  </div>
+                </div>
+              </div>
+
+
+
+              
+              </div>
+              
+            </div>
+            <!-- /.row -->
+            <!-- Main row -->
+
+            <div class="card card-success">
+              <div class="card-header">
+                <h3 class="card-title">Anotações da ordem de serviço</h3>
+              </div>
+              <!-- /.card-header -->
+              <!-- form start -->
+              <form action="" method="post" autocomplete="off"> {% csrf_token %}
+                <div class="card-body">
+                     
+                <div class="row">
+                    <div class="col-md-4">
+                        {{form1.body|as_crispy_field}}
+                    </div>
+                    <div class="col-md-8">
+                      <div class="row">
+                        <div class="col">
+                            {{form1.name|as_crispy_field}}
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col">
+                          {{form1.data_1|as_crispy_field}}
+                        </div>
+                        <div class="col">
+                          {{form1.procedimento|as_crispy_field}}
+                        </div>
+                      </div>
+                      <div class="row">
+                      <div class="col">
+                        {{form1.hora_1|as_crispy_field}}
+                      </div>
+                      <div class="col">
+                        {{form1.hora_2|as_crispy_field}}
+                      </div>                      
+                      </div>
+                      <div class="row">
+                        <div class="col">
+                          {{form1.material|as_crispy_field}}
+                        </div>
+                        <div class="col">
+                          {{form1.qtd_mat|as_crispy_field}}
+                        </div>                      
+                        </div>
+                    </div>                    
+                </div>
+                <div class="col-6 col-md-3">
+                  <button type="submit" class="btn btn-primary">
+                    <i class="far fa-save"></i> Salvar Anotações</button>
+                </div>
+                
+              
+            </form>
+            </div>
+
+
+            <div class="card card-success">
+              <div class="card-header">
+                <h3 class="card-title">Alterar status da ordem de serviço</h3>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-4 col-6">
+                <!-- small box -->
+                <div class="small-box bg-warning">
+                  <div class="inner">                    
+                    <h3><sup style="font-size: 18px">Status</sup></h3> 
+                    <h3><sup style="font-size: 18px">{{ os_list.status_os }}</sup></h3>
+                  </div>
+                  <div class="icon">
+                    <i class="ion ion-pie-graph"></i>
+                  </div>
+                  <a href="#" class="small-box-footer"> </a>
+                </div>
+              </div>
+              <div class="col-lg-4 col-6">
+                <!-- small box -->
+                <div class="small-box bg-light">
+                  <div class="inner">                    
+                    <h3><sup style="font-size: 18px">Finalizar OS</sup></h3> 
+                    <a button type="button" class="btn btn-success"  href="{% url 'updt_close' os_list.id %}"> {% csrf_token %}
+                      <i class="far fa-check-circle"></i>Fechar</a>
+                  </div>
+                  <div class="icon">
+                    <i class="ion ion-pie-graph"></i>
+                  </div>
+                  <a href="#" class="small-box-footer"> </a>
+                </div>
+              </div>
+              <div class="col-lg-4 col-6">
+                <!-- small box -->
+                <div class="small-box bg-light">
+                  <div class="inner">
+                    <h3><sup style="font-size: 18px">Ativar OS</sup></h3>
+                    <a button type="button" class="btn btn-warning" href="{% url 'updt_open' os_list.id %}"> {% csrf_token %}
+                      <i class="far fa-times-circle"></i>Abrir</a>
+                  </div>
+                  <div class="icon">
+                    <i class="ion ion-stats-bars"></i>
+                  </div>
+                  <a href="#" class="small-box-footer"> </a>
+                </div>
+              </div>
+              
+            </div>
+
+            <!-- Tabela das Anotações Operacionais-->
+            <div class="row">
+              <div class="col-12">
+                <div class="card">
+                  <div class="card card-success">
+                    <div class="card-header">
+                      <h3 class="card-title">Histórico da ordem de serviço</h3>
+                    </div>
+                  </div>
+                  <!-- /.card-header -->
+                  <div class="card-body table-responsive p-0" style="height: 300px;">
+                    <table class="table table-head-fixed text-nowrap">
+                      <thead>
+                        <tr>
+                          <tr class="table-light">
+                            <th >Procedimento</th>
+                            <th >Nome</th>
+                            <th >Data</th>
+                            <th >Hora inicial</th>
+                            <th >Hora final</th>
+                            <th >O que foi feito</th>
+                            <th >O que foi usado</th>
+                            <th >Quanto foi usado</th>
+                            <th >Excluir</th>                        
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {% for os_number in os_list.comments.all %}
+                          <tr>                          
+                              <td > {{ os_number.procedimento }}</td>
+                              <td > {{ os_number.name }}</td>
+                              <td > {{ os_number.data_1 }}</td>
+                              <td > {{ os_number.hora_1 }}</td>
+                              <td > {{ os_number.hora_2 }}</td>
+                              <td > {{ os_number.body }}</td>
+                              <td > {{ os_number.material }}</td>
+                              <td > {{ os_number.qtd_mat }}</td>
+                              <td>
+                                <a button type="button" class="btn btn-danger" href="{% url 'apagar_delete' os_number.id %}"> {% csrf_token %}
+                                  <i class="far fa-trash-alt"></i> Excluir</button>                              
+                                </a>
+                              </td> 
+                          </tr>
+                        {% endfor %}
+                      </tbody>
+                    </table>
+                  </div>
+                  <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+              </div>
+            </div>
+        </div>
+        </section>
+      </div>  
+  
+  <!-- /.content-wrapper -->
+  <footer class="main-footer">
+    <strong>Copyright &copy; 2021-2022 <a href="https://www.marflex.ind.br">www.marflex.ind.br</a></strong>
+    PCP Marflex.
+    <div class="float-right d-none d-sm-inline-block">
+      <b>Versão</b> 0.0.2
+    </div>
+  </footer>
+
+  <!-- Control Sidebar -->
+  <aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+  </aside>
+  <!-- /.control-sidebar -->
+</div>
+<!-- ./wrapper -->
+
+<!-- jQuery -->
+<script src="/static/plugins/jquery/jquery.min.js"></script>
+<!-- jQuery UI 1.11.4 -->
+<script src="/static/plugins/jquery-ui/jquery-ui.min.js"></script>
+<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+<script>
+  $.widget.bridge('uibutton', $.ui.button)
+</script>
+<!-- Bootstrap 4 -->
+<script src="/static/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- overlayScrollbars -->
+<script src="/static/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+<!-- AdminLTE App -->
+<script src="/static/dist/js/adminlte.js"></script>
+<!-- AdminLTE for demo purposes 
+<script src="/static/dist/js/demo.js"></script>
+-->
+</body>
 </html>

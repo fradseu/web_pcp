@@ -1,0 +1,391 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.84.0">
+    <title>PCP-WEB</title>
+    <!--
+      <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/dashboard/">
+    -->
+    
+
+    <!-- Bootstrap core CSS -->
+<link href="/static/bootstrap/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <!-- Favicons -->
+  
+<script src="/static/bootstrap/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<!--
+<script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js" integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE" crossorigin="anonymous"></script><script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js" integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha" crossorigin="anonymous"></script><script src="dashboard.js"></script>
+    -->
+<link rel="apple-touch-icon" href="/docs/5.0/assets/img/favicons/apple-touch-icon.png" sizes="180x180">
+<link rel="icon" href="/static/img/favicons/favicon-32x32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="/static/img/favicon-16x16.png" sizes="16x16" type="image/png">
+<link rel="manifest" href="/docs/5.0/assets/img/favicons/manifest.json">
+<link rel="mask-icon" href="/docs/5.0/assets/img/favicons/safari-pinned-tab.svg" color="#7952b3">
+<link rel="icon" href="/static/img/favicon.ico">
+<meta name="theme-color" content="#7952b3">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+    </style>
+
+    
+    <!-- Custom styles for this template 
+    <link href="dashboard.css" rel="stylesheet">
+    -->
+  </head>
+  <body>
+    
+<header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
+  <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="#">PCP - WEB</a>
+  <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <!--
+  <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
+  -->
+  <div class="navbar-nav">
+    <div class="nav-item text-nowrap">
+      <a class="nav-link px-3" href="#">Sign out</a>
+    </div>
+  </div>
+</header>
+
+<div class="container-fluid">
+  <div class="row">
+    <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+      <div class="position-sticky pt-3">
+        <ul class="nav flex-column">
+          <li class="nav-item">
+            <a class="nav-link" href="/home/">
+              <span data-feather="shopping-cart"></span>
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-house" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M2 13.5V7h1v6.5a.5.5 0 0 0 .5.5h9a.5.5 0 0 0 .5-.5V7h1v6.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5zm11-11V6l-2-2V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5z"/>
+                <path fill-rule="evenodd" d="M7.293 1.5a1 1 0 0 1 1.414 0l6.647 6.646a.5.5 0 0 1-.708.708L8 2.207 1.354 8.854a.5.5 0 1 1-.708-.708L7.293 1.5z"/>
+              </svg>
+              Home
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/admin/">
+              <span data-feather="shopping-cart"></span>
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-server" viewBox="0 0 16 16">
+                <path d="M1.333 2.667C1.333 1.194 4.318 0 8 0s6.667 1.194 6.667 2.667V4c0 1.473-2.985 2.667-6.667 2.667S1.333 5.473 1.333 4V2.667z"/>
+                <path d="M1.333 6.334v3C1.333 10.805 4.318 12 8 12s6.667-1.194 6.667-2.667V6.334a6.51 6.51 0 0 1-1.458.79C11.81 7.684 9.967 8 8 8c-1.966 0-3.809-.317-5.208-.876a6.508 6.508 0 0 1-1.458-.79z"/>
+                <path d="M14.667 11.668a6.51 6.51 0 0 1-1.458.789c-1.4.56-3.242.876-5.21.876-1.966 0-3.809-.316-5.208-.876a6.51 6.51 0 0 1-1.458-.79v1.666C1.333 14.806 4.318 16 8 16s6.667-1.194 6.667-2.667v-1.665z"/>
+              </svg>
+              ADMIN
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="/dashboard/">
+              <span data-feather="home"></span>
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clipboard-data" viewBox="0 0 16 16">
+                <path d="M4 11a1 1 0 1 1 2 0v1a1 1 0 1 1-2 0v-1zm6-4a1 1 0 1 1 2 0v5a1 1 0 1 1-2 0V7zM7 9a1 1 0 0 1 2 0v3a1 1 0 1 1-2 0V9z"/>
+                <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z"/>
+                <path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z"/>
+              </svg>
+              Dashboard
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/ferr_form/">
+              <span data-feather="file"></span>
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clipboard-plus" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M8 7a.5.5 0 0 1 .5.5V9H10a.5.5 0 0 1 0 1H8.5v1.5a.5.5 0 0 1-1 0V10H6a.5.5 0 0 1 0-1h1.5V7.5A.5.5 0 0 1 8 7z"/>
+                <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z"/>
+                <path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z"/>
+              </svg>
+              Abrir Chamado
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/manut_list/">
+              <span data-feather="shopping-cart"></span>
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-list-check" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M5 11.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zM3.854 2.146a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 1 1 .708-.708L2 3.293l1.146-1.147a.5.5 0 0 1 .708 0zm0 4a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 1 1 .708-.708L2 7.293l1.146-1.147a.5.5 0 0 1 .708 0zm0 4a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 0 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0z"/>
+              </svg>
+              Lista de Os
+            </a>
+          </li>
+        </ul>
+
+        <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+          <span>Documentação</span>
+          <a class="link-secondary" href="#" aria-label="Add a new report">
+            <span data-feather="plus-circle"></span>
+          </a>
+        </h6>
+        <ul class="nav flex-column mb-2">
+          <li class="nav-item">
+            <a class="nav-link" href="#">
+              <span data-feather="file-text"></span>
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-lightbulb" viewBox="0 0 16 16">
+                <path d="M2 6a6 6 0 1 1 10.174 4.31c-.203.196-.359.4-.453.619l-.762 1.769A.5.5 0 0 1 10.5 13a.5.5 0 0 1 0 1 .5.5 0 0 1 0 1l-.224.447a1 1 0 0 1-.894.553H6.618a1 1 0 0 1-.894-.553L5.5 15a.5.5 0 0 1 0-1 .5.5 0 0 1 0-1 .5.5 0 0 1-.46-.302l-.761-1.77a1.964 1.964 0 0 0-.453-.618A5.984 5.984 0 0 1 2 6zm6-5a5 5 0 0 0-3.479 8.592c.263.254.514.564.676.941L5.83 12h4.342l.632-1.467c.162-.377.413-.687.676-.941A5 5 0 0 0 8 1z"/>
+              </svg>
+              SGQ em Foco
+            </a>
+          </li>
+          <!--
+          <li class="nav-item">
+            <a class="nav-link" href="#">
+              <span data-feather="file-text"></span>
+              Last quarter
+            </a>
+          </li>
+        
+          <li class="nav-item">
+            <a class="nav-link" href="/teste/">
+              <span data-feather="file-text"></span>
+              Teste
+            </a>
+          </li>
+
+          -->
+          <li class="nav-item">
+            <a class="nav-link" href="/teste/">
+              <span data-feather="file-text"></span>
+              Teste
+            </a>
+          </li>
+          
+        </ul>
+        <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+          <span>Expedição</span>
+          <a class="link-secondary" href="#" aria-label="Add a new report">
+            <span data-feather="plus-circle"></span>
+          </a>
+        </h6>
+        <ul class="nav flex-column mb-2">
+          <li class="nav-item">
+            <a class="nav-link" href="http://192.168.0.244/autenticacao" target="_blank">
+              <span data-feather="file-text"></span>
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-truck" viewBox="0 0 16 16">
+                <path d="M0 3.5A1.5 1.5 0 0 1 1.5 2h9A1.5 1.5 0 0 1 12 3.5V5h1.02a1.5 1.5 0 0 1 1.17.563l1.481 1.85a1.5 1.5 0 0 1 .329.938V10.5a1.5 1.5 0 0 1-1.5 1.5H14a2 2 0 1 1-4 0H5a2 2 0 1 1-3.998-.085A1.5 1.5 0 0 1 0 10.5v-7zm1.294 7.456A1.999 1.999 0 0 1 4.732 11h5.536a2.01 2.01 0 0 1 .732-.732V3.5a.5.5 0 0 0-.5-.5h-9a.5.5 0 0 0-.5.5v7a.5.5 0 0 0 .294.456zM12 10a2 2 0 0 1 1.732 1h.768a.5.5 0 0 0 .5-.5V8.35a.5.5 0 0 0-.11-.312l-1.48-1.85A.5.5 0 0 0 13.02 6H12v4zm-9 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm9 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"/>
+              </svg>
+              Sistema Expedição
+            </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    
+
+    <main class="col-md-9 ms-sm-auto col-lg-10 px-md-2">
+
+      <div class="container">
+        <div class="bg-dark text-secondary px-1 py-2 text-center">
+          <div class="py-2">
+            <h1 class="display-5 fw-bold text-white">NOVA EMISSÃO DE ORDEM DE MANUTENÇÃO E FERRAMENTARIA </h1>
+            <div class="col-lg-6 mx-auto">
+              <p class="fs-5 mb-4">{{ mensagem }}</p>
+              <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+                <!--
+                <button type="button" class="btn btn-outline-info btn-lg px-4 me-sm-3 fw-bold">Custom button</button>
+                <button type="button" class="btn btn-outline-light btn-lg px-4">Secondary</button>
+                -->
+              </div>
+            </div>
+          </div>
+        </div>
+
+      
+      </div>
+      <hr>
+      <div class="b-example-divider bg-light" ></div>
+      
+      <div class="px-1 py-2 my-2 text-center">
+        <!--
+        <img class="d-block mx-auto mb-4" src="/docs/5.2/assets/brand/bootstrap-logo.svg" alt="" width="72" height="57">
+        -->
+        <h1 class="display-5 fw-bold">Descrição e histórico do projeto</h1>
+        <div class="col-lg-6 mx-auto">
+          <p class="lead mb-4">O projeto da Folha de manutenção foi criado em meados de março de 2022, quando surgiu a necessidade na fábrica Marflex de documentar todas as ações corretivas realizadas nas ferramentas, para estar em conformidade com as normas ISO.</p>
+          <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+            <!--
+            <button type="button" class="btn btn-primary btn-lg px-4 gap-3">Primary button</button>
+            <button type="button" class="btn btn-outline-secondary btn-lg px-4">Secondary</button>
+            -->
+          </div>
+        </div>
+      </div>
+      <hr>
+
+      <div class="px-1 py-2 my-2 text-center">
+        <!--
+        <img class="d-block mx-auto mb-4" src="/docs/5.2/assets/brand/bootstrap-logo.svg" alt="" width="72" height="57">
+        -->
+        <h1 class="display-5 fw-bold">Escopo do projeto</h1>
+        <div class="col-lg-6 mx-auto">
+          <p class="lead mb-4">O projeto WEB PCP tem como objetivo suprir a necessidade de informatizar a documentação. Atualmente a documentação é feita através de documentos Excel, os quais utilizam técnicas de programação VBA. 
+            A criação de um sistema web onde podemos centralizar as informações, proporcionando ganho de tempo, pois não será mais necessário procurar pastas dentro da rede ou até mesmo criar itens que já existem por motivos de não serem encontrados. 
+            O WEB PCP em seu início deverá conter as funções de CRIAR ORDEM DE MANUTENÇÃO e FERRAMENTARIA, as quais devem ser impressas ou não, guardando as informações em banco de dados PostgreSQL, assim possibilitando as possíveis auditorias em conformidade com a norma ISO.</p>
+          <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+            <!--
+            <button type="button" class="btn btn-primary btn-lg px-4 gap-3">Primary button</button>
+            <button type="button" class="btn btn-outline-secondary btn-lg px-4">Secondary</button>
+            -->
+          </div>
+        </div>
+      </div>
+      <hr>
+
+      <div class="px-1 py-2 my-2 text-center">
+        <!--
+        <img class="d-block mx-auto mb-4" src="/docs/5.2/assets/brand/bootstrap-logo.svg" alt="" width="72" height="57">
+        -->
+        <h1 class="display-5 fw-bold">Requisitos de alto nível</h1>
+        <div class="col-lg-6 mx-auto">
+          <p class="lead mb-4 blockquote text-center"> O novo sistema deve incluir o seguinte:<br><br>
+            
+              Capacidade de permitir que os usuários internos acessem o aplicativo sem baixar nenhum software.<br>
+              Conter uma página home, onde possamos criar links para pastas da rede ou documentos.<br>
+              Capacidade de criar Ordem de Manutenção e ou Ferramentaria.<br>
+              Capacidade de IMPRIMIR a Ordem de Manutenção e ou Ferramentaria.<br>
+              Capacidade de ALTERAR a Ordem de Manutenção e ou Ferramentaria.<br>
+              Capacidade de VISUALIZAR a Ordem de Manutenção e ou Ferramentaria.<br>
+              Capacidade de DELETAR a Ordem de Manutenção e ou Ferramentaria.<br>
+              Capacidade de salvar a Ordem de Manutenção e ou Ferramentaria em banco de dados.<br>
+              Capacidade de exportar dados para geração de indicadores.<br>
+              Permitir a utilização simultânea do sistema pelos usuários.<br>
+            
+          </p>
+          <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+            <!--
+            <button type="button" class="btn btn-primary btn-lg px-4 gap-3">Primary button</button>
+            <button type="button" class="btn btn-outline-secondary btn-lg px-4">Secondary</button>
+            -->
+          </div>
+        </div>
+      </div>
+      <hr>
+
+      <div class="px-1 py-2 my-2 text-center">
+        <!--
+        <img class="d-block mx-auto mb-4" src="/docs/5.2/assets/brand/bootstrap-logo.svg" alt="" width="72" height="57">
+        -->
+        <h1 class="display-5 fw-bold">Resultados finais</h1>
+        <div class="col-lg-6 mx-auto">
+          <p class="lead mb-4">As partes interessadas são a Produção, o Planejamento e controle de Produção, a Qualidade, a Ferramentaria e a Manutenção.</p>
+          <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+            <!--
+            <button type="button" class="btn btn-primary btn-lg px-4 gap-3">Primary button</button>
+            <button type="button" class="btn btn-outline-secondary btn-lg px-4">Secondary</button>
+            -->
+          </div>
+        </div>
+      </div>
+      <hr>
+
+      <div class="px-1 py-2 my-2 text-center">
+        <!--
+        <img class="d-block mx-auto mb-4" src="/docs/5.2/assets/brand/bootstrap-logo.svg" alt="" width="72" height="57">
+        -->
+        <h1 class="display-5 fw-bold">Exclusões exclusivas do escopo</h1>
+        <div class="col-lg-6 mx-auto">
+          <p class="lead mb-4">O projeto PCP WEB, será implementado conforme os módulos forem entregues.</p>
+          <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+            <!--
+            <button type="button" class="btn btn-primary btn-lg px-4 gap-3">Primary button</button>
+            <button type="button" class="btn btn-outline-secondary btn-lg px-4">Secondary</button>
+            -->
+          </div>
+        </div>
+      </div>
+      <hr>
+
+      <div class="px-1 py-2 my-2 text-center">
+        <!--
+        <img class="d-block mx-auto mb-4" src="/docs/5.2/assets/brand/bootstrap-logo.svg" alt="" width="72" height="57">
+        -->
+        <h1 class="display-5 fw-bold">Plano de implementação</h1>
+        <div class="col-lg-6 mx-auto">
+          <p class="lead mb-4">A nossa proposta é implementar o sistema PCP - WEB, gradativamente. Após a entrega da aplicação iremos realizar um período de testes onde o objetivo é identificar os bugs ou erros de programação. As atualizações serão implementadas conforme necessidade de adequação. 
+            A primeira etapa é fornecer a aplicação de Ordem de Serviço Manutenção/Ferramentaria (OSMF), contendo a capacidade de criar, ler, atualizar, deletar e imprimir.
+            A segunda etapa será a atualização da página de listagem de OSMF, onde o objetivo é aplicar técnicas de paginação e filtros para melhor localização dos itens.
+            A terceira etapa, consiste em criar o sistema de usuários cadastrados, onde o usuário deve se logar para utilizar o sistema PCP – WEB.</p>
+          <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+            <!--
+            <button type="button" class="btn btn-primary btn-lg px-4 gap-3">Primary button</button>
+            <button type="button" class="btn btn-outline-secondary btn-lg px-4">Secondary</button>
+            -->
+          </div>
+        </div>
+      </div>
+
+      
+  
+      </main>
+    </div>
+    <!--
+    <footer class="container py-5">
+      <div class="row">
+        <div class="col-12 col-md">
+          <img src="/static/img/al053-mekwe-001.ico">
+          <small class="d-block mb-3 text-muted">©Felipe Reis - 2022</small>
+        </div>
+        <div class="col-6 col-md">
+          <h5>Marflex</h5>
+          <ul class="list-unstyled text-small">
+            <li><a class="link-secondary" href="#">-</a></li>
+            <li><a class="link-secondary" href="#">-</a></li>
+          </ul>
+        </div>
+        <div class="col-6 col-md">
+          <h5>Marflex</h5>
+          <ul class="list-unstyled text-small">
+            <li><a class="link-secondary" href="#">-</a></li>
+            <li><a class="link-secondary" href="#">-</a></li>
+          </ul>
+        </div>
+        <div class="col-6 col-md">
+          <h5>Marflex</h5>
+          <ul class="list-unstyled text-small">
+            <li><a class="link-secondary" href="#">-</a></li>
+            <li><a class="link-secondary" href="#">-</a></li>
+          </ul>
+        </div>
+        <div class="col-6 col-md">
+          <h5>Marflex</h5>
+          <ul class="list-unstyled text-small">
+            <li><a class="link-secondary" href="#">-</a></li>
+            <li><a class="link-secondary" href="#">-</a></li>
+          </ul>
+        </div>
+      </div>
+    </footer>
+    -->
+    <footer class="bg-light text-center text-lg-start">
+      <!-- Copyright -->
+      <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+        © 2022 Copyright:
+        <a class="text-dark" href="https://www.marflex.ind.br/">www.marflex.ind.br/</a>
+        Dev: Felipe Reis.
+      </div>
+      <!-- Copyright -->
+    </footer>
+    
+    
+    
+  </body>
+</html>
