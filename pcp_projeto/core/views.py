@@ -51,7 +51,9 @@ def submit_login(request):
             usuario = request.user
             grp = request.user.groups.values_list('name',flat = True)
             grp_list = list(grp)
-            print('usuário conectado: ',usuario,grp_list)
+            print('------------------------------')
+            print('usuário conectado: ',usuario)
+            print('------------------------------')
             return redirect('/')
         else:
             messages.error(request, "Usuário ou senha inválido")
@@ -59,7 +61,9 @@ def submit_login(request):
 
 def logout_user(request):
     user = request.user
+    print('------------------------------')
     print('usuário desconectado: ',user)
+    print('------------------------------')
     logout(request)   
     return redirect('/')
 
@@ -75,7 +79,7 @@ def teste(request):
         'ordens': ordens,
         'nums': nums
         }
-    return render(request, 'manut_list.html',context)
+    return render(request, 'login-v2.html',context)
 
 
 #página Inicial.
@@ -83,20 +87,22 @@ def teste(request):
 def home(request):
     #mensagem do dia, um pequeno motivacional para descontrair.
     msg_date = datetime.today().strftime('%Y-%m-%d')
-
     try:
         editar = Msg_day.objects.get(current_day=msg_date)
         print(editar)
     except:    
         editar = datetime.today().strftime('%Y-%m-%d')
+        usuario = request.user
         print('------------------------------')
-        print('Novo acesso homePage')
+        print('Novo acesso:',usuario)
         print('------------------------------')
-
 
     os_list = Solicitacao.objects.all()
+    usuario = request.user
+    print(usuario)
     try:
         context = {
+            'usuario':usuario,
             'os_list': os_list,
             'mensagem':editar.mensagem,
         }
@@ -117,11 +123,18 @@ def manut_list(request):
     nome = request.user.first_name
     sobrenome = request.user.last_name
     grp = request.user.groups.values_list('id',flat = True)
-    print(grp)
     grp_list = list(grp)
-    print(usuario, grp_list)
-    # Blog.objects.filter(pk__in=[1, 4, 7])
+    print('------------------------------')                
+    print('Manut Lista')
+    print('Usuário: ',usuario)
     
+    msg_date = datetime.today().strftime('%Y-%m-%d')
+    try:
+        editar = Msg_day.objects.get(current_day=msg_date)
+        print(editar)
+    except:    
+        editar = datetime.today().strftime('%Y-%m-%d')
+    print('------------------------------')
     os_list = Solicitacao.objects.all()    
     # configuração paginação
     p = Paginator(Solicitacao.objects.filter(sector__in=grp_list), 50)
@@ -129,11 +142,12 @@ def manut_list(request):
     ordens = p.get_page(page)
     nums = "a" * ordens.paginator.num_pages
     context = {
-        'usuario':nome,
+        'usuario':usuario,
         'sobrenome':sobrenome,
         'os_list': os_list,
         'ordens': ordens,
-        'nums': nums
+        'nums': nums,
+        'mensagem':editar.mensagem,
         }
     return render(request, 'manut_list.html',context)
 
@@ -142,9 +156,11 @@ def manut_list(request):
 #Página do dashboard.
 @login_required(login_url='/login/')
 def dashboard(request):
+    usuario = request.user
     os_list = Solicitacao.objects.all()
     context = {
-        'os_list': os_list
+        'os_list': os_list,
+        'usuario':usuario
     }
     return render(request, 'dashboard.html',context)
 
@@ -153,17 +169,19 @@ def dashboard(request):
 
 @login_required(login_url='/login/')
 class ferram_class:
+    @login_required(login_url='/login/')
     def ferr_form(request,slug=0):
+        usuario = request.user        
         if request.method == "GET":
             if slug==0:
                 #criar os
                 form = Ferramentaria_form()
-                return render(request, 'manut_form.html',{'form':form})    
+                return render(request, 'manut_form.html',{'form':form,'usuario':usuario})    
             else:
                 try:
                     editar = Solicitacao.objects.get(slug=slug)
                     form = Ferramentaria_form(instance=editar)
-                    return render(request, 'manut_form.html',{'form':form})
+                    return render(request, 'manut_form.html',{'form':form,'usuario':usuario})
                 except:
                     return redirect('/manut_list/')
         else:
@@ -177,13 +195,16 @@ class ferram_class:
                 form = Ferramentaria_form(request.POST,instance=editar)
                 print('atualizado')
             if form.is_valid():
-                manut_print = form.save()                
-                print('------------------------------')
-                user = request.user
+                manut_print = form.save()     
+                user = request.user           
+                print('------------------------------')                
                 print('Os Criada')
-                print('Número da OS: ',manut_print.id,user)                
+                print('Número da OS: ',manut_print.id,user)
+                print('------------------------------')              
                 #impress_id = manut_print.id
-                contexto = {'id':manut_print.id,
+                usuario = request.user
+                contexto = {'usuario':usuario,
+                            'id':manut_print.id,
                             'fullname':manut_print.fullname,
                             'type_service':manut_print.type_service,
                             'factory':manut_print.factory,
@@ -196,9 +217,7 @@ class ferram_class:
                             'date_create':manut_print.date_create,
                             'hour_arrive':manut_print.hour_arrive,
                             'slug':manut_print.slug,
-                            }
-                print('------------------------------')
-                                          
+                            }                                         
                 return render(request, 'manut_print.html',contexto)
 
 
@@ -212,7 +231,9 @@ def manut_impressao(request):
 #Página de detalhe da Os
 @login_required(login_url='/login/')
 class manut_detail_class:
+    @login_required(login_url='/login/')
     def manut_detail(request, slug):
+        usuario = request.user
         os_list = Solicitacao.objects.get(slug=slug)
         #print('----------------------')
         #print('Qual é essa os?')
@@ -226,12 +247,12 @@ class manut_detail_class:
                 print('------------------------------')
                 print(request.META.get('HTTP_REFERER'))
                 print('Atividade de OS Criada')                
-                print('OS: ',comments.id)
+                print('OS: ',comments.id,usuario)
                 print('------------------------------')
                 return redirect('manut_detail', slug= os_list.slug)
         else:
             form1 = Ferramentaria_form_report()
-        return render(request, 'manut_detail.html', {'os_list':os_list, 'form1':form1})
+        return render(request, 'manut_detail.html', {'os_list':os_list, 'form1':form1,'usuario':usuario })
 
 
 
@@ -241,8 +262,9 @@ class manut_detail_class:
 def form_delete(request, id):
     try:
         os_list = Solicitacao.objects.get(pk=id)
+        usuario = request.user
         print('------------------------------')
-        print('Atividade de OS deletada')
+        print('Formulario deletado')
         print('OS: ',os_list.id)
         print(os_list.fullname,
                 os_list.type_service,
@@ -257,6 +279,7 @@ def form_delete(request, id):
                 os_list.hour_arrive,
                 os_list.slug,
                 )
+        print('Quem deletou: ', usuario)
         print('------------------------------')
         os_list.delete()
         return redirect('/manut_list/')
@@ -268,10 +291,12 @@ def form_delete(request, id):
 @login_required(login_url='/login/')
 def apagar_delete(request, id):
     os_number = Ferr_report.objects.get(pk=id)
+    usuario = request.user
     print('------------------------------')
     print(request.META.get('HTTP_REFERER'))
-    print('OS:',os_number.id)
-    print('Atividade de os deletada')
+    print('Histórico da ordem de serviço')
+    print('Quem deletou: ', usuario)
+    print('OS:',os_number.id)    
     os_number.delete()
     print('------------------------------')
 

@@ -43,7 +43,7 @@
       <!-- Navbar Search -->   
            
       <li class="nav-item">
-        <a href="/login/">
+        <a href="/logout">
           <i class="fas fa-sign-out-alt"></i> Sair 
         </a>        
       </li> 
@@ -69,7 +69,7 @@
         </div>
         -->
         <div class="info">
-          <a href="#" class="d-block">Olá {{ user.get_full_name }}</a>
+          <a href="#" class="d-block">Olá {{ usuario.get_full_name }}</a>
         </div>
       </div>
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
@@ -100,7 +100,7 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="/dashboard/" ><i class="fas fa-chart-line"></i>  Dashboard
+                <a href="#" ><i class="fas fa-chart-line"></i>  Dashboard
                 </a>
               </li>              
             </ul>
@@ -177,7 +177,7 @@
   <div class="content-wrapper iframe-mode" data-widget="iframe" data-loading-screen="750">
     
     <div class="nav navbar navbar-expand navbar-white navbar-light border-bottom p-0">
-      <a class="nav-link bg-light" href="#" data-widget="iframe-fullscreen"><i class="fas fa-expand"></i></a>
+      <a class="nav-link bg-light" href="#" data-widget="iframe-fullscreen"><i class="fas fa-expand"></i></a> {{ mensagem }}
     </div>
   
     <div class="tab-content">
@@ -186,7 +186,72 @@
               
           <div class="card">
             <div class="card-header">
-              <h3 class="card-title">Lista de Chamados</h3>
+              <h3 class="card-title">Lista de Chamados</h3><br>
+              <strong>Registros {{ ordens.start_index }}-{{ ordens.end_index }} de {{ ordens.paginator.count }}</strong><br>
+              <div class="card-tools">
+                <ul class="pagination pagination-sm float-right">{% if ordens.has_previous %}
+                  <li class="page-item">
+                    <a class="page-link" href="?page=1">
+                      &laquo Primeiro
+                    </a>
+                  </li>
+                  <li class="page-item">
+                    <a class="page-link"  href="?page={{ ordens.previous_page_number }}">
+                      Anterior
+                    </a>
+                  </li>
+                {% else %}
+                  <li class="page-item" disabled>
+                    <a class="page-link" href="#" disabled>
+                      &laquo Primeiro
+                    </a>
+                  </li>
+                  <li class="page-item" disabled>
+                    <a class="page-link"  href="#" disabled>
+                      Anterior
+                    </a>
+                  </li>
+                {% endif %}
+                
+                <!-- Contador de paginação padrão
+                <li class="page-item"><a href="#" class="page-link" disabled>
+                Page {{ ordens.number }} of {{ ordens.paginator.num_pages }}</a>
+                </li>
+                -->
+                <!-- Contador de paginação por números fracionados-->
+                {% for i in nums %}
+                  <li class="page-item">
+                    <a class="page-link" href="?page={{ forloop.counter }}">
+                      {{ forloop.counter }}
+                    </a>
+                  </li>
+                  
+                {% endfor %}
+        
+        
+                {% if ordens.has_next %}
+                  <li class="page-item">
+                    <a class="page-link"  href="?page={{ ordens.next_page_number }}">
+                      Próximo</a>
+                    </li>
+                  <li class="page-item">
+                    <a class="page-link"  href="?page={{ ordens.paginator.num_pages }}">
+                      Último &raquo
+                    </a>
+                  </li>
+                {% else %}
+                  <li class="page-item" disabled>
+                    <a class="page-link"  href="#" disabled>
+                      Próximo</a>
+                    </li>
+                  <li class="page-item" disabled>
+                    <a class="page-link"  href="#" disabled>
+                      Último &raquo
+                    </a>
+                  </li>
+                {% endif %}
+                </ul>
+              </div>
 
               
             </div>
@@ -241,70 +306,7 @@
         </div>
         <!-- /.card-body -->
       </div>
-      <div class="card-tools">
-        <ul class="pagination pagination-sm float-right">{% if ordens.has_previous %}
-          <li class="page-item">
-            <a class="page-link" href="?page=1">
-              &laquo Primeiro
-            </a>
-          </li>
-          <li class="page-item">
-            <a class="page-link"  href="?page={{ ordens.previous_page_number }}">
-              Anterior
-            </a>
-          </li>
-        {% else %}
-          <li class="page-item" disabled>
-            <a class="page-link" href="#" disabled>
-              &laquo Primeiro
-            </a>
-          </li>
-          <li class="page-item" disabled>
-            <a class="page-link"  href="#" disabled>
-              Anterior
-            </a>
-          </li>
-        {% endif %}
-        
-        <!-- Contador de paginação padrão
-        <li class="page-item"><a href="#" class="page-link" disabled>
-        Page {{ ordens.number }} of {{ ordens.paginator.num_pages }}</a>
-        </li>
-        -->
-        <!-- Contador de paginação por números fracionados-->
-        {% for i in nums %}
-          <li class="page-item">
-            <a class="page-link" href="?page={{ forloop.counter }}">
-              {{ forloop.counter }}
-            </a>
-          </li>
-          
-        {% endfor %}
-
-
-        {% if ordens.has_next %}
-          <li class="page-item">
-            <a class="page-link"  href="?page={{ ordens.next_page_number }}">
-              Próximo</a>
-            </li>
-          <li class="page-item">
-            <a class="page-link"  href="?page={{ ordens.paginator.num_pages }}">
-              Último &raquo
-            </a>
-          </li>
-        {% else %}
-          <li class="page-item" disabled>
-            <a class="page-link"  href="#" disabled>
-              Próximo</a>
-            </li>
-          <li class="page-item" disabled>
-            <a class="page-link"  href="#" disabled>
-              Último &raquo
-            </a>
-          </li>
-        {% endif %}
-        </ul>
-      </div>
+      
 
       
     </div>

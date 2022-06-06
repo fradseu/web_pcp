@@ -13,7 +13,7 @@ class Ferramentaria_form(forms.ModelForm):
             'type_service':'Tipo de Manutenção',
             'factory':'Fábrica',
             'status_os':'Status da OS:',
-            'machine_code':'Cód. Máqina',
+            'machine_code':'Cód. Máqina ou Ferramenta',
             'sector':'Setor',
             'priority_type':'Prioridade',
             'propose_service':'Propósito',
