@@ -1,6 +1,6 @@
 from datetime import date
 from django.shortcuts import redirect, render
-from .models import Solicitacao,Ferr_report,Msg_day,Statusos
+from .models import Sector, Solicitacao,Ferr_report,Msg_day,Statusos
 from .forms import Ferramentaria_form,Ferramentaria_form_report,Status_form
 #Imports para gerar pdf.
 ## Não implementado.
@@ -28,16 +28,45 @@ from datetime import datetime
 ##Imports para criar Login/Logout
 ##Em implementação
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth import authenticate, login, logout
+from django.contrib import messages
 
 
 
 
 ###############################################
 
+#página de login
+def login_user(request):    
+    return render(request, 'login.html')
+
+#validação de login
+def submit_login(request):
+    if request.POST:
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        usuario = authenticate(username=username, password=password)
+        if usuario is not None:
+            login(request, usuario)
+            usuario = request.user
+            grp = request.user.groups.values_list('name',flat = True)
+            grp_list = list(grp)
+            print('usuário conectado: ',usuario,grp_list)
+            return redirect('/')
+        else:
+            messages.error(request, "Usuário ou senha inválido")
+    return redirect('/login/')
+
+def logout_user(request):
+    user = request.user
+    print('usuário desconectado: ',user)
+    logout(request)   
+    return redirect('/')
+
 def teste(request):        
     os_list = Solicitacao.objects.all()    
     # configuração paginação
-    p = Paginator(Solicitacao.objects.all(), 50)
+    p = Paginator(Solicitacao.objects.all(), 3)
     page = request.GET.get('page')
     ordens = p.get_page(page)
     nums = "a" * ordens.paginator.num_pages
@@ -46,10 +75,11 @@ def teste(request):
         'ordens': ordens,
         'nums': nums
         }
-    return render(request, 'iframe.html',context)
+    return render(request, 'manut_list.html',context)
 
 
 #página Inicial.
+@login_required(login_url='/login/')
 def home(request):
     #mensagem do dia, um pequeno motivacional para descontrair.
     msg_date = datetime.today().strftime('%Y-%m-%d')
@@ -81,26 +111,32 @@ def home(request):
     
 
 #Página de lista de OS, com paginação. Necessita incluir função filtro.
+@login_required(login_url='/login/')
 def manut_list(request):
+    usuario = request.user
+    nome = request.user.first_name
+    sobrenome = request.user.last_name
+    grp = request.user.groups.values_list('id',flat = True)
+    print(grp)
+    grp_list = list(grp)
+    print(usuario, grp_list)
+    # Blog.objects.filter(pk__in=[1, 4, 7])
     
     os_list = Solicitacao.objects.all()    
     # configuração paginação
-    p = Paginator(Solicitacao.objects.all(), 50)
+    p = Paginator(Solicitacao.objects.filter(sector__in=grp_list), 50)
     page = request.GET.get('page')
     ordens = p.get_page(page)
     nums = "a" * ordens.paginator.num_pages
     context = {
+        'usuario':nome,
+        'sobrenome':sobrenome,
         'os_list': os_list,
         'ordens': ordens,
         'nums': nums
         }
     return render(request, 'manut_list.html',context)
 
-
-
-
-def login_user(request):
-    return render(request, 'login.html')
 
 
 #Página do dashboard.
@@ -115,7 +151,7 @@ def dashboard(request):
 
 
 
-
+@login_required(login_url='/login/')
 class ferram_class:
     def ferr_form(request,slug=0):
         if request.method == "GET":
@@ -143,8 +179,9 @@ class ferram_class:
             if form.is_valid():
                 manut_print = form.save()                
                 print('------------------------------')
+                user = request.user
                 print('Os Criada')
-                print('Número da OS: ',manut_print.id)                
+                print('Número da OS: ',manut_print.id,user)                
                 #impress_id = manut_print.id
                 contexto = {'id':manut_print.id,
                             'fullname':manut_print.fullname,
@@ -173,6 +210,7 @@ def manut_impressao(request):
 
 
 #Página de detalhe da Os
+@login_required(login_url='/login/')
 class manut_detail_class:
     def manut_detail(request, slug):
         os_list = Solicitacao.objects.get(slug=slug)
@@ -199,6 +237,7 @@ class manut_detail_class:
 
 
 #Apagar a Ordem de Serviço
+@login_required(login_url='/login/')
 def form_delete(request, id):
     try:
         os_list = Solicitacao.objects.get(pk=id)
@@ -226,6 +265,7 @@ def form_delete(request, id):
 
 
 #Apagar atividades das OS (registros)
+@login_required(login_url='/login/')
 def apagar_delete(request, id):
     os_number = Ferr_report.objects.get(pk=id)
     print('------------------------------')
@@ -244,6 +284,7 @@ def apagar_delete(request, id):
 
 
 #atualizar o status das os.
+@login_required(login_url='/login/')
 class atualizador_class:
     def updt_close(request, id):
         q = Solicitacao.objects.get(pk=id)

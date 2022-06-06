@@ -25,6 +25,8 @@ urlpatterns = [
     #path('manut_list/', views.manut_list, name='manut_list'),
     path('dashboard/', views.dashboard, name='dashboard'),
     path('login/', views.login_user, name='login'),
+    path('logout/', views.logout_user, name='logout'),
+    path('login/submit', views.submit_login, name='entrar_login'),
     path('teste/', views.teste,name='teste'),
     path('admin/', admin.site.urls),
     path('', RedirectView.as_view(url='/home/')),

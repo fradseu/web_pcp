@@ -15,12 +15,6 @@ class Factory(models.Model):
     def __str__(self):
         return self.title
 
-class Sector(models.Model):
-    title = models.CharField(max_length=20)
-    def __str__(self):
-        return self.title
-
-
 class Priority(models.Model):
     title = models.CharField(max_length=20)
     def __str__(self):
@@ -46,10 +40,10 @@ class Propose_service(models.Model):
     def __str__(self):
         return self.title
 
-#class Material(models.Model):
-#    title = models.CharField(max_length=12)
-#    def __str__(self):
-#        return self.title
+class Sector(models.Model):
+    title = models.CharField(max_length=20)
+    def __str__(self):
+        return self.title
 		
 class Solicitacao(models.Model):
     id = models.AutoField(primary_key=True)
