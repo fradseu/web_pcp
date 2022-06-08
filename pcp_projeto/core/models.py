@@ -63,7 +63,7 @@ class Solicitacao(models.Model):
  
     
     class Meta:
-        ordering = ['id']
+        ordering = ['-id']
 
 #    def cod():
  #       allowed_chars = ''.join((string.ascii_letters, string.digits))

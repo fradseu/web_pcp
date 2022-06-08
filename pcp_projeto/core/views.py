@@ -67,19 +67,99 @@ def logout_user(request):
     logout(request)   
     return redirect('/')
 
-def teste(request):        
+def teste(request):
+    teste_input = request.GET.get('tipo_servico1') 
+    usuario = request.user
+    nome = request.user.first_name
+    sobrenome = request.user.last_name
+    grp = request.user.groups.values_list('id',flat = True)
+    grp_list = list(grp)
+    print('------------------------------')                
+    print('Manut Lista')
+    print('Usuário: ',usuario)
+    msg_date = datetime.today().strftime('%Y-%m-%d')
+    try:
+        editar = Msg_day.objects.get(current_day=msg_date)
+        print(editar)
+    except:    
+        editar = datetime.today().strftime('%Y-%m-%d')
+    print('------------------------------')
     os_list = Solicitacao.objects.all()    
     # configuração paginação
-    p = Paginator(Solicitacao.objects.all(), 3)
+
+    p = Paginator(Solicitacao.objects.filter(sector__in=grp_list,type_service__in=[1,2]), 50)
     page = request.GET.get('page')
     ordens = p.get_page(page)
     nums = "a" * ordens.paginator.num_pages
-    context = {
-        'os_list': os_list,
-        'ordens': ordens,
-        'nums': nums
-        }
-    return render(request, 'login-v2.html',context)
+    
+    try:    
+        context = {
+            'usuario':usuario,
+            'sobrenome':sobrenome,
+            'os_list': os_list,
+            'ordens': ordens,
+            'nums': nums,
+            'mensagem':editar.mensagem,
+            }
+    except:    
+        context = {
+            'usuario':usuario,
+            'sobrenome':sobrenome,
+            'os_list': os_list,
+            'ordens': ordens,
+            'nums': nums,
+            'mensagem':'Semear ideias ecológicas e plantar sustentabilidade é ter a garantia de colhermos um futuro fértil e consciente. 🌎'
+            }
+        
+            
+    return render(request, 'manut_list copy.html',context)
+
+
+
+def teste_aberto(request):
+    usuario = request.user
+    sobrenome = request.user.last_name
+    grp = request.user.groups.values_list('id',flat = True)
+    grp_list = list(grp)
+    print('------------------------------')                
+    print('Manut Lista')
+    print('Usuário: ',usuario)
+    msg_date = datetime.today().strftime('%Y-%m-%d')
+    try:
+        editar = Msg_day.objects.get(current_day=msg_date)
+        print(editar)
+    except:    
+        editar = datetime.today().strftime('%Y-%m-%d')
+    print('------------------------------')
+    os_list = Solicitacao.objects.all()    
+    # configuração paginação
+
+    p = Paginator(Solicitacao.objects.filter(sector__in=grp_list,status_os__in=[1]), 50)
+    page = request.GET.get('page')
+    ordens = p.get_page(page)
+    nums = "a" * ordens.paginator.num_pages
+    
+    try:    
+        context = {
+            'usuario':usuario,
+            'sobrenome':sobrenome,
+            'os_list': os_list,
+            'ordens': ordens,
+            'nums': nums,
+            'mensagem':editar.mensagem,
+            }
+    except:    
+        context = {
+            'usuario':usuario,
+            'sobrenome':sobrenome,
+            'os_list': os_list,
+            'ordens': ordens,
+            'nums': nums,
+            'mensagem':'Semear ideias ecológicas e plantar sustentabilidade é ter a garantia de colhermos um futuro fértil e consciente. 🌎'
+            }
+        
+            
+    return render(request, 'manut_list copy.html',context)
 
 
 #página Inicial.
@@ -94,12 +174,11 @@ def home(request):
         editar = datetime.today().strftime('%Y-%m-%d')
         usuario = request.user
         print('------------------------------')
-        print('Novo acesso:',usuario)
+        print('Home page:',usuario)
         print('------------------------------')
 
     os_list = Solicitacao.objects.all()
     usuario = request.user
-    print(usuario)
     try:
         context = {
             'usuario':usuario,
@@ -108,7 +187,8 @@ def home(request):
         }
     except:
         context = {
-        'os_list': os_list,
+            'usuario':usuario,
+            'os_list': os_list,
             'mensagem':'Semear ideias ecológicas e plantar sustentabilidade é ter a garantia de colhermos um futuro fértil e consciente. 🌎'
         }
         
@@ -120,14 +200,12 @@ def home(request):
 @login_required(login_url='/login/')
 def manut_list(request):
     usuario = request.user
-    nome = request.user.first_name
     sobrenome = request.user.last_name
     grp = request.user.groups.values_list('id',flat = True)
     grp_list = list(grp)
     print('------------------------------')                
     print('Manut Lista')
     print('Usuário: ',usuario)
-    
     msg_date = datetime.today().strftime('%Y-%m-%d')
     try:
         editar = Msg_day.objects.get(current_day=msg_date)
@@ -137,19 +215,131 @@ def manut_list(request):
     print('------------------------------')
     os_list = Solicitacao.objects.all()    
     # configuração paginação
+
     p = Paginator(Solicitacao.objects.filter(sector__in=grp_list), 50)
     page = request.GET.get('page')
     ordens = p.get_page(page)
     nums = "a" * ordens.paginator.num_pages
-    context = {
-        'usuario':usuario,
-        'sobrenome':sobrenome,
-        'os_list': os_list,
-        'ordens': ordens,
-        'nums': nums,
-        'mensagem':editar.mensagem,
-        }
-    return render(request, 'manut_list.html',context)
+    
+    try:    
+        context = {
+            'usuario':usuario,
+            'sobrenome':sobrenome,
+            'os_list': os_list,
+            'ordens': ordens,
+            'nums': nums,
+            'mensagem':editar.mensagem,
+            }
+    except:    
+        context = {
+            'usuario':usuario,
+            'sobrenome':sobrenome,
+            'os_list': os_list,
+            'ordens': ordens,
+            'nums': nums,
+            'mensagem':'Semear ideias ecológicas e plantar sustentabilidade é ter a garantia de colhermos um futuro fértil e consciente. 🌎'
+            }
+                    
+    return render(request, 'manut_list copy.html',context)
+
+@login_required(login_url='/login/')
+def manut_list_aberto(request):
+    usuario = request.user
+    sobrenome = request.user.last_name
+    grp = request.user.groups.values_list('id',flat = True)
+    grp_list = list(grp)
+    print('------------------------------')                
+    print('Manut Lista')
+    print('Usuário: ',usuario)
+    msg_date = datetime.today().strftime('%Y-%m-%d')
+    try:
+        editar = Msg_day.objects.get(current_day=msg_date)
+        print(editar)
+    except:    
+        editar = datetime.today().strftime('%Y-%m-%d')
+    print('------------------------------')
+    os_list = Solicitacao.objects.all()    
+    # configuração paginação
+
+    p = Paginator(Solicitacao.objects.filter(sector__in=grp_list,status_os__in=[1]), 50)
+    page = request.GET.get('page')
+    ordens = p.get_page(page)
+    nums = "a" * ordens.paginator.num_pages
+    
+    try:    
+        context = {
+            'usuario':usuario,
+            'sobrenome':sobrenome,
+            'os_list': os_list,
+            'ordens': ordens,
+            'nums': nums,
+            'mensagem':editar.mensagem,
+            }
+    except:    
+        context = {
+            'usuario':usuario,
+            'sobrenome':sobrenome,
+            'os_list': os_list,
+            'ordens': ordens,
+            'nums': nums,
+            'mensagem':'Semear ideias ecológicas e plantar sustentabilidade é ter a garantia de colhermos um futuro fértil e consciente. 🌎'
+            }
+                    
+    return render(request, 'manut_list copy.html',context)
+
+
+@login_required(login_url='/login/')
+def manut_list_fechado(request):
+    usuario = request.user
+    sobrenome = request.user.last_name
+    grp = request.user.groups.values_list('id',flat = True)
+    grp_list = list(grp)
+    print('------------------------------')                
+    print('Manut Lista')
+    print('Usuário: ',usuario)
+    msg_date = datetime.today().strftime('%Y-%m-%d')
+    try:
+        editar = Msg_day.objects.get(current_day=msg_date)
+        print(editar)
+    except:    
+        editar = datetime.today().strftime('%Y-%m-%d')
+    print('------------------------------')
+    os_list = Solicitacao.objects.all()    
+    # configuração paginação
+
+    p = Paginator(Solicitacao.objects.filter(sector__in=grp_list,status_os__in=[2]), 50)
+    page = request.GET.get('page')
+    ordens = p.get_page(page)
+    nums = "a" * ordens.paginator.num_pages
+    
+    try:    
+        context = {
+            'usuario':usuario,
+            'sobrenome':sobrenome,
+            'os_list': os_list,
+            'ordens': ordens,
+            'nums': nums,
+            'mensagem':editar.mensagem,
+            }
+    except:    
+        context = {
+            'usuario':usuario,
+            'sobrenome':sobrenome,
+            'os_list': os_list,
+            'ordens': ordens,
+            'nums': nums,
+            'mensagem':'Semear ideias ecológicas e plantar sustentabilidade é ter a garantia de colhermos um futuro fértil e consciente. 🌎'
+            }
+                    
+    return render(request, 'manut_list copy.html',context)
+
+
+
+
+
+
+
+
 
 
 
@@ -185,10 +375,8 @@ class ferram_class:
                 except:
                     return redirect('/manut_list/')
         else:
-            if slug==0:
-                
-                form = Ferramentaria_form(request.POST)
-                
+            if slug==0:                
+                form = Ferramentaria_form(request.POST)                
             else:
                 #editar os
                 editar = Solicitacao.objects.get(slug=slug)
@@ -202,7 +390,7 @@ class ferram_class:
                 print('Número da OS: ',manut_print.id,user)
                 print('------------------------------')              
                 #impress_id = manut_print.id
-                usuario = request.user
+                usuario = request.user                
                 contexto = {'usuario':usuario,
                             'id':manut_print.id,
                             'fullname':manut_print.fullname,
@@ -311,18 +499,28 @@ def apagar_delete(request, id):
 #atualizar o status das os.
 @login_required(login_url='/login/')
 class atualizador_class:
+    @login_required(login_url='/login/')
     def updt_close(request, id):
+        usuario = request.user
         q = Solicitacao.objects.get(pk=id)
         q.status_os = Statusos.objects.get(pk=2)
-        print('alterado status da os:',q.id, 'para >>', q.status_os)
+        print('------------------------------')
+        print('alterado status da os:',q.id, '\n para >>', q.status_os)
+        print('Quem fez: ',usuario)
+        print('------------------------------')
         q.save()
         r_redirect = 'http://192.168.0.153:3306/' + q.slug
         return redirect(r_redirect)
 
+    @login_required(login_url='/login/')
     def updt_open(request, id):
+        usuario = request.user
         q = Solicitacao.objects.get(pk=id)
         q.status_os = Statusos.objects.get(pk=1)
-        print('alterado status da os:',q.id, 'para >>', q.status_os)
+        print('------------------------------')
+        print('alterado status da os:',q.id, '\n para >>', q.status_os)
+        print('Quem fez: ',usuario)
+        print('------------------------------')
         q.save()
         r_redirect = 'http://192.168.0.153:3306/' + q.slug
         return redirect(r_redirect)

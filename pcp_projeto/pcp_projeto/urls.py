@@ -28,6 +28,8 @@ urlpatterns = [
     path('logout/', views.logout_user, name='logout'),
     path('login/submit', views.submit_login, name='entrar_login'),
     path('teste/', views.teste,name='teste'),
+    path('aberta/', views.manut_list_aberto,name='manut_list_aberto'),
+    path('fechada/', views.manut_list_fechado,name='manut_list_fechado'),
     path('admin/', admin.site.urls),
     path('', RedirectView.as_view(url='/home/')),
     path('home/', views.home),
