@@ -30,6 +30,15 @@ h5 {
     border: 1px solid #ddd; /* Add a grey border */
     margin-bottom: 12px; /* Add some space below the input */
   }
+
+
+#detalhe {
+	list-style-type: none;
+	}
+
+li.none {
+        list-style-type: none;
+        }
   
 
 

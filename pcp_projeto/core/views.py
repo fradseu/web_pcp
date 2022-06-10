@@ -6,8 +6,7 @@ from .forms import Ferramentaria_form,Ferramentaria_form_report,Status_form
 ## Não implementado.
 import io
 from django.http import FileResponse
-import reportlab
-from reportlab.pdfgen import canvas
+
 
 #imports para criar paginação
 ## Em implementação, necessita criar o filtro.
@@ -67,52 +66,27 @@ def logout_user(request):
     logout(request)   
     return redirect('/')
 
-def teste(request):
-    teste_input = request.GET.get('tipo_servico1') 
-    usuario = request.user
-    nome = request.user.first_name
-    sobrenome = request.user.last_name
-    grp = request.user.groups.values_list('id',flat = True)
-    grp_list = list(grp)
-    print('------------------------------')                
-    print('Manut Lista')
-    print('Usuário: ',usuario)
-    msg_date = datetime.today().strftime('%Y-%m-%d')
-    try:
-        editar = Msg_day.objects.get(current_day=msg_date)
-        print(editar)
-    except:    
-        editar = datetime.today().strftime('%Y-%m-%d')
-    print('------------------------------')
-    os_list = Solicitacao.objects.all()    
-    # configuração paginação
-
-    p = Paginator(Solicitacao.objects.filter(sector__in=grp_list,type_service__in=[1,2]), 50)
-    page = request.GET.get('page')
-    ordens = p.get_page(page)
-    nums = "a" * ordens.paginator.num_pages
-    
-    try:    
-        context = {
-            'usuario':usuario,
-            'sobrenome':sobrenome,
-            'os_list': os_list,
-            'ordens': ordens,
-            'nums': nums,
-            'mensagem':editar.mensagem,
-            }
-    except:    
-        context = {
-            'usuario':usuario,
-            'sobrenome':sobrenome,
-            'os_list': os_list,
-            'ordens': ordens,
-            'nums': nums,
-            'mensagem':'Semear ideias ecológicas e plantar sustentabilidade é ter a garantia de colhermos um futuro fértil e consciente. 🌎'
-            }
-        
-            
-    return render(request, 'manut_list copy.html',context)
+def teste(request, slug):
+        usuario = request.user
+        os_list = Solicitacao.objects.get(slug=slug)
+        #print('----------------------')
+        #print('Qual é essa os?')
+        #print(os_list.id)
+        if request.method == "POST":
+            form1 = Ferramentaria_form_report(request.POST)
+            if form1.is_valid():
+                comments = form1.save(commit=False)
+                comments.os_number = os_list
+                comments.save()
+                print('------------------------------')
+                print(request.META.get('HTTP_REFERER'))
+                print('Atividade de OS Criada')                
+                print('OS: ',comments.id,usuario)
+                print('------------------------------')
+                return redirect('manut_detail', slug= os_list.slug)
+        else:
+            form1 = Ferramentaria_form_report()
+        return render(request, 'manut_list copy.html', {'os_list':os_list, 'form1':form1,'usuario':usuario })
 
 
 
@@ -159,7 +133,7 @@ def teste_aberto(request):
             }
         
             
-    return render(request, 'manut_list copy.html',context)
+    return render(request, 'manut_list.html',context)
 
 
 #página Inicial.
@@ -198,13 +172,14 @@ def home(request):
 
 #Página de lista de OS, com paginação. Necessita incluir função filtro.
 @login_required(login_url='/login/')
+#Página com todos os itens, sem filtro.
 def manut_list(request):
     usuario = request.user
     sobrenome = request.user.last_name
     grp = request.user.groups.values_list('id',flat = True)
     grp_list = list(grp)
     print('------------------------------')                
-    print('Manut Lista')
+    print('Manut Lista, página com todos os itens, sem filtro')
     print('Usuário: ',usuario)
     msg_date = datetime.today().strftime('%Y-%m-%d')
     try:
@@ -240,16 +215,17 @@ def manut_list(request):
             'mensagem':'Semear ideias ecológicas e plantar sustentabilidade é ter a garantia de colhermos um futuro fértil e consciente. 🌎'
             }
                     
-    return render(request, 'manut_list copy.html',context)
+    return render(request, 'manut_list.html',context)
 
 @login_required(login_url='/login/')
+#Página com todos os itens, com filtro = Status aberto.
 def manut_list_aberto(request):
     usuario = request.user
     sobrenome = request.user.last_name
     grp = request.user.groups.values_list('id',flat = True)
     grp_list = list(grp)
-    print('------------------------------')                
-    print('Manut Lista')
+    print('------------------------------')              
+    print('Manut Lista, página com filtro = Status aberto')
     print('Usuário: ',usuario)
     msg_date = datetime.today().strftime('%Y-%m-%d')
     try:
@@ -285,17 +261,18 @@ def manut_list_aberto(request):
             'mensagem':'Semear ideias ecológicas e plantar sustentabilidade é ter a garantia de colhermos um futuro fértil e consciente. 🌎'
             }
                     
-    return render(request, 'manut_list copy.html',context)
+    return render(request, 'manut_list.html',context)
 
 
 @login_required(login_url='/login/')
+#Página com todos os itens, com filtro = Status fechado.
 def manut_list_fechado(request):
     usuario = request.user
     sobrenome = request.user.last_name
     grp = request.user.groups.values_list('id',flat = True)
     grp_list = list(grp)
     print('------------------------------')                
-    print('Manut Lista')
+    print('Manut Lista,página com filtro = Status fechado')
     print('Usuário: ',usuario)
     msg_date = datetime.today().strftime('%Y-%m-%d')
     try:
@@ -331,7 +308,7 @@ def manut_list_fechado(request):
             'mensagem':'Semear ideias ecológicas e plantar sustentabilidade é ter a garantia de colhermos um futuro fértil e consciente. 🌎'
             }
                     
-    return render(request, 'manut_list copy.html',context)
+    return render(request, 'manut_list.html',context)
 
 
 
@@ -381,7 +358,7 @@ class ferram_class:
                 #editar os
                 editar = Solicitacao.objects.get(slug=slug)
                 form = Ferramentaria_form(request.POST,instance=editar)
-                print('atualizado')
+                print('Atualizou OS')
             if form.is_valid():
                 manut_print = form.save()     
                 user = request.user           

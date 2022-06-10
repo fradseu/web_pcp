@@ -20,6 +20,7 @@
 </head>
 <body class="hold-transition sidebar-mini layout-fixed" data-panel-auto-height-mode="height">
 <div class="wrapper">
+  {% load crispy_forms_tags %}
 
   <!-- Navbar -->
   <nav class="main-header navbar navbar-expand navbar-white navbar-light">
@@ -78,6 +79,8 @@
           <a href="/home/" class="d-block"><i class="fas fa-home"></i> Home</a>
         </div>
       </div>
+      
+      
 
       <!-- SidebarSearch Form -->
       
@@ -90,6 +93,7 @@
           <!--
           <li class="nav-header"><h6>PCP</h6></li>
           -->
+          
           <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="fas fa-tachometer-alt"></i>
@@ -104,6 +108,10 @@
                 </a>
               </li>              
             </ul>
+            <li class="nav-item">
+              <a href="/#/" ><i class="fas fa-chart-line"></i>  Dashboard
+              </a>
+            </li>  
           </li> 
           <li class="nav-item">
             <a href="#" class="nav-link">
@@ -121,8 +129,16 @@
               <li class="nav-item">
                 <a href="/manut_list/" ><i class="fas fa-list-ul"></i> Lista de Chamados
                 </a>
-              </li>            
+              </li>              
             </ul>
+            <li class="nav-item">
+              <a href="/ferr_form/" ><i class="far fa-plus-square"></i> Abrir Chamado
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="/manut_list/" ><i class="fas fa-list-ul"></i> Lista de Chamados
+              </a>
+            </li>
           </li>          
           <li class="nav-item">
             <a href="#" class="nav-link">
@@ -150,6 +166,22 @@
                 </a>
               </li>             
             </ul>
+            <li class="nav-item">
+              <a href="#" ><i class="far fa-circle nav-icon"></i> Desvio de Qualidade
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="#" ><i class="far fa-circle nav-icon"></i> Recebimento
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="#" ><i class="far fa-circle nav-icon"></i> Inspeção de Linha
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="#" ><i class="far fa-circle nav-icon"></i> Instrução de Trabalho
+              </a>
+            </li>
           </li>              
           <li class="nav-item">
             <a href="#" class="nav-link">
@@ -165,6 +197,10 @@
                 </a>
               </li>      
             </ul>
+            <li class="nav-item">
+              <a href="http://192.168.0.244/autenticacao" target="_blank" ><i class="far fa-circle nav-icon"></i> Sistema Senai
+              </a>
+            </li>
           </li>
         </ul>
       </nav>
@@ -181,186 +217,257 @@
     </div>
   
     <div class="tab-content">
-
       <div class="card">
-              
-          <div class="card">
-            <div class="card-header">
-              <div class="card card-secondary">
-                <div class="card-header">
-                  <h3 class="card-title">Filtros</h3>
-                </div>
-
-                <div class="row">
-                  <div class="col-lg-12 col-12">
-                    <!-- small box -->
-                    <div class="small-box bg-light">
-                      <div class="inner">                    
-                        <h3><sup style="font-size: 18px">Filtrar tipo de Chamado:</sup></h3> 
-                        <input type="text" id="tabela_filtro"  onkeyup="myFunction()" placeholder="Ferrament. ou Manut."><br>
-                      </div>
-                      <div class="icon">
-                        <i class="ion ion-pie-graph"></i>
-                      </div>
-                      <a href="#" class="small-box-footer"> </a>
-                    </div>
-                  </div>
-                  
-                  <div class="col-lg-12 col-12">
-                    <!-- small box -->
-                    <div class="small-box bg-light">
-                      <div class="inner">                    
-                        <h4><sup style="font-size: 18px">Filtrar Status do Chamado</sup></h4> 
-                        <a button type="button" class="btn btn-info"  href="/manut_list/"> {% csrf_token %}
-                          <i class="far fa-circle"></i></i>Todas</a>
-                        <a button type="button" class="btn btn-success"  href="/aberta/"> {% csrf_token %}
-                          <i class="far fa-check-circle"></i>Aberta</a>
-                        <a button type="button" class="btn btn-danger"  href="/fechada/"> {% csrf_token %}
-                          <i class="far fa-times-circle"></i></i>Fechada</a>
-                           
-                      </div>
-                      <div class="icon">
-                        <i class="ion ion-pie-graph"></i>
-                      </div>
-                      <a href="#" class="small-box-footer"> </a>
-                    </div>
-                  </div>
-                  
-                </div>
-
-
-
-              </div>
-              
-              <br>
-              <h3 class="card-title">Lista de Chamados</h3><br>
-              <strong>Registros {{ ordens.start_index }}-{{ ordens.end_index }} de {{ ordens.paginator.count }}</strong><br>
-              <div class="card-tools">
-                <ul class="pagination pagination-sm float-right">{% if ordens.has_previous %}
-                  <li class="page-item">
-                    <a class="page-link" href="?page=1">
-                      &laquo Primeiro
-                    </a>
-                  </li>
-                  <li class="page-item">
-                    <a class="page-link"  href="?page={{ ordens.previous_page_number }}">
-                      Anterior
-                    </a>
-                  </li>
-                {% else %}
-                  <li class="page-item" disabled>
-                    <a class="page-link" href="#" disabled>
-                      &laquo Primeiro
-                    </a>
-                  </li>
-                  <li class="page-item" disabled>
-                    <a class="page-link"  href="#" disabled>
-                      Anterior
-                    </a>
-                  </li>
-                {% endif %}
-                
-                <!-- Contador de paginação padrão
-                <li class="page-item"><a href="#" class="page-link" disabled>
-                Page {{ ordens.number }} of {{ ordens.paginator.num_pages }}</a>
-                </li>
-                -->
-                <!-- Contador de paginação por números fracionados-->
-                {% for i in nums %}
-                  <li class="page-item">
-                    <a class="page-link" href="?page={{ forloop.counter }}">
-                      {{ forloop.counter }}
-                    </a>
-                  </li>
-                  
-                {% endfor %}
-        
-        
-                {% if ordens.has_next %}
-                  <li class="page-item">
-                    <a class="page-link"  href="?page={{ ordens.next_page_number }}">
-                      Próximo</a>
-                    </li>
-                  <li class="page-item">
-                    <a class="page-link"  href="?page={{ ordens.paginator.num_pages }}">
-                      Último &raquo
-                    </a>
-                  </li>
-                {% else %}
-                  <li class="page-item" disabled>
-                    <a class="page-link"  href="#" disabled>
-                      Próximo</a>
-                    </li>
-                  <li class="page-item" disabled>
-                    <a class="page-link"  href="#" disabled>
-                      Último &raquo
-                    </a>
-                  </li>
-                {% endif %}
-                </ul>
-              </div>
-
-              
-            </div>
-            <!-- /.card-header -->
-            <div class="card-body table-responsive p-0" style="height: 750px;">
-              <table id="tabela_lista" class="table table-head-fixed text-nowrap">
-                <thead>
-                  <tr>
-                    <th>Tipo</th>
-                    <th>Nº OS</th>
-                    <th>Setor</th>
-                    <th>Máquina</th>
-                    <th>Prioridade</th>
-                    <th>Status</th>
-                    <th>Visualizar</th>
-                    <th>Editar O.S.</th>
-                    <th>Excluir O.S.</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {% for os in ordens %}
-                    <tr>
-                        <td> {{ os.type_service }}</td>
-                        <td> {{ os.id }}</td>
-                        <td> {{ os.sector }}</td>
-                        <td> {{ os.machine_code }}</td>
-                        <td> {{ os.priority_type }}</td>
-                        <td> {{ os.status_os }}</td>
-                        
-                        <td>  
-                            <a button type="button" class="btn btn-secondary" href="{% url 'manut_detail' os.slug %}">
-                              <i class="fas fa-hammer"></i> Serviço</button>
-                            </a>
-                        </td>
-                        <td>
-                            <a button type="button" class="btn btn-primary" href="{% url 'ferr_form_update' os.slug %}">
-                              <i class="fas fa-edit"></i> Editar</button>
-                            </a>
-                        </td>
-                        <td>
-                          <a button type="button" class="btn btn-danger" href="{% url 'form_delete' os.id %}"> {% csrf_token %}
-                            <i class="far fa-trash-alt"></i> Excluir</button>
-                          </a>
-                        </td>
-                    </tr>
-                {% endfor %}
-                </tbody>
-              </table>
-            </div>
-            <!-- /.card-body -->
+        <div class="card card-success">
+          <div class="card-header">
+            <h3 class="card-title">Informações da ordem de servço</h3>
           </div>
         </div>
-        <!-- /.card-body -->
-      </div>
-      
+        <!-- Começo Principal -->
+        <section class="content">
+          <div class="container-fluid">
+            <!-- Small boxes (Stat box) -->
+            <div class="row">
+              <div class="col-lg-3 col-6">
+                <!-- small box -->
+                <div class="small-box bg-warning">
+                  <div class="inner">                    
+                    <h3><sup style="font-size: 18px">Número da OS</sup></h3> 
+                    <h3><sup style="font-size: 18px">{{ os_list.id }}</sup></h3>
+                  </div>
+                  <div class="icon">
+                    <i class="ion ion-pie-graph"></i>
+                  </div>
+                  <a href="#" class="small-box-footer"> </a>
+                </div>
+              </div>
+              <div class="col-lg-3 col-6">
+                <!-- small box -->
+                <div class="small-box bg-warning">
+                  <div class="inner">
+                    <h3><sup style="font-size: 18px">Data de crição</sup></h3>
+                    <h3><sup style="font-size: 18px">{{ os_list.date_create}}</sup></h3>
+                  </div>
+                  <div class="icon">
+                    <i class="ion ion-stats-bars"></i>
+                  </div>
+                  <a href="#" class="small-box-footer"> </a>
+                </div>
+              </div>
+              
+              <!-- ./col -->
+              <div class="col-lg-3 col-6">
+                <!-- small box -->
+                <div class="small-box bg-warning">
+                  <div class="inner">
+                    <h3><sup style="font-size: 18px">Setor solicitante</sup></h3> 
+                    <h3><sup style="font-size: 18px">{{ os_list.sector}}</sup></h3>
+                  </div>
+                  <div class="icon">
+                    <i class="ion ion-person-add"></i>
+                  </div>
+                  <a href="#" class="small-box-footer"> </a>
+                </div>
+              </div>
+              <!-- ./col -->
+              <div class="col-lg-3 col-6">
+                <!-- small box -->
+                <div class="small-box bg-warning">
+                  <div class="inner">
+                    <h3><sup style="font-size: 18px">Quem solicitou</sup></h3> 
+                    <h3><sup style="font-size: 18px">{{os_list.fullname}}</sup></h3>
+                  </div>
+                  <div class="icon">
+                    <i class="ion ion-pie-graph"></i>
+                  </div>
+                  <a href="#" class="small-box-footer"> </a>
+                </div>
+              </div>
+              <!-- ./col -->
+              
+            </div>
+            <div class="row">
+              <div class="col-lg-12 col-12">
+                <div class="card card-primary card-outline">
+                  <div class="card-header">
+                    <h3><sup style="font-size: 18px">Descrição do problema</sup></h3> 
+                  </div>
+                  <div class="card-body">                  
+                    <h3><sup style="font-size: 18px">{{ os_list.issue_desctiption }}</sup></h3>
+                  </div>
+                </div>
+              </div>
 
-      
-    </div>
 
 
+              
+              </div>
+              
+            </div>
+            <!-- /.row -->
+            <!-- Main row -->
 
-  </div>
+            <div class="card card-success">
+              <div class="card-header">
+                <h3 class="card-title">Anotações da ordem de serviço</h3>
+              </div>
+              <!-- /.card-header -->
+              <!-- form start -->
+              <form action="" method="post" autocomplete="off"> {% csrf_token %}
+                <div class="card-body">
+                     
+                <div class="row">
+                    <div class="col-md-4">
+                        {{form1.body|as_crispy_field}}
+                    </div>
+                    <div class="col-md-8">
+                      <div class="row">
+                        <div class="col">
+                            {{form1.name|as_crispy_field}}
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col">
+                          {{form1.data_1|as_crispy_field}}
+                        </div>
+                        <div class="col">
+                          {{form1.procedimento|as_crispy_field}}
+                        </div>
+                      </div>
+                      <div class="row">
+                      <div class="col">
+                        {{form1.hora_1|as_crispy_field}}
+                      </div>
+                      <div class="col">
+                        {{form1.hora_2|as_crispy_field}}
+                      </div>                      
+                      </div>
+                      <div class="row">
+                        <div class="col">
+                          {{form1.material|as_crispy_field}}
+                        </div>
+                        <div class="col">
+                          {{form1.qtd_mat|as_crispy_field}}
+                        </div>                      
+                        </div>
+                    </div>                    
+                </div>
+                <div class="col-6 col-md-3">
+                  <button type="submit" class="btn btn-primary">
+                    <i class="far fa-save"></i> Salvar Anotações</button>
+                </div>
+                
+              
+            </form>
+            </div>
+
+
+            <div class="card card-success">
+              <div class="card-header">
+                <h3 class="card-title">Alterar status da ordem de serviço</h3>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-4 col-6">
+                <!-- small box -->
+                <div class="small-box bg-warning">
+                  <div class="inner">                    
+                    <h3><sup style="font-size: 18px">Status</sup></h3> 
+                    <h3><sup style="font-size: 18px">{{ os_list.status_os }}</sup></h3>
+                  </div>
+                  <div class="icon">
+                    <i class="ion ion-pie-graph"></i>
+                  </div>
+                  <a href="#" class="small-box-footer"> </a>
+                </div>
+              </div>
+              <div class="col-lg-4 col-6">
+                <!-- small box -->
+                <div class="small-box bg-light">
+                  <div class="inner">                    
+                    <h3><sup style="font-size: 18px">Finalizar OS</sup></h3> 
+                    <a button type="button" class="btn btn-success"  href="{% url 'updt_close' os_list.id %}"> {% csrf_token %}
+                      <i class="far fa-check-circle"></i>Fechar</a>
+                  </div>
+                  <div class="icon">
+                    <i class="ion ion-pie-graph"></i>
+                  </div>
+                  <a href="#" class="small-box-footer"> </a>
+                </div>
+              </div>
+              <div class="col-lg-4 col-6">
+                <!-- small box -->
+                <div class="small-box bg-light">
+                  <div class="inner">
+                    <h3><sup style="font-size: 18px">Ativar OS</sup></h3>
+                    <a button type="button" class="btn btn-warning" href="{% url 'updt_open' os_list.id %}"> {% csrf_token %}
+                      <i class="far fa-times-circle"></i>Abrir</a>
+                  </div>
+                  <div class="icon">
+                    <i class="ion ion-stats-bars"></i>
+                  </div>
+                  <a href="#" class="small-box-footer"> </a>
+                </div>
+              </div>
+              
+            </div>
+
+            <!-- Tabela das Anotações Operacionais-->
+            <div class="row">
+              <div class="col-12">
+                <div class="card">
+                  <div class="card card-success">
+                    <div class="card-header">
+                      <h3 class="card-title">Histórico da ordem de serviço</h3>
+                    </div>
+                  </div>
+                  <!-- /.card-header -->
+                  <div class="card-body table-responsive p-0" style="height: 300px;">
+                    <table class="table table-head-fixed text-nowrap">
+                      <thead>
+                        <tr>
+                          <tr class="table-light">
+                            <th >Procedimento</th>
+                            <th >Nome</th>
+                            <th >Data</th>
+                            <th >Hora inicial</th>
+                            <th >Hora final</th>
+                            <th >O que foi feito</th>
+                            <th >O que foi usado</th>
+                            <th >Quanto foi usado</th>
+                            <th >Excluir</th>                        
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {% for os_number in os_list.comments.all %}
+                          <tr>                          
+                              <td > {{ os_number.procedimento }}</td>
+                              <td > {{ os_number.name }}</td>
+                              <td > {{ os_number.data_1 }}</td>
+                              <td > {{ os_number.hora_1 }}</td>
+                              <td > {{ os_number.hora_2 }}</td>
+                              <td > {{ os_number.body }}</td>
+                              <td > {{ os_number.material }}</td>
+                              <td > {{ os_number.qtd_mat }}</td>
+                              <td>
+                                <a button type="button" class="btn btn-danger" href="{% url 'apagar_delete' os_number.id %}"> {% csrf_token %}
+                                  <i class="far fa-trash-alt"></i> Excluir</button>                              
+                                </a>
+                              </td> 
+                          </tr>
+                        {% endfor %}
+                      </tbody>
+                    </table>
+                  </div>
+                  <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+              </div>
+            </div>
+        </div>
+        </section>
+      </div>  
+  
   <!-- /.content-wrapper -->
   <footer class="main-footer">
     <strong>Copyright &copy; 2021-2022 <a href="https://www.marflex.ind.br">www.marflex.ind.br</a></strong>
@@ -392,32 +499,6 @@
 <script src="/static/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
 <!-- AdminLTE App -->
 <script src="/static/dist/js/adminlte.js"></script>
-
-<script>
-  function myFunction() {
-    // Declare variables
-    var input, filter, table, tr, td, i, txtValue;
-    input = document.getElementById("tabela_filtro");
-    filter = input.value.toUpperCase();
-    table = document.getElementById("tabela_lista");
-    tr = table.getElementsByTagName("tr");
-  
-    // Loop through all table rows, and hide those who don't match the search query
-    for (i = 0; i < tr.length; i++) {
-      td = tr[i].getElementsByTagName("td")[0];
-      if (td) {
-        txtValue = td.textContent || td.innerText;
-        if (txtValue.toUpperCase().indexOf(filter) > -1) {
-          tr[i].style.display = "";
-        } else {
-          tr[i].style.display = "none";
-        }
-      }
-    }
-  }
-  
-  </script>
-
 <!-- AdminLTE for demo purposes 
 <script src="/static/dist/js/demo.js"></script>
 -->

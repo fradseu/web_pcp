@@ -1,0 +1,11 @@
+Padrão para commits
+
+Novos recursos: Páginas, funções
+"10/06/2022,feat, :sparkles:, Novo recurso: BLA BLA BLA,"
+
+Em progresso: Páginas, funções
+"10/06/2022,feat, :construction:, Em Progresso: BLA BLA BLA,"
+
+Bugfix: correções de erros relatados
+"10/06/2022,fix, :bug:, Correção de bugs: BLA BLA BLA,"
+

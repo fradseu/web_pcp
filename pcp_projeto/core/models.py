@@ -115,5 +115,5 @@ class Mensagem(models.Model):
 class Msg_day(models.Model):
     id = models.AutoField(primary_key=True)
     current_day = models.DateField(auto_now_add=False)
-    mensagem = models.CharField(max_length=150)
+    mensagem = models.CharField(max_length=450)
 
