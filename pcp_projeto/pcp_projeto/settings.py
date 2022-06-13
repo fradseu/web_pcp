@@ -136,3 +136,8 @@ STATICFILES_DIR = {
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 TIME_INPUT_FORMATS = ('%H:%M',)
+
+
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True     # opional, as this will log you out when browser is closed
+SESSION_COOKIE_AGE = 300                   # 0r 5 * 60, same thing
+SESSION_SAVE_EVERY_REQUEST = True          # Will prrevent from logging you out after 300 seconds
