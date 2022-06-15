@@ -66,27 +66,35 @@ def logout_user(request):
     logout(request)   
     return redirect('/')
 
-def teste(request, slug):
+def teste(request):
+    #mensagem do dia, um pequeno motivacional para descontrair.
+    msg_date = datetime.today().strftime('%Y-%m-%d')
+    try:
+        editar = Msg_day.objects.get(current_day=msg_date)
+        print(editar)
+    except:    
+        editar = datetime.today().strftime('%Y-%m-%d')
         usuario = request.user
-        os_list = Solicitacao.objects.get(slug=slug)
-        #print('----------------------')
-        #print('Qual é essa os?')
-        #print(os_list.id)
-        if request.method == "POST":
-            form1 = Ferramentaria_form_report(request.POST)
-            if form1.is_valid():
-                comments = form1.save(commit=False)
-                comments.os_number = os_list
-                comments.save()
-                print('------------------------------')
-                print(request.META.get('HTTP_REFERER'))
-                print('Atividade de OS Criada')                
-                print('OS: ',comments.id,usuario)
-                print('------------------------------')
-                return redirect('manut_detail', slug= os_list.slug)
-        else:
-            form1 = Ferramentaria_form_report()
-        return render(request, 'manut_list copy.html', {'os_list':os_list, 'form1':form1,'usuario':usuario })
+        print('------------------------------')
+        print('Home page:',usuario)
+        print('------------------------------')
+
+    os_list = Solicitacao.objects.all()
+    usuario = request.user
+    try:
+        context = {
+            'usuario':usuario,
+            'os_list': os_list,
+            'mensagem':editar.mensagem,
+        }
+    except:
+        context = {
+            'usuario':usuario,
+            'os_list': os_list,
+            'mensagem':'Semear ideias ecológicas e plantar sustentabilidade é ter a garantia de colhermos um futuro fértil e consciente. 🌎'
+        }        
+    return render(request, 'manut_list copy.html',context)
+        
 
 
 
@@ -164,8 +172,7 @@ def home(request):
             'usuario':usuario,
             'os_list': os_list,
             'mensagem':'Semear ideias ecológicas e plantar sustentabilidade é ter a garantia de colhermos um futuro fértil e consciente. 🌎'
-        }
-        
+        }        
     return render(request, 'index.html',context)
 
     

@@ -9,10 +9,8 @@ Em progresso: Páginas, funções
  git commit -m "Bugfix: correções de erros relatados,
 10/06/2022,fix, :bug:, Correção de bugs: Página de detalhamento da os, aprensta problemas no colapse do menu lateral esquerdo, averiguado possibilidade de melhorias no cód html bootstrap5"
 
-
+ recu, 
 Estilização de interface: 
 
-git status
-git add .
- git commit -m "Novo recurso: homologação pela qualidade,
-13/06/2022, feat :sparkles:, Modelo aprovado pelo SGQ, gerado nº FRQ. na data de hoje."
+
+
