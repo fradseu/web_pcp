@@ -193,6 +193,7 @@
     <style>
       .flex-container{
         display: flex;
+        flex-wrap: wrap;
       }
       .item{
             font-size: 24px;
@@ -200,14 +201,38 @@
             text-align: center;
             min-width: 34%;
             line-height: 60px;
+            -webkit-box-shadow: 2px 2px 2px 0px rgba(0, 5, 0, 0.75);
+            -moz-box-shadow: 2px 2px 2px 0px rgba(0, 5, 0, 0.75);
+            box-shadow: 2px 2px 2px 0px rgba(0, 5, 0, 0.75);
         }
       
       .alinhamento{
         text-align: center;
+        -webkit-box-shadow: 2px 2px 2px 0px rgba(0, 5, 0, 0.75);
+        -moz-box-shadow: 2px 2px 2px 0px rgba(0, 5, 0, 0.75);
+        box-shadow: 2px 2px 2px 0px rgba(78, 78, 78, 0.75);
+        background-color: #dddcdc;
+      }
+
+      .descricao{
+        text-align: center;
+        -webkit-box-shadow: 2px 2px 2px 0px rgba(0, 5, 0, 0.75);
+        -moz-box-shadow: 2px 2px 2px 0px rgba(0, 5, 0, 0.75);
+        box-shadow: 2px 2px 2px 0px rgba(78, 78, 78, 0.75);
+        background-color: #dddcdc;
+      }
+
+      .borda-top{
+        border-top: 5px groove rgb(87, 140, 238);
       }
 
     </style>
-  
+
+    <div class="p-0 m-0 card card-success">
+      <div class="card-header">
+        <h3 class="card-title">Alterar status da ordem de serviço</h3>
+      </div>
+    </div>  
     <div class="tab-content">
       <div class="card">
         <!--
@@ -216,35 +241,44 @@
         </div>
         -->
         <!-- Começo Principal -->
-        <div class="flex-container">
-         
-          <div class="p-3 border bg-light flex-fill bd-highlight alinhamento"><h3><sup style="font-size: 18px">Status</sup></h3>
-            <div class="p-2 flex-fill bd-highlight" ><h3><sup style="font-size: 18px">ABERTA</sup></h3></div>
+        <div class="flex-container">         
+          <div class="p-1 m-1 border flex-fill bd-highlight alinhamento rounded"><h3><sup style="font-size: 70%"><strong>Número da OS</strong></sup></h3>
+            <div class="p-2 flex-fill bd-highlight" ><h3><sup style="font-size: 18px">{{ os_list.id }}</sup></h3></div>
           </div>          
-          <div class="p-3 border bg-light flex-fill bd-highlight align-self-stretch alinhamento"><h3><sup style="font-size: 18px">Fechar OS</sup></h3> 
-            <div class="p-2 flex-fill bd-highlight">
-              <a button type="button" class="btn btn-success btn-lg btn-block"  href="#"> {% csrf_token %}
-                <i class="far fa-check-circle"></i> Fechar</a>
-            </div>
+          <div class="p-1 m-1 border  flex-fill bd-highlight align-self-stretch alinhamento rounded"><h3><sup style="font-size: 70%">Data de crição</sup></h3> 
+            <div class="p-2 flex-fill bd-highlight" ><h3><sup style="font-size: 18px">{{ os_list.date_create }}</sup></h3></div>
           </div>
-          <div class="p-3 border bg-light flex-fill bd-highlight align-self-stretch alinhamento"><h3><sup style="font-size: 18px">Abrir OS</sup></h3>
-            <div class="p-2 flex-fill bd-highlight">
-              <a button type="button"  class="btn btn-warning btn-lg btn-block" href="#"> {% csrf_token %}
-                <i class="far fa-times-circle"></i> Abrir</a>
-                
-            </div>
+          <div class="p-1 m-1 border  flex-fill bd-highlight align-self-stretch alinhamento rounded"><h3><sup style="font-size: 70%">Setor solicitante</sup></h3>
+            <div class="p-2 flex-fill bd-highlight" ><h3><sup style="font-size: 18px">{{ os_list.sector }}</sup></h3></div>
           </div>
+          <div class="p-1 m-1 border  flex-fill bd-highlight align-self-stretch alinhamento rounded"><h3><sup style="font-size: 70%">Quem solicitou</sup></h3>
+            <div class="p-2 flex-fill bd-highlight" ><h3><sup style="font-size: 18px">{{ os_list.id }}</sup></h3></div>
+          </div>
+          <div class="p-1 m-1 border  flex-fill bd-highlight align-self-stretch alinhamento rounded"><h3><sup style="font-size: 70%">Status</sup></h3>
+            <div class="p-2 flex-fill bd-highlight" ><h3><sup style="font-size: 18px">{{ os_list.id }}</sup></h3></div>
+          </div>
+          <div class="p-1 m-1 border  flex-fill bd-highlight align-self-stretch alinhamento rounded"><h3><sup style="font-size: 70%">Fábrica</sup></h3>
+            <div class="p-2 flex-fill bd-highlight" ><h3><sup style="font-size: 18px">{{ os_list.id }}</sup></h3></div>
+          </div>
+        </div>  
 
-        </div>        
+
+        
+      <div class="m-1 flex-container borda-top">
+        <div class="d-flex bd-highlight">
+          <div class="p-2 m-1 flex-shrink-4 border flex-fill bd-highlight align-self-stretch descricao rounded "><h3><sup style="font-size: 70%"><strong>Descrição do problema</strong></sup></h3></div>
+          <div class="p-2 m-1 w-100 flex-fill bd-highlight align-self-stretch alinhamento rounded">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</div>
+        </div>
+      </div> 
+        
+
+
         <!-- Final Principal -->
       </div>
       </div>
     </div>
   </div>
 
-  <h3>
-    <sup style="font-size: 18px">Finalizar OS</sup>
-  </h3> 
   <!-- /.content-wrapper -->
   <footer class="main-footer">
     <strong>Copyright &copy; 2021-2022 <a href="https://www.marflex.ind.br">www.marflex.ind.br</a></strong>

@@ -67,33 +67,8 @@ def logout_user(request):
     return redirect('/')
 
 def teste(request):
-    #mensagem do dia, um pequeno motivacional para descontrair.
-    msg_date = datetime.today().strftime('%Y-%m-%d')
-    try:
-        editar = Msg_day.objects.get(current_day=msg_date)
-        print(editar)
-    except:    
-        editar = datetime.today().strftime('%Y-%m-%d')
-        usuario = request.user
-        print('------------------------------')
-        print('Home page:',usuario)
-        print('------------------------------')
-
-    os_list = Solicitacao.objects.all()
-    usuario = request.user
-    try:
-        context = {
-            'usuario':usuario,
-            'os_list': os_list,
-            'mensagem':editar.mensagem,
-        }
-    except:
-        context = {
-            'usuario':usuario,
-            'os_list': os_list,
-            'mensagem':'Semear ideias ecológicas e plantar sustentabilidade é ter a garantia de colhermos um futuro fértil e consciente. 🌎'
-        }        
-    return render(request, 'manut_list copy.html',context)
+         
+    return render(request, 'advanced.html')
         
 
 
