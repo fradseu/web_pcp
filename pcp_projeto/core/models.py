@@ -59,6 +59,9 @@ class Solicitacao(models.Model):
     status_os = models.ForeignKey(Statusos,default='ABERTA', on_delete= models.CASCADE)#ABERTA, FECHADA
     type_service = models.ForeignKey(Type_service,max_length=50, on_delete= models.CASCADE)#FERRAMENTARIA, MANUTENÇÃO    
     propose_service = models.ForeignKey(Propose_service, on_delete= models.CASCADE)#CORRETIVO, PREDIAL, PREVENTIVO, PROJETO
+
+    def __str__(self):
+        return "{}-{}".format(self.factory, self.sector)
  
  
     
@@ -93,6 +96,7 @@ class Ferr_report(models.Model):
     procedimento = models.ForeignKey(Procedimento,max_length=50, on_delete= models.CASCADE)#P1, P2, P3, P4, P5, P6, P7, P8, P9, P10
     material = models.CharField(max_length=12,default="--")
     qtd_mat = models.FloatField(default=0)
+
     
 
     class Meta:

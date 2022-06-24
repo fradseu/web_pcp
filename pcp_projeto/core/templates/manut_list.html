@@ -17,6 +17,46 @@
   <link rel="icon" href="/static/img/favicons/favicon-32x32.png" sizes="32x32" type="image/png">
   <link rel="icon" href="/static/img/favicon-16x16.png" sizes="16x16" type="image/png">
   <link rel="icon" href="/static/img/favicon.ico">
+
+  <style>
+    .flex-container{
+      display: flex;
+      flex-wrap: wrap;
+    }
+    .item{
+          font-size: 24px;
+          height: 50%;
+          text-align: center;
+          min-width: 34%;
+          line-height: 60px;
+          -webkit-box-shadow: 2px 2px 2px 0px rgba(0, 5, 0, 0.75);
+          -moz-box-shadow: 2px 2px 2px 0px rgba(0, 5, 0, 0.75);
+          box-shadow: 2px 2px 2px 0px rgba(0, 5, 0, 0.75);
+      }
+    
+    .alinhamento{
+      text-align: center;
+      -webkit-box-shadow: 2px 2px 2px 0px rgba(0, 5, 0, 0.75);
+      -moz-box-shadow: 2px 2px 2px 0px rgba(0, 5, 0, 0.75);
+      box-shadow: 2px 2px 2px 0px rgba(78, 78, 78, 0.75);
+      background-color: #dddcdc;
+    }
+
+    .descricao{
+      text-align: center;
+      -webkit-box-shadow: 2px 2px 2px 0px rgba(0, 5, 0, 0.75);
+      -moz-box-shadow: 2px 2px 2px 0px rgba(0, 5, 0, 0.75);
+      box-shadow: 2px 2px 2px 0px rgba(78, 78, 78, 0.75);
+      background-color: #dddcdc;
+    }
+
+    .borda-top{
+      border-top: 5px groove rgb(87, 140, 238);
+    }
+
+  </style>
+
+
 </head>
 <body class="hold-transition sidebar-mini layout-fixed" data-panel-auto-height-mode="height">
 <div class="wrapper">
@@ -185,56 +225,43 @@
       <div class="card">
               
           <div class="card">
-            <div class="card-header">
-              <div class="card card-secondary">
-                <div class="card-header">
-                  <h3 class="card-title">Filtros</h3>
-                </div>
-
-                <div class="row">
-                  <div class="col-lg-12 col-12">
-                    <!-- small box -->
-                    <div class="small-box bg-light">
-                      <div class="inner">                    
-                        <h3><sup style="font-size: 18px">Filtrar tipo de Chamado:</sup></h3> 
-                        <input type="text" id="tabela_filtro"  onkeyup="myFunction()" placeholder="Ferrament. ou Manut."><br>
-                      </div>
-                      <div class="icon">
-                        <i class="ion ion-pie-graph"></i>
-                      </div>
-                      <a href="#" class="small-box-footer"> </a>
-                    </div>
+            <div class="p-0 m-0 card-header">
+              
+              <div class="p-0 container-fluid">
+                <!-- Small boxes (Stat box) -->
+                <div class="p-0 m-0 card card-secondary">
+                  <div class="card-header">
+                    <h3 class="card-title">Filtros</h3>
                   </div>
+                </div>  
+                
+    
+                <div class="flex-container">         
+                  <div class="p-1 m-1 border  flex-fill bd-highlight alinhamento rounded"><h3><sup><strong>Filtrar tipo de Chamado:</strong></sup></h3>
+                    <div class="p-2 flex-fill bd-highlight" ><h3><sup><input type="text" id="tabela_filtro"  onkeyup="myFunction()" placeholder="Ferrament. ou Manut."><br></sup></h3></div>
+                  </div>
+                  <div class="p-1 m-1 border  flex-fill bd-highlight alinhamento rounded"><h3><sup><strong>Filtrar Status do Chamado:</strong></sup></h3>
+                    <div class="p-2 flex-fill" >
+                      <h3>
+                        <a button type="button" class="btn btn-info flex-fill"  href="/manut_list/"> {% csrf_token %}<i class="far fa-circle"></i></i>Todas</a>
+                        <a button type="button" class="btn btn-success flex-fill"  href="/aberta/"> {% csrf_token %}<i class="far fa-check-circle"></i>Aberta</a>
+                        <a button type="button" class="btn btn-danger flex-fill"  href="/fechada/"> {% csrf_token %}<i class="far fa-times-circle"></i></i>Fechada</a>
+                      </h3>
+                    </div>
+                  </div>         
                   
-                  <div class="col-lg-12 col-12">
-                    <!-- small box -->
-                    <div class="small-box bg-light">
-                      <div class="inner">                    
-                        <h4><sup style="font-size: 18px">Filtrar Status do Chamado</sup></h4> 
-                        <a button type="button" class="btn btn-info"  href="/manut_list/"> {% csrf_token %}
-                          <i class="far fa-circle"></i></i>Todas</a>
-                        <a button type="button" class="btn btn-success"  href="/aberta/"> {% csrf_token %}
-                          <i class="far fa-check-circle"></i>Aberta</a>
-                        <a button type="button" class="btn btn-danger"  href="/fechada/"> {% csrf_token %}
-                          <i class="far fa-times-circle"></i></i>Fechada</a>
-                           
-                      </div>
-                      <div class="icon">
-                        <i class="ion ion-pie-graph"></i>
-                      </div>
-                      <a href="#" class="small-box-footer"> </a>
-                    </div>
-                  </div>
+                </div>
+                
+                
                   
                 </div>
 
 
 
-              </div>
               
               <br>
-              <h3 class="card-title">Lista de Chamados</h3><br>
-              <strong>Registros {{ ordens.start_index }}-{{ ordens.end_index }} de {{ ordens.paginator.count }}</strong><br>
+              <h3 class="card-title">&nbsp; Lista de Chamados</h3><br>
+              <strong>&nbsp; Registros {{ ordens.start_index }}-{{ ordens.end_index }} de {{ ordens.paginator.count }}</strong><br>
               <div class="card-tools">
                 <ul class="pagination pagination-sm float-right">{% if ordens.has_previous %}
                   <li class="page-item">
@@ -310,6 +337,7 @@
                 <thead>
                   <tr>
                     <th>Tipo</th>
+                    <th>Fábrica</th>
                     <th>Nº OS</th>
                     <th>Setor</th>
                     <th>Máqina ou Ferramenta</th>
@@ -324,6 +352,7 @@
                   {% for os in ordens %}
                     <tr>
                         <td> {{ os.type_service }}</td>
+                        <td> {{ os.factory }}</td>
                         <td> {{ os.id }}</td>
                         <td> {{ os.sector }}</td>
                         <td> {{ os.machine_code }}</td>

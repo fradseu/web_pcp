@@ -17,11 +17,16 @@
   <link rel="icon" href="/static/img/favicons/favicon-32x32.png" sizes="32x32" type="image/png">
   <link rel="icon" href="/static/img/favicon-16x16.png" sizes="16x16" type="image/png">
   <link rel="icon" href="/static/img/favicon.ico">
+</head>
 
   <style>
     .flex-container{
       display: flex;
       flex-wrap: wrap;
+    }
+
+    .flex-container2{
+      display: flex;
     }
     .item{
           font-size: 24px;
@@ -43,7 +48,7 @@
     }
 
     .descricao{
-      text-align: center;
+      text-align: left;
       -webkit-box-shadow: 2px 2px 2px 0px rgba(0, 5, 0, 0.75);
       -moz-box-shadow: 2px 2px 2px 0px rgba(0, 5, 0, 0.75);
       box-shadow: 2px 2px 2px 0px rgba(78, 78, 78, 0.75);
@@ -52,6 +57,15 @@
 
     .borda-top{
       border-top: 5px groove rgb(87, 140, 238);
+      padding-bottom: 8px;
+    }
+
+    .fg-1 {
+    flex: auto;
+    }
+
+    .fg-2 {
+      flex-grow: 2;
     }
 
   </style>
@@ -121,8 +135,7 @@
       </div>
       
       
-
-      <!-- SidebarSearch Form -->
+      <!-- SidebarSearch Form -->     
       
 
       <!-- Sidebar Menu -->
@@ -130,10 +143,8 @@
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-          <!--
-          <li class="nav-header"><h6>PCP</h6></li>
-          -->
-          
+          <!--          <li class="nav-header"><h6>PCP</h6></li>          -->
+                    
           <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="fas fa-tachometer-alt"></i>
@@ -242,7 +253,9 @@
               </a>
             </li>
           </li>
-        </ul>    
+        </ul>   
+        
+        
          
       </nav>
       <!-- /.sidebar-menu -->
@@ -290,12 +303,15 @@
               </div>
             </div>
             
-            <div class="m-1 flex-container borda-top">
-              <div class="d-flex bd-highlight">
-                <div class="p-2 m-1 flex-shrink-4 border flex-fill bd-highlight align-self-stretch descricao rounded "><h3><sup style="font-size: 70%"><strong>Descrição do problema</strong></sup></h3></div>
-                <div class="p-2 m-1 w-100 flex-fill bd-highlight align-self-stretch alinhamento rounded">{{ os_list.issue_desctiption }}</div>
+            
+              <div class="d-flex  bd-highlight borda-top">
+                <div class="p-2 m-1 border flex-grow-2 bd-highlight alinhamento rounded align-self-stretch"><h3><sup style="font-size: 70%"><strong>Descrição do problema</strong></sup></h3></div> 
+                <div class="p-2 m-1 border flex-grow-1 bd-highlight descricao rounded align-self-stretch">{{ os_list.issue_desctiption }}</div>                           
               </div>
-            </div>
+
+
+            
+
               
             </div>
             <!-- /.row -->
@@ -486,5 +502,8 @@
 <!-- AdminLTE for demo purposes 
 <script src="/static/dist/js/demo.js"></script>
 -->
+
+
+
 </body>
 </html>

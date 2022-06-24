@@ -1,3 +1,10 @@
+### Projeto PCP-WEB
+##
+# Horas gastas até o momento = 416h,
+# Início do projeto 07/04/2022 >>> 22/06/2022,
+# Objetivo do projeto já foi alcançado, 
+# 
+
 from datetime import date
 from django.shortcuts import redirect, render
 from .models import Sector, Solicitacao,Ferr_report,Msg_day,Statusos
@@ -30,6 +37,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 
+from django.views.generic import TemplateView
 
 
 
@@ -67,8 +75,9 @@ def logout_user(request):
     return redirect('/')
 
 def teste(request):
+
          
-    return render(request, 'advanced.html')
+    return render(request, 'chartjs.html')
         
 
 
@@ -295,23 +304,71 @@ def manut_list_fechado(request):
 
 
 
-
-
-
-
-
-
-
 #Página do dashboard.
 @login_required(login_url='/login/')
 def dashboard(request):
+    current_time = datetime.now()
     usuario = request.user
     os_list = Solicitacao.objects.all()
+    
+    #mes = date.month()
+    #ano = date.year()
+    
+    #print(mes)
+    #print(ano)
+
+    labels = []
+    data = []
+    maior = Solicitacao.objects.order_by('-factory')[:5]
+    menor = Solicitacao.objects.order_by('factory')[:5]
+    dash_info = Solicitacao.objects.all()
+
+    
+    
+    ###testes de filtros para plotar o dashboard
+
+    #Filtro Geral da fábrica Marflex
+    marflex = Solicitacao.objects.filter(factory__in=[2]).count()
+    print('marflex: ',marflex)
+
+    #Filtro Mês Atual da fábrica Marflex
+    mfx_m_a = Solicitacao.objects.filter(factory__in=[2],date_create__month=current_time.month).count()
+    print('mes', mfx_m_a)
+
+
+    speedbrake = Solicitacao.objects.filter(factory__in=[3]).count()
+    print('speedbrake: ',speedbrake)
+
+    #Entry.objects.filter(pub_date__month=12)
+    #current_time.month
+
+
+    for informa in maior:
+        labels.append(informa.factory)
+        data.append(informa.id)
+    print(informa.factory)
+    print(informa.id)
+
+
+    for informa1 in menor:
+        labels.append(informa1.factory)
+        data.append(informa1.id)
+    print(informa1.factory)
+    print(informa1.id)    
+
     context = {
         'os_list': os_list,
-        'usuario':usuario
+        'usuario':usuario,
+        'maior': informa.factory,
+        'qtd_maior': informa.id,
+        'menor': informa1.factory,
+        'qtd_menor': informa1.id,
+        'dash_info': dash_info,
+        'marflex':marflex,
+        'speedbrake':speedbrake,
     }
-    return render(request, 'dashboard.html',context)
+
+    return render(request, 'dashboard.html', context)
 
 
 
