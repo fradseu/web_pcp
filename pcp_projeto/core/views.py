@@ -38,6 +38,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 
 from django.views.generic import TemplateView
+from django.db.models import Count
 
 
 
@@ -321,52 +322,292 @@ def dashboard(request):
     data = []
     maior = Solicitacao.objects.order_by('-factory')[:5]
     menor = Solicitacao.objects.order_by('factory')[:5]
-    dash_info = Solicitacao.objects.all()
-
+        
     
-    
-    ###testes de filtros para plotar o dashboard
+    # ###testes de filtros para plotar o dashboard
 
-    #Filtro Geral da fábrica Marflex
-    marflex = Solicitacao.objects.filter(factory__in=[2]).count()
-    print('marflex: ',marflex)
+    # #Filtro Geral da fábrica MFX
+    # mfx_geral = Solicitacao.objects.filter(factory__in=[2]).count()
+    # #biblioteca 
+    # #print('MFX: ',mfx_geral)
+    # #Filtro Mês Atual da fábrica MFX
+    # mfx_m = Solicitacao.objects.filter(factory__in=[2],date_create__month=current_time.month).count()
+    # #print('mes', mfx_m)
 
-    #Filtro Mês Atual da fábrica Marflex
-    mfx_m_a = Solicitacao.objects.filter(factory__in=[2],date_create__month=current_time.month).count()
-    print('mes', mfx_m_a)
-
-
-    speedbrake = Solicitacao.objects.filter(factory__in=[3]).count()
-    print('speedbrake: ',speedbrake)
-
-    #Entry.objects.filter(pub_date__month=12)
-    #current_time.month
+    #  #Filtro Geral da fábrica SPD
+    # spdb_geral = Solicitacao.objects.filter(factory__in=[3]).count()
+    # #print('SPD: ',spdb_geral)
+    # #Filtro Mês Atual da fábrica MFX
+    # spd_m = Solicitacao.objects.filter(factory__in=[3],date_create__month=current_time.month).count()
 
 
-    for informa in maior:
-        labels.append(informa.factory)
-        data.append(informa.id)
-    print(informa.factory)
-    print(informa.id)
+
+# RANKING DE FÁBRICAS QUE UTILIZAM OS SERVIÇOS E RESPECTIVAS QUANTIDADES (GERAL)
+
+    donut2 = Solicitacao.objects.values_list('factory__title').annotate(qtd_count=Count('factory')).order_by('-qtd_count')[:10]
+    #print('fabricas',fabricas)
+    #print('mes', spd_m)
+
+    #RANKING 0
+    fabrica0_g = donut2[0]
+    #print('setor0', setor0_)
+    fabrica0_nome_g = fabrica0_g[0]
+    fabrica0_valor_g = fabrica0_g[1]
+
+    #RANKING 0
+    fabrica1_g = donut2[1]
+    #print('setor0', setor0_)
+    fabrica1_nome_g= fabrica1_g[0]
+    fabrica1_valor_g = fabrica1_g[1]
 
 
-    for informa1 in menor:
-        labels.append(informa1.factory)
-        data.append(informa1.id)
-    print(informa1.factory)
-    print(informa1.id)    
+
+
+# RANKING DE FÁBRICAS QUE UTILIZAM OS SERVIÇOS E RESPECTIVAS QUANTIDADES (Mês atual)
+
+    donut1 = Solicitacao.objects.filter(date_create__month=current_time.month).values_list('factory__title').annotate(qtd_count=Count('factory')).order_by('-qtd_count')[:10]
+    #print('fabricas',fabricas)
+    #print('mes', spd_m)
+
+    #RANKING 0
+    fabrica0_ = donut1[0]
+    #print('setor0', setor0_)
+    fabrica0_nome = fabrica0_[0]
+    fabrica0_valor = fabrica0_[1]
+
+    #RANKING 0
+    fabrica1_ = donut1[1]
+    #print('setor0', setor0_)
+    fabrica1_nome = fabrica1_[0]
+    fabrica1_valor = fabrica1_[1]
+
+
+
+# RANKING DE SETORES QUE UTILIZAM OS SERVIÇOS E RESPECTIVAS QUANTIDADES
+
+    barras1 = Solicitacao.objects.values_list('sector__title').annotate(qtd_count=Count('sector')).order_by('-qtd_count')[:10]
+    #print(barras1)
+    #elemento2 = barras1[0]
+
+    #RANKING 0
+    setor0_ = barras1[0]
+    #print('setor0', setor0_)
+    setor0_nome = setor0_[0]
+    setor0_valor = setor0_[1]
+
+    #RANKING 1
+    setor1_ = barras1[1]
+    #print('setor1', setor1_)
+    setor1_nome = setor1_[0]
+    setor1_valor = setor1_[1]
+
+    #RANKING 2
+    setor2_ = barras1[2]
+    #print('setor2', setor1_)
+    setor2_nome = setor2_[0]
+    setor2_valor = setor2_[1]
+
+    #RANKING 3
+    setor3_ = barras1[3]
+    #print('setor3', setor1_)
+    setor3_nome = setor3_[0]
+    setor3_valor = setor3_[1]
+
+    #RANKING 4
+    setor4_ = barras1[4]
+    #print('setor4', setor4_)
+    setor4_nome = setor4_[0]
+    setor4_valor = setor4_[1]
+
+    #RANKING 5
+    setor5_ = barras1[5]
+    #print('setor5', setor5_)
+    setor5_nome = setor5_[0]
+    setor5_valor = setor5_[1]
+
+    #RANKING 6
+    setor6_ = barras1[6]
+    #print('setor6', setor6_)
+    setor6_nome = setor6_[0]
+    setor6_valor = setor6_[1]
+
+    #RANKING 7
+    setor7_ = barras1[7]
+    #print('setor7', setor7_)
+    setor7_nome = setor7_[0]
+    setor7_valor = setor7_[1]
+
+    #RANKING 8
+    setor8_ = barras1[8]
+    #print('setor8', setor8_)
+    setor8_nome = setor8_[0]
+    setor8_valor = setor8_[1]
+
+    #RANKING 9
+    setor9_ = barras1[9]
+    #print('setor9', setor1_)
+    setor9_nome = setor9_[0]
+    setor9_valor = setor9_[1]
+
+
+
+# RANKING DE SETORES QUE UTILIZAM OS SERVIÇOS E RESPECTIVAS QUANTIDADES (Mês atual)
+
+    barras2 = Solicitacao.objects.filter(date_create__month=current_time.month).values_list('sector__title').annotate(qtd_count=Count('sector')).order_by('-qtd_count')[:10]
+    #print(barras1)
+    #elemento2 = barras1[0]
+
+    #RANKING 0
+    setor0_g = barras2[0]
+    #print('setor0', setor0_)
+    setor0_nome_g = setor0_g[0]
+    setor0_valor_g = setor0_g[1]
+
+    #RANKING 1
+    setor1_g = barras2[1]
+    #print('setor1', setor1_)
+    setor1_nome_g = setor1_g[0]
+    setor1_valor_g = setor1_g[1]
+
+    #RANKING 2
+    setor2_g = barras2[2]
+    #print('setor2', setor1_)
+    setor2_nome_g = setor2_g[0]
+    setor2_valor_g = setor2_g[1]
+
+    #RANKING 3
+    setor3_g = barras2[3]
+    #print('setor3', setor1_)
+    setor3_nome_g = setor3_g[0]
+    setor3_valor_g = setor3_g[1]
+
+    #RANKING 4
+    setor4_g = barras2[4]
+    #print('setor4', setor4_)
+    setor4_nome_g = setor4_g[0]
+    setor4_valor_g = setor4_g[1]
+
+    #RANKING 5
+    setor5_g = barras2[5]
+    #print('setor5', setor5_)
+    setor5_nome_g = setor5_g[0]
+    setor5_valor_g = setor5_g[1]
+
+    #RANKING 6
+    setor6_g = barras2[6]
+    #print('setor6', setor6_)
+    setor6_nome_g = setor6_g[0]
+    setor6_valor_g = setor6_g[1]
+
+    #RANKING 7
+    setor7_g = barras2[7]
+    #print('setor7', setor7_)
+    setor7_nome_g = setor7_g[0]
+    setor7_valor_g = setor7_g[1]
+
+    #RANKING 8
+    setor8_g = barras2[8]
+    #print('setor8', setor8_)
+    setor8_nome_g = setor8_g[0]
+    setor8_valor_g = setor8_g[1]
+
+    #RANKING 9
+    setor9_g = barras2[9]
+    #print('setor9', setor1_)
+    setor9_nome_g = setor9_g[0]
+    setor9_valor_g = setor9_g[1]
+
+    #Dados para Gráficos barChartCanvas
+    ## Dicionário dct = dict((x, y) for x, y in barras1)
+    ##print('ordenação 1 -------------',dct)
+    ##aList = list(barras1)
+    ##print('Lista -------------',aList)
+    ##elemento = aList[0]
+
+#--------------------------------------------------------------------------------------------------------
+
+
+
+    # #nome SPD
+    # for nome2 in maior:
+    #     labels.append(nome2.factory)
+    #     data.append(nome2.id)
+    #     #print(nome2.factory)
+    #     #print(nome2.id)
+
+
+    # #nome marflex
+    # for nome1 in menor:
+    #     labels.append(nome1.factory)
+    #     data.append(nome1.id)
+
+    mes_str = datetime.today().strftime('%B')
+    print(mes_str)
 
     context = {
         'os_list': os_list,
         'usuario':usuario,
-        'maior': informa.factory,
-        'qtd_maior': informa.id,
-        'menor': informa1.factory,
-        'qtd_menor': informa1.id,
-        'dash_info': dash_info,
-        'marflex':marflex,
-        'speedbrake':speedbrake,
+        'data':mes_str,
+        # RANKING DE FÁBRICAS QUE UTILIZAM OS SERVIÇOS E RESPECTIVAS QUANTIDADES
+
+        'fabrica0_nome':fabrica0_nome,
+        'fabrica0_valor':fabrica0_valor,
+        'fabrica1_nome':fabrica1_nome,
+        'fabrica1_valor':fabrica1_valor,
+
+        # RANKING DE FÁBRICAS QUE UTILIZAM OS SERVIÇOS E RESPECTIVAS QUANTIDADES (Mês atual)
+
+        'fabrica0_nome_g':fabrica0_nome_g,
+        'fabrica0_valor_g':fabrica0_valor_g,
+        'fabrica1_nome_g':fabrica1_nome_g,
+        'fabrica1_valor_g':fabrica1_valor_g,
+
+        # RANKING DE SETORES QUE UTILIZAM OS SERVIÇOS E RESPECTIVAS QUANTIDADES
+        'setor0_nome':setor0_nome,
+        'setor0_valor':setor0_valor,
+        'setor1_nome':setor1_nome,
+        'setor1_valor':setor1_valor,
+        'setor2_nome':setor2_nome,
+        'setor2_valor':setor2_valor,
+        'setor3_nome':setor3_nome,
+        'setor3_valor':setor3_valor,
+        'setor4_nome':setor4_nome,
+        'setor4_valor':setor4_valor,
+        'setor5_nome':setor5_nome,
+        'setor5_valor':setor5_valor,
+        'setor6_nome':setor6_nome,
+        'setor6_valor':setor6_valor,
+        'setor7_nome':setor7_nome,
+        'setor7_valor':setor7_valor,
+        'setor8_nome':setor8_nome,
+        'setor8_valor':setor8_valor,        
+        'setor9_nome':setor9_nome,
+        'setor9_valor':setor9_valor,
+
+        # RANKING DE SETORES QUE UTILIZAM OS SERVIÇOS E RESPECTIVAS QUANTIDADES (Mês atual)
+        'setor0_nome_g':setor0_nome_g,
+        'setor0_valor_g':setor0_valor_g,
+        'setor1_nome_g':setor1_nome_g,
+        'setor1_valor_g':setor1_valor_g,
+        'setor2_nome_g':setor2_nome_g,
+        'setor2_valor_g':setor2_valor_g,
+        'setor3_nome_g':setor3_nome_g,
+        'setor3_valor_g':setor3_valor_g,
+        'setor4_nome_g':setor4_nome_g,
+        'setor4_valor_g':setor4_valor_g,
+        'setor5_nome_g':setor5_nome_g,
+        'setor5_valor_g':setor5_valor_g,
+        'setor6_nome_g':setor6_nome_g,
+        'setor6_valor_g':setor6_valor_g,
+        'setor7_nome_g':setor7_nome_g,
+        'setor7_valor_g':setor7_valor_g,
+        'setor8_nome_g':setor8_nome_g,
+        'setor8_valor_g':setor8_valor_g,        
+        'setor9_nome_g':setor9_nome_g,
+        'setor9_valor_g':setor9_valor_g,
+
     }
+
 
     return render(request, 'dashboard.html', context)
 

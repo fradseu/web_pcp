@@ -18,6 +18,58 @@
   <link rel="icon" href="/static/img/favicon-16x16.png" sizes="16x16" type="image/png">
   <link rel="icon" href="/static/img/favicon.ico">
   <script src="https://cdn.jsdelivr.net/npm/chart.js@3.8.0/dist/chart.min.js"></script>
+
+
+  <style>
+    .flex-container{
+      display: flex;
+      flex-wrap: wrap;
+    }
+    .item{
+          font-size: 24px;
+          height: 50%;
+          text-align: center;
+          min-width: 34%;
+          line-height: 60px;
+          -webkit-box-shadow: 2px 2px 2px 0px rgba(0, 5, 0, 0.75);
+          -moz-box-shadow: 2px 2px 2px 0px rgba(0, 5, 0, 0.75);
+          box-shadow: 2px 2px 2px 0px rgba(0, 5, 0, 0.75);
+      }
+    
+    .alinhamento{
+      text-align: center;
+      -webkit-box-shadow: 2px 2px 2px 0px rgba(0, 5, 0, 0.75);
+      -moz-box-shadow: 2px 2px 2px 0px rgba(0, 5, 0, 0.75);
+      box-shadow: 2px 2px 2px 0px rgba(78, 78, 78, 0.75);
+      background-color: #dddcdc;
+    }
+
+    .descricao{
+      text-align: right;
+      -webkit-box-shadow: 2px 2px 2px 0px rgba(0, 5, 0, 0.75);
+      -moz-box-shadow: 2px 2px 2px 0px rgba(0, 5, 0, 0.75);
+      box-shadow: 2px 2px 2px 0px rgba(78, 78, 78, 0.75);
+      background-color: #dddcdc;
+    }
+
+    .borda-top{
+      border-top: 5px groove rgb(87, 140, 238);
+    }
+
+    .fg-1{
+      flex-grow: 1;
+    }
+
+    .margem{
+      margin-right: 1;
+      padding-right: 1;
+    }
+
+  </style>
+
+
+
+
 </head>
 <body class="hold-transition sidebar-mini layout-fixed" data-panel-auto-height-mode="height">
 <div class="wrapper">
@@ -45,7 +97,7 @@
            
       <li class="nav-item">
         <a href="/logout">
-          <i class="fas fa-sign-out-alt"></i> Sair 
+          <i class="fas fa-running"></i> Sair
         </a>        
       </li> 
     </ul>
@@ -183,35 +235,141 @@
     <!-- /.sidebar -->
   </aside>
 
+
   <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper iframe-mode" data-widget="iframe" data-loading-screen="750">
-    
-    <div class="nav navbar navbar-expand navbar-white navbar-light border-bottom p-0">
-      <a class="nav-link bg-light" href="#" data-widget="iframe-fullscreen"><i class="fas fa-expand"></i></a> {{ mensagem }}
-    </div>
-  
-    <div class="tab-content">
-      <div class="card">
-      
-        <!-- Começo Principal -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="card card-secondary">
+      <div class="card-header">
+        <h3 class="card-title">Dashboard Ferramentaria / Manutenção</h3>
+      </div>
+    </div> 
 
-        <canvas id="myChart" width="150" height="50"></canvas>
-        
+    <!-- Main content -->
+    <section class="p-1 content">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-6">
+            <!-- AREA CHART -->
+            
+            <!-- /.card -->
 
-        <!-- Final Principal -->
-      </div>
-      </div>
-      </div>
-    </div>
+            <!-- DONUT CHART -->
+            <div class="card card-secondary">
+              <div class="card-header">
+                <h3 class="card-title">Utilização Geral por Fábrica</h3>
+
+                <div class="card-tools">
+                  <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                    <i class="fas fa-minus"></i>
+                  </button>
+                  <button type="button" class="btn btn-tool" data-card-widget="remove">
+                    <i class="fas fa-times"></i>
+                  </button>
+                </div>
+              </div>
+              <div class="card-body">
+                <canvas id="donutChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+                
+                <p>{{fabrica1_nome_g}} {{fabrica1_valor_g}}</p>
+                <p>{{fabrica0_nome_g}} {{fabrica0_valor_g}}</p>               
+
+
+
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+
+            <!-- PIE CHART -->
+            <div class="card card-secondary">
+              <div class="card-header">
+                <h3 class="card-title">Utilização Geral por Setor</h3>
+
+                <div class="card-tools">
+                  <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                    <i class="fas fa-minus"></i>
+                  </button>
+                  <button type="button" class="btn btn-tool" data-card-widget="remove">
+                    <i class="fas fa-times"></i>
+                  </button>
+                </div>
+              </div>
+              <div class="card-body">
+                <canvas id="barChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+
+          </div>
+          <!-- /.col (LEFT) -->
+          <div class="col-md-6">
+            <!-- LINE CHART -->
+            
+            <!-- /.card -->
+
+            <!-- BAR CHART -->
+            <div class="card card-secondary">
+              <div class="card-header">
+                <h3 class="card-title">Utilização Mensal por Fábrica: {{ data }}</h3>
+
+                <div class="card-tools">
+                  <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                    <i class="fas fa-minus"></i>
+                  </button>
+                  <button type="button" class="btn btn-tool" data-card-widget="remove">
+                    <i class="fas fa-times"></i>
+                  </button>
+                </div>
+              </div>
+              <div class="card-body">
+                <canvas id="donutChart2" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+                <p>{{fabrica1_nome}} {{fabrica1_valor}}</p>
+                <p>{{fabrica0_nome}} {{fabrica0_valor}}</p>               
+
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+
+            <!-- STACKED BAR CHART -->
+            <div class="card card-secondary">
+              <div class="card-header">
+                <h3 class="card-title">Utilização Mensal por Setor: {{ data }}</h3>
+
+                <div class="card-tools">
+                  <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                    <i class="fas fa-minus"></i>
+                  </button>
+                  <button type="button" class="btn btn-tool" data-card-widget="remove">
+                    <i class="fas fa-times"></i>
+                  </button>
+                </div>
+              </div>
+              <div class="card-body">
+                <div class="chart">
+                  <canvas id="barChart2" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+                </div>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+
+          </div>
+          <!-- /.col (RIGHT) -->
+        </div>
+        <!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
-  <footer class="main-footer">
-    <strong>Copyright &copy; 2021-2022 <a href="https://www.marflex.ind.br">www.marflex.ind.br</a></strong>
-    PCP Marflex.
-    <div class="float-right d-none d-sm-inline-block">
-      <b>Versão</b> 0.0.2
-    </div>
-  </footer>
+
+
+
+  <!-- /.content-wrapper -->
+
 
   <!-- Control Sidebar -->
   <aside class="control-sidebar control-sidebar-dark">
@@ -219,6 +377,7 @@
   </aside>
   <!-- /.control-sidebar -->
 </div>
+
 <!-- ./wrapper -->
 
 <!-- jQuery -->
@@ -235,40 +394,197 @@
 <script src="/static/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
 <!-- AdminLTE App -->
 <script src="/static/dist/js/adminlte.js"></script>
-<!-- AdminLTE for demo purposes 
-<script src="/static/dist/js/demo.js"></script>
--->
-
 
 <script>
-const ctx = document.getElementById('myChart').getContext('2d');
-const myChart = new Chart(ctx, {
-    type: 'bar',
-    data: {
-        labels: ['{{ menor }}','{{ maior }}'],
-        datasets: [{
-            label: 'Quantidade de Chamados',
-            data: ['{{ marflex }}', '{{ speedbrake }}'],
-            backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-            ],
-            borderColor: [
-                'rgba(255, 99, 132, 1)',
-                'rgba(54, 162, 235, 1)',                
-            ],
-            borderWidth: 1
-        }]
-    },
-    options: {
-        scales: {
-            y: {
-                beginAtZero: true
-            }
+  $(function () {
+    /* ChartJS
+     * -------
+     * Here we will create a few charts using ChartJS
+     */
+
+    //--------------
+    //- AREA CHART -
+    //--------------
+
+    // Get context with jQuery - using jQuery's .get() method.
+    
+
+    //fabrica0_nome = fabrica0_[0]
+    //fabrica0_valor = fabrica0_[1]
+
+    //-------------
+    //- DONUT CHART -
+    //-------------
+    // Get context with jQuery - using jQuery's .get() method.
+    var donutChartCanvas = $('#donutChart').get(0).getContext('2d')
+    var donutData        = {
+      labels: [
+          ['{{ fabrica0_nome_g }}'],
+          ['{{ fabrica1_nome_g }}'],
+      ],
+      datasets: [
+        {
+          data: ['{{ fabrica0_valor_g }}','{{ fabrica1_valor_g }}'],
+          backgroundColor : [ '#034694','#ff2800',],
         }
+      ]
     }
-});
+    var donutOptions     = {
+      maintainAspectRatio : false,
+      responsive : true,
+    }
+    //Create pie or douhnut chart
+    // You can switch between pie and douhnut using the method below.
+    new Chart(donutChartCanvas, {
+      type: 'doughnut',
+      data: donutData,
+      options: donutOptions
+    })
+
+
+
+    //-------------
+    //- DONUT CHART -
+    //-------------
+    // Get context with jQuery - using jQuery's .get() method.
+    var donutChartCanvas2 = $('#donutChart2').get(0).getContext('2d')
+    var donutData2        = {
+      labels: [
+          ['{{ fabrica0_nome }}'],
+          ['{{ fabrica1_nome }}'],
+      ],
+      datasets: [
+        {
+          data: ['{{ fabrica0_valor }}','{{ fabrica1_valor }}'],
+          backgroundColor : [ '#034694','#ff2800',],
+        }
+      ]
+    }
+    var donutOptions2     = {
+      maintainAspectRatio : false,
+      responsive : true,
+    }
+    //Create pie or douhnut chart
+    // You can switch between pie and douhnut using the method below.
+    new Chart(donutChartCanvas2, {
+      type: 'doughnut',
+      data: donutData2,
+      options: donutOptions2
+    }) 
+
+
+    //-------------
+    //- BAR CHART -
+    //-------------
+    var barChartCanvas = $('#barChart').get(0).getContext('2d')
+    var barChartData = {
+      labels: [
+          ['{{ setor0_nome }}'],
+          ['{{ setor1_nome }}'],
+          ['{{ setor2_nome }}'],
+          ['{{ setor3_nome }}'],
+          ['{{ setor4_nome }}'],
+          ['{{ setor5_nome }}'],
+          ['{{ setor6_nome }}'],
+          ['{{ setor7_nome }}'],
+          ['{{ setor8_nome }}'],
+          ['{{ setor9_nome }}'],
+      ],
+      datasets: [
+        {
+          label: 'Utilização: ',
+          data: ['{{ setor0_valor  }}',
+          '{{ setor1_valor  }}',
+          '{{ setor2_valor  }}',
+          '{{ setor3_valor  }}',
+          '{{ setor4_valor  }}',          
+          '{{ setor5_valor  }}',
+          '{{ setor6_valor  }}',
+          '{{ setor7_valor  }}',
+          '{{ setor8_valor  }}',
+          '{{ setor9_valor  }}'],
+          backgroundColor : ['#ff2800', '#034694'],
+        }
+      ]
+    }
+    
+    var barChartOptions = {
+      responsive              : true,
+      maintainAspectRatio     : false,
+      datasetFill             : false
+    }
+
+    new Chart(barChartCanvas, {
+      type: 'bar',
+      data: barChartData,
+      options: barChartOptions
+    })
+
+
+    //-------------
+    //- BAR CHART -
+    //-------------
+    var barChartCanvas2 = $('#barChart2').get(0).getContext('2d')
+    var barChartData2 = {
+      labels: [
+          ['{{ setor0_nome_g }}'],
+          ['{{ setor1_nome_g }}'],
+          ['{{ setor2_nome_g }}'],
+          ['{{ setor3_nome_g }}'],
+          ['{{ setor4_nome_g }}'],
+          ['{{ setor5_nome_g }}'],
+          ['{{ setor6_nome_g }}'],
+          ['{{ setor7_nome_g }}'],
+          ['{{ setor8_nome_g }}'],
+          ['{{ setor9_nome_g }}'],
+      ],
+      datasets: [
+        {
+          label: 'Utilização: ',
+          data: ['{{ setor0_valor  }}',
+          '{{ setor1_valor_g  }}',
+          '{{ setor2_valor_g  }}',
+          '{{ setor3_valor_g  }}',
+          '{{ setor4_valor_g  }}',          
+          '{{ setor5_valor_g  }}',
+          '{{ setor6_valor_g  }}',
+          '{{ setor7_valor_g  }}',
+          '{{ setor8_valor_g  }}',
+          '{{ setor9_valor_g  }}'],
+          backgroundColor : ['#ff2800', '#034694'],
+        }
+      ]
+    }
+    
+    var barChartOptions2 = {
+      responsive              : true,
+      maintainAspectRatio     : false,
+      datasetFill             : false
+    }
+
+    new Chart(barChartCanvas2, {
+      type: 'bar',
+      data: barChartData2,
+      options: barChartOptions2
+    })
+
+
+    
+
+    
+  })
 </script>
+
+<footer class="main-footer">
+  <strong>Copyright &copy; 2021-2022 <a href="https://www.marflex.ind.br">www.marflex.ind.br</a></strong>
+  PCP Marflex.
+  <div class="float-right d-none d-sm-inline-block">
+    <b>Versão</b> 0.0.2
+  </div>
+</footer>
+
+
+
 
 </body>
 </html>
